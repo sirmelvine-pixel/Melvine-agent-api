@@ -1,0 +1,2196 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8"/>
+<meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+<title>TrueHR — HR Automation for Growing Businesses</title>
+<link href="https://fonts.googleapis.com/css2?family=Clash+Display:wght@400;500;600;700&family=Cabinet+Grotesk:wght@300;400;500;700;800&display=swap" rel="stylesheet"/>
+<style>
+:root {
+  --bg:       #070b14;
+  --bg2:      #0d1423;
+  --bg3:      #111827;
+  --border:   rgba(255,255,255,0.08);
+  --border2:  rgba(255,255,255,0.14);
+  --text:     #e8ecf5;
+  --muted:    #7a85a0;
+  --accent:   #3d6eff;
+  --accent-g: #00e5b0;
+  --accent-r: #ff4d6d;
+  --gold:     #f5c518;
+  --card:     rgba(255,255,255,0.04);
+  --card-h:   rgba(255,255,255,0.07);
+}
+
+*{box-sizing:border-box;margin:0;padding:0;}
+html{scroll-behavior:smooth;}
+
+body{
+  font-family:'Cabinet Grotesk',sans-serif;
+  background:var(--bg);
+  color:var(--text);
+  min-height:100vh;
+  overflow-x:hidden;
+}
+
+/* ── NOISE OVERLAY ── */
+body::before{
+  content:'';
+  position:fixed;inset:0;
+  background-image:url("data:image/svg+xml,%3Csvg viewBox='0 0 256 256' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='noise'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.9' numOctaves='4' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23noise)' opacity='0.04'/%3E%3C/svg%3E");
+  pointer-events:none;z-index:0;opacity:0.4;
+}
+
+/* ── PAGES ── */
+.page{display:none;animation:fadeUp 0.4s ease;}
+.page.active{display:block;}
+@keyframes fadeUp{from{opacity:0;transform:translateY(16px);}to{opacity:1;transform:translateY(0);}}
+
+/* ── NAV ── */
+nav{
+  position:fixed;top:0;left:0;right:0;z-index:100;
+  display:flex;align-items:center;justify-content:space-between;
+  padding:0 48px;height:68px;
+  background:rgba(7,11,20,0.85);
+  backdrop-filter:blur(16px);
+  border-bottom:1px solid var(--border);
+}
+.nav-logo{display:flex;align-items:center;gap:10px;cursor:pointer;}
+.nav-logo-mark{
+  width:36px;height:36px;border-radius:9px;
+  background:linear-gradient(135deg,var(--accent),var(--accent-g));
+  display:flex;align-items:center;justify-content:center;
+  font-family:'Clash Display',sans-serif;font-weight:700;font-size:17px;color:white;
+}
+.nav-logo-text{font-family:'Clash Display',sans-serif;font-weight:600;font-size:20px;color:white;letter-spacing:-0.3px;}
+.nav-logo-text span{color:var(--accent-g);}
+.nav-links{display:flex;align-items:center;gap:6px;}
+.nav-link{
+  padding:8px 16px;border-radius:8px;font-size:14px;font-weight:500;
+  color:var(--muted);cursor:pointer;transition:all 0.2s;border:none;background:none;
+}
+.nav-link:hover{color:var(--text);background:var(--card);}
+.nav-link.active{color:white;background:var(--card);}
+.nav-cta{
+  padding:9px 22px;border-radius:9px;font-size:14px;font-weight:700;
+  background:var(--accent);color:white;cursor:pointer;
+  border:none;transition:all 0.2s;font-family:'Cabinet Grotesk',sans-serif;
+}
+.nav-cta:hover{background:#2d5ef0;transform:translateY(-1px);}
+.nav-mobile-btn{display:none;background:none;border:none;color:white;font-size:22px;cursor:pointer;}
+
+/* ── HERO ── */
+.hero{
+  min-height:100vh;display:flex;align-items:center;
+  padding:120px 48px 80px;position:relative;overflow:hidden;
+}
+.hero-glow{
+  position:absolute;top:-200px;right:-200px;
+  width:700px;height:700px;border-radius:50%;
+  background:radial-gradient(circle,rgba(61,110,255,0.15) 0%,transparent 70%);
+  pointer-events:none;
+}
+.hero-glow2{
+  position:absolute;bottom:-100px;left:-100px;
+  width:500px;height:500px;border-radius:50%;
+  background:radial-gradient(circle,rgba(0,229,176,0.08) 0%,transparent 70%);
+  pointer-events:none;
+}
+.hero-inner{max-width:1100px;margin:0 auto;width:100%;display:grid;grid-template-columns:1fr 1fr;gap:64px;align-items:center;}
+.hero-badge{
+  display:inline-flex;align-items:center;gap:8px;
+  background:rgba(61,110,255,0.12);border:1px solid rgba(61,110,255,0.3);
+  padding:6px 14px;border-radius:20px;font-size:12px;font-weight:600;
+  color:#7a9fff;letter-spacing:0.5px;margin-bottom:24px;
+}
+.hero-badge-dot{width:6px;height:6px;border-radius:50%;background:var(--accent-g);animation:pulse 2s infinite;}
+@keyframes pulse{0%,100%{opacity:1;}50%{opacity:0.4;}}
+.hero h1{
+  font-family:'Clash Display',sans-serif;
+  font-size:clamp(36px,4.5vw,62px);font-weight:700;
+  line-height:1.08;letter-spacing:-1.5px;margin-bottom:22px;
+}
+.hero h1 em{
+  font-style:normal;
+  background:linear-gradient(90deg,var(--accent),var(--accent-g));
+  -webkit-background-clip:text;-webkit-text-fill-color:transparent;background-clip:text;
+}
+.hero-sub{font-size:17px;color:var(--muted);line-height:1.75;max-width:480px;margin-bottom:36px;font-weight:400;}
+.hero-actions{display:flex;gap:14px;flex-wrap:wrap;}
+.btn-primary{
+  padding:14px 28px;border-radius:10px;font-size:15px;font-weight:700;
+  background:var(--accent);color:white;border:none;cursor:pointer;
+  transition:all 0.2s;font-family:'Cabinet Grotesk',sans-serif;
+  display:inline-flex;align-items:center;gap:8px;
+}
+.btn-primary:hover{background:#2d5ef0;transform:translateY(-2px);box-shadow:0 8px 28px rgba(61,110,255,0.35);}
+.btn-ghost{
+  padding:14px 28px;border-radius:10px;font-size:15px;font-weight:600;
+  background:transparent;color:var(--text);
+  border:1px solid var(--border2);cursor:pointer;
+  transition:all 0.2s;font-family:'Cabinet Grotesk',sans-serif;
+}
+.btn-ghost:hover{background:var(--card);border-color:var(--border2);}
+.hero-trust{display:flex;align-items:center;gap:10px;margin-top:28px;}
+.hero-trust span{font-size:13px;color:var(--muted);}
+.trust-avatars{display:flex;}
+.trust-av{
+  width:28px;height:28px;border-radius:50%;
+  border:2px solid var(--bg);margin-left:-8px;
+  display:flex;align-items:center;justify-content:center;
+  font-size:10px;font-weight:700;color:white;
+}
+
+/* hero right - dashboard mockup */
+.hero-visual{position:relative;}
+.dashboard-card{
+  background:var(--bg2);border:1px solid var(--border);
+  border-radius:20px;padding:24px;overflow:hidden;
+  box-shadow:0 40px 80px rgba(0,0,0,0.5);
+}
+.dash-header{display:flex;align-items:center;justify-content:space-between;margin-bottom:20px;}
+.dash-title{font-family:'Clash Display',sans-serif;font-size:15px;font-weight:600;}
+.dash-dot{width:8px;height:8px;border-radius:50%;background:var(--accent-g);}
+.dash-metrics{display:grid;grid-template-columns:1fr 1fr 1fr;gap:12px;margin-bottom:20px;}
+.dash-metric{
+  background:var(--bg3);border:1px solid var(--border);
+  border-radius:12px;padding:14px 12px;
+}
+.dash-metric .dm-val{font-family:'Clash Display',sans-serif;font-size:22px;font-weight:700;margin-bottom:2px;}
+.dash-metric .dm-lbl{font-size:11px;color:var(--muted);}
+.dash-metric.green .dm-val{color:var(--accent-g);}
+.dash-metric.blue .dm-val{color:var(--accent);}
+.dash-metric.gold .dm-val{color:var(--gold);}
+.dash-list{display:flex;flex-direction:column;gap:8px;}
+.dash-row{
+  display:flex;align-items:center;justify-content:space-between;
+  background:var(--bg3);border:1px solid var(--border);
+  border-radius:10px;padding:11px 14px;
+}
+.dash-row-left{display:flex;align-items:center;gap:10px;}
+.dash-av{width:28px;height:28px;border-radius:50%;display:flex;align-items:center;justify-content:center;font-size:11px;font-weight:700;color:white;flex-shrink:0;}
+.dash-name{font-size:13px;font-weight:600;}
+.dash-action{font-size:11px;color:var(--muted);}
+.badge{padding:3px 10px;border-radius:20px;font-size:11px;font-weight:600;}
+.badge.green{background:rgba(0,229,176,0.12);color:var(--accent-g);}
+.badge.blue{background:rgba(61,110,255,0.12);color:#7a9fff;}
+.badge.yellow{background:rgba(245,197,24,0.12);color:var(--gold);}
+.floating-card{
+  position:absolute;bottom:-20px;left:-30px;
+  background:var(--bg2);border:1px solid var(--border);
+  border-radius:14px;padding:14px 18px;
+  display:flex;align-items:center;gap:12px;
+  box-shadow:0 20px 40px rgba(0,0,0,0.4);
+}
+.fc-icon{font-size:24px;}
+.fc-val{font-family:'Clash Display',sans-serif;font-size:18px;font-weight:700;color:var(--accent-g);}
+.fc-lbl{font-size:11px;color:var(--muted);}
+
+/* ── SECTION COMMONS ── */
+.section{padding:96px 48px;max-width:1100px;margin:0 auto;}
+.section-full{padding:96px 48px;background:var(--bg2);}
+.section-full .inner{max-width:1100px;margin:0 auto;}
+.s-label{
+  font-size:11px;font-weight:700;letter-spacing:2.5px;text-transform:uppercase;
+  color:var(--accent);margin-bottom:10px;
+}
+.s-title{
+  font-family:'Clash Display',sans-serif;
+  font-size:clamp(28px,3.5vw,44px);font-weight:700;
+  letter-spacing:-1px;line-height:1.15;margin-bottom:14px;
+}
+.s-sub{font-size:16px;color:var(--muted);max-width:560px;line-height:1.75;margin-bottom:48px;}
+.divider{border:none;border-top:1px solid var(--border);margin:0;}
+
+/* ── FEATURES ── */
+.features-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:20px;}
+@media(max-width:900px){.features-grid{grid-template-columns:1fr 1fr;}}
+@media(max-width:560px){.features-grid{grid-template-columns:1fr;}}
+.feat-card{
+  background:var(--card);border:1px solid var(--border);
+  border-radius:16px;padding:28px;
+  transition:all 0.25s;position:relative;overflow:hidden;
+}
+.feat-card::before{
+  content:'';position:absolute;inset:0;
+  background:linear-gradient(135deg,rgba(61,110,255,0.05),transparent);
+  opacity:0;transition:opacity 0.25s;
+}
+.feat-card:hover{border-color:var(--border2);transform:translateY(-4px);box-shadow:0 20px 40px rgba(0,0,0,0.3);}
+.feat-card:hover::before{opacity:1;}
+.feat-icon{
+  width:46px;height:46px;border-radius:12px;
+  display:flex;align-items:center;justify-content:center;
+  font-size:20px;margin-bottom:18px;
+}
+.feat-icon.blue{background:rgba(61,110,255,0.15);}
+.feat-icon.green{background:rgba(0,229,176,0.12);}
+.feat-icon.gold{background:rgba(245,197,24,0.12);}
+.feat-icon.red{background:rgba(255,77,109,0.12);}
+.feat-icon.purple{background:rgba(160,100,255,0.12);}
+.feat-icon.teal{background:rgba(0,200,200,0.12);}
+.feat-card h3{font-family:'Clash Display',sans-serif;font-size:17px;font-weight:600;margin-bottom:8px;}
+.feat-card p{font-size:14px;color:var(--muted);line-height:1.7;}
+
+/* ── HOW IT WORKS ── */
+.steps{display:grid;grid-template-columns:repeat(4,1fr);gap:24px;position:relative;}
+@media(max-width:800px){.steps{grid-template-columns:1fr 1fr;}}
+@media(max-width:480px){.steps{grid-template-columns:1fr;}}
+.steps::before{
+  content:'';position:absolute;top:28px;left:10%;right:10%;height:1px;
+  background:linear-gradient(90deg,transparent,var(--border),var(--border),transparent);
+}
+.step{text-align:center;position:relative;z-index:1;}
+.step-num{
+  width:56px;height:56px;border-radius:50%;
+  background:var(--bg2);border:2px solid var(--border2);
+  display:flex;align-items:center;justify-content:center;
+  font-family:'Clash Display',sans-serif;font-size:18px;font-weight:700;
+  color:var(--accent);margin:0 auto 16px;
+  transition:all 0.2s;
+}
+.step:hover .step-num{background:var(--accent);color:white;border-color:var(--accent);}
+.step h4{font-family:'Clash Display',sans-serif;font-size:15px;font-weight:600;margin-bottom:6px;}
+.step p{font-size:13px;color:var(--muted);line-height:1.6;}
+
+/* ── STATS BAND ── */
+.stats-band{
+  background:linear-gradient(135deg,rgba(61,110,255,0.1),rgba(0,229,176,0.05));
+  border:1px solid var(--border);border-radius:20px;
+  display:grid;grid-template-columns:repeat(4,1fr);
+  overflow:hidden;margin-bottom:80px;
+}
+@media(max-width:700px){.stats-band{grid-template-columns:1fr 1fr;}}
+.stat-item{
+  padding:36px 28px;text-align:center;
+  border-right:1px solid var(--border);
+}
+.stat-item:last-child{border-right:none;}
+.stat-num{
+  font-family:'Clash Display',sans-serif;font-size:42px;font-weight:700;
+  background:linear-gradient(90deg,var(--accent),var(--accent-g));
+  -webkit-background-clip:text;-webkit-text-fill-color:transparent;background-clip:text;
+  line-height:1;margin-bottom:6px;
+}
+.stat-lbl{font-size:13px;color:var(--muted);line-height:1.4;}
+
+/* ── TESTIMONIALS ── */
+.testi-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:20px;}
+@media(max-width:800px){.testi-grid{grid-template-columns:1fr 1fr;}}
+@media(max-width:520px){.testi-grid{grid-template-columns:1fr;}}
+.testi-card{
+  background:var(--card);border:1px solid var(--border);
+  border-radius:16px;padding:28px;transition:all 0.2s;
+}
+.testi-card:hover{border-color:var(--border2);transform:translateY(-3px);}
+.testi-stars{color:var(--gold);font-size:14px;margin-bottom:14px;letter-spacing:2px;}
+.testi-card p{font-size:14px;color:#b0b8cc;line-height:1.75;font-style:italic;margin-bottom:18px;}
+.testi-author{display:flex;align-items:center;gap:10px;}
+.tav{
+  width:36px;height:36px;border-radius:50%;
+  display:flex;align-items:center;justify-content:center;
+  font-size:12px;font-weight:800;color:white;flex-shrink:0;
+}
+.tav-name{font-size:13px;font-weight:700;}
+.tav-role{font-size:11px;color:var(--muted);}
+
+/* ── PRICING PAGE ── */
+.pricing-hero{
+  padding:140px 48px 60px;text-align:center;
+  background:radial-gradient(ellipse at top,rgba(61,110,255,0.1) 0%,transparent 60%);
+}
+.pricing-toggle{
+  display:inline-flex;align-items:center;gap:12px;
+  background:var(--bg2);border:1px solid var(--border);
+  border-radius:30px;padding:6px;margin-bottom:52px;
+}
+.toggle-btn{
+  padding:8px 22px;border-radius:24px;font-size:13px;font-weight:600;
+  cursor:pointer;border:none;background:none;color:var(--muted);transition:all 0.2s;
+  font-family:'Cabinet Grotesk',sans-serif;
+}
+.toggle-btn.active{background:var(--accent);color:white;}
+.save-badge{
+  background:rgba(0,229,176,0.15);color:var(--accent-g);
+  font-size:11px;font-weight:700;padding:3px 10px;border-radius:20px;
+}
+.pricing-cards{display:grid;grid-template-columns:repeat(3,1fr);gap:22px;max-width:980px;margin:0 auto;}
+@media(max-width:800px){.pricing-cards{grid-template-columns:1fr;max-width:420px;}}
+.p-card{
+  background:var(--bg2);border:1px solid var(--border);
+  border-radius:20px;padding:36px 30px;position:relative;overflow:hidden;
+  transition:transform 0.2s,box-shadow 0.2s;
+}
+.p-card:hover{transform:translateY(-5px);box-shadow:0 24px 48px rgba(0,0,0,0.4);}
+.p-card.featured{border-color:var(--accent);background:linear-gradient(180deg,rgba(61,110,255,0.08) 0%,var(--bg2) 100%);}
+.p-card.featured::after{
+  content:'MOST POPULAR';
+  position:absolute;top:16px;right:-24px;
+  background:var(--accent);color:white;
+  font-size:9px;font-weight:800;letter-spacing:1.5px;
+  padding:5px 36px;transform:rotate(45deg);
+}
+.p-tier{font-size:11px;font-weight:700;letter-spacing:2px;text-transform:uppercase;color:var(--muted);margin-bottom:14px;}
+.p-price{font-family:'Clash Display',sans-serif;font-size:52px;font-weight:700;line-height:1;margin-bottom:4px;}
+.p-price sup{font-size:22px;vertical-align:super;}
+.p-per{font-size:13px;color:var(--muted);margin-bottom:24px;}
+.p-divider{border:none;border-top:1px solid var(--border);margin:22px 0;}
+.p-features{list-style:none;margin-bottom:28px;}
+.p-features li{
+  display:flex;align-items:flex-start;gap:10px;
+  font-size:14px;color:#b0b8cc;padding:7px 0;
+  border-bottom:1px solid var(--border);line-height:1.45;
+}
+.p-features li:last-child{border:none;}
+.p-check{color:var(--accent-g);font-weight:700;flex-shrink:0;margin-top:1px;}
+.p-btn{
+  width:100%;padding:13px;border-radius:10px;
+  font-family:'Cabinet Grotesk',sans-serif;font-size:14px;font-weight:700;
+  cursor:pointer;transition:all 0.2s;border:1px solid var(--border2);
+  background:transparent;color:var(--text);
+}
+.p-btn:hover{background:var(--card);}
+.p-card.featured .p-btn{background:var(--accent);border-color:var(--accent);color:white;}
+.p-card.featured .p-btn:hover{background:#2d5ef0;}
+.pricing-faq{max-width:700px;margin:72px auto 0;}
+.faq-title{font-family:'Clash Display',sans-serif;font-size:26px;font-weight:700;text-align:center;margin-bottom:32px;}
+.faq-item{border:1px solid var(--border);border-radius:12px;margin-bottom:10px;overflow:hidden;}
+.faq-q{
+  display:flex;justify-content:space-between;align-items:center;
+  padding:16px 20px;cursor:pointer;font-size:14px;font-weight:600;
+}
+.faq-q:hover{background:var(--card);}
+.faq-icon{color:var(--muted);font-size:18px;transition:transform 0.3s;}
+.faq-item.open .faq-icon{transform:rotate(180deg);}
+.faq-a{max-height:0;overflow:hidden;transition:max-height 0.3s ease,padding 0.3s;}
+.faq-item.open .faq-a{max-height:200px;padding:0 20px 16px;}
+.faq-a p{font-size:13px;color:var(--muted);line-height:1.7;}
+
+/* ── ABOUT PAGE ── */
+.about-hero{
+  padding:140px 48px 80px;
+  background:radial-gradient(ellipse at top right,rgba(0,229,176,0.07) 0%,transparent 60%);
+}
+.about-grid{display:grid;grid-template-columns:1fr 1fr;gap:60px;align-items:center;max-width:1100px;margin:0 auto;}
+@media(max-width:700px){.about-grid{grid-template-columns:1fr;}}
+.about-visual{
+  background:var(--bg2);border:1px solid var(--border);
+  border-radius:20px;padding:36px;
+}
+.about-stat-row{display:grid;grid-template-columns:1fr 1fr;gap:16px;margin-bottom:16px;}
+.about-stat{
+  background:var(--bg3);border:1px solid var(--border);
+  border-radius:12px;padding:18px;
+}
+.about-stat .asn{
+  font-family:'Clash Display',sans-serif;font-size:32px;font-weight:700;
+  background:linear-gradient(90deg,var(--accent),var(--accent-g));
+  -webkit-background-clip:text;-webkit-text-fill-color:transparent;background-clip:text;
+  margin-bottom:4px;
+}
+.about-stat .asl{font-size:12px;color:var(--muted);}
+.mission-card{
+  background:linear-gradient(135deg,rgba(61,110,255,0.1),rgba(0,229,176,0.05));
+  border:1px solid rgba(61,110,255,0.2);border-radius:12px;padding:20px;
+}
+.mission-card p{font-size:14px;color:#b0b8cc;line-height:1.75;font-style:italic;}
+.team-section{max-width:1100px;margin:0 auto;padding:0 0 80px;}
+.team-grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(220px,1fr));gap:20px;}
+.team-card{
+  background:var(--card);border:1px solid var(--border);
+  border-radius:16px;padding:28px 22px;text-align:center;
+  transition:all 0.2s;
+}
+.team-card:hover{border-color:var(--border2);transform:translateY(-4px);}
+.team-av{
+  width:72px;height:72px;border-radius:50%;margin:0 auto 16px;
+  display:flex;align-items:center;justify-content:center;
+  font-family:'Clash Display',sans-serif;font-size:24px;font-weight:700;color:white;
+}
+.team-name{font-family:'Clash Display',sans-serif;font-size:16px;font-weight:600;margin-bottom:4px;}
+.team-role{font-size:13px;color:var(--accent);margin-bottom:8px;font-weight:600;}
+.team-bio{font-size:12px;color:var(--muted);line-height:1.6;}
+.values-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:18px;max-width:1100px;margin:0 auto 80px;}
+@media(max-width:700px){.values-grid{grid-template-columns:1fr 1fr;}}
+.val-card{
+  background:var(--card);border:1px solid var(--border);
+  border-radius:14px;padding:24px;
+}
+.val-icon{font-size:26px;margin-bottom:12px;}
+.val-card h4{font-family:'Clash Display',sans-serif;font-size:15px;font-weight:600;margin-bottom:6px;}
+.val-card p{font-size:13px;color:var(--muted);line-height:1.6;}
+
+/* ── CONTACT PAGE ── */
+.contact-wrap{
+  max-width:1100px;margin:0 auto;
+  padding:140px 48px 80px;
+  display:grid;grid-template-columns:1fr 1.2fr;gap:60px;
+}
+@media(max-width:800px){.contact-wrap{grid-template-columns:1fr;padding:120px 24px 60px;}}
+.contact-info h1{
+  font-family:'Clash Display',sans-serif;
+  font-size:clamp(28px,3.5vw,44px);font-weight:700;
+  letter-spacing:-1px;margin-bottom:16px;line-height:1.15;
+}
+.contact-info p{font-size:15px;color:var(--muted);line-height:1.75;margin-bottom:36px;}
+.contact-methods{display:flex;flex-direction:column;gap:14px;}
+.cm-item{
+  display:flex;align-items:center;gap:14px;
+  background:var(--card);border:1px solid var(--border);
+  border-radius:12px;padding:16px 18px;
+}
+.cm-icon{font-size:20px;}
+.cm-label{font-size:12px;color:var(--muted);margin-bottom:2px;}
+.cm-val{font-size:14px;font-weight:600;}
+.contact-form-card{
+  background:var(--bg2);border:1px solid var(--border);
+  border-radius:20px;padding:40px;
+}
+.contact-form-card h3{
+  font-family:'Clash Display',sans-serif;font-size:22px;font-weight:700;margin-bottom:6px;
+}
+.contact-form-card .sub{font-size:14px;color:var(--muted);margin-bottom:28px;}
+.form-row{display:grid;grid-template-columns:1fr 1fr;gap:16px;}
+@media(max-width:500px){.form-row{grid-template-columns:1fr;}}
+.fg{margin-bottom:16px;}
+.fg label{display:block;font-size:13px;font-weight:600;margin-bottom:7px;color:#c0c8dc;}
+.fg input,.fg select,.fg textarea{
+  width:100%;padding:12px 14px;
+  background:var(--bg3);border:1px solid var(--border);
+  border-radius:10px;color:var(--text);
+  font-family:'Cabinet Grotesk',sans-serif;font-size:14px;
+  transition:border-color 0.2s;resize:none;
+}
+.fg input:focus,.fg select:focus,.fg textarea:focus{
+  outline:none;border-color:var(--accent);
+  background:rgba(61,110,255,0.05);
+}
+.fg select option{background:var(--bg2);}
+.form-submit-btn{
+  width:100%;padding:14px;border-radius:10px;
+  background:var(--accent);color:white;
+  font-family:'Cabinet Grotesk',sans-serif;font-size:15px;font-weight:700;
+  border:none;cursor:pointer;transition:all 0.2s;margin-top:6px;
+}
+.form-submit-btn:hover{background:#2d5ef0;transform:translateY(-1px);}
+.form-submit-btn:disabled{opacity:0.6;cursor:not-allowed;transform:none;}
+.success-box{
+  display:none;text-align:center;padding:40px 20px;
+}
+.success-box .s-icon{font-size:52px;margin-bottom:16px;}
+.success-box h4{font-family:'Clash Display',sans-serif;font-size:22px;font-weight:700;margin-bottom:8px;}
+.success-box p{font-size:14px;color:var(--muted);}
+
+/* ── CTA BAND ── */
+.cta-band{
+  margin:0 48px 80px;
+  background:linear-gradient(135deg,var(--accent) 0%,#1a3fd4 100%);
+  border-radius:24px;padding:64px 56px;
+  display:flex;align-items:center;justify-content:space-between;
+  gap:32px;flex-wrap:wrap;position:relative;overflow:hidden;
+}
+.cta-band::before{
+  content:'';position:absolute;top:-60px;right:-60px;
+  width:280px;height:280px;border-radius:50%;
+  background:rgba(255,255,255,0.06);
+}
+.cta-band::after{
+  content:'';position:absolute;bottom:-40px;left:30%;
+  width:180px;height:180px;border-radius:50%;
+  background:rgba(0,229,176,0.1);
+}
+.cta-band h2{
+  font-family:'Clash Display',sans-serif;
+  font-size:clamp(22px,3vw,36px);font-weight:700;color:white;
+  line-height:1.2;position:relative;z-index:1;
+}
+.cta-band p{font-size:15px;color:rgba(255,255,255,0.75);margin-top:8px;position:relative;z-index:1;}
+.cta-band .cta-btns{display:flex;gap:12px;flex-wrap:wrap;position:relative;z-index:1;}
+.cta-band .btn-white{
+  padding:13px 28px;border-radius:10px;
+  background:white;color:var(--accent);
+  font-family:'Cabinet Grotesk',sans-serif;font-size:14px;font-weight:700;
+  border:none;cursor:pointer;transition:all 0.2s;
+}
+.cta-band .btn-white:hover{transform:translateY(-2px);box-shadow:0 8px 20px rgba(0,0,0,0.2);}
+.cta-band .btn-outline-w{
+  padding:13px 28px;border-radius:10px;
+  background:transparent;color:white;
+  font-family:'Cabinet Grotesk',sans-serif;font-size:14px;font-weight:600;
+  border:1px solid rgba(255,255,255,0.4);cursor:pointer;transition:all 0.2s;
+}
+.cta-band .btn-outline-w:hover{background:rgba(255,255,255,0.1);}
+
+/* ── FOOTER ── */
+footer{
+  background:var(--bg2);border-top:1px solid var(--border);
+  padding:60px 48px 32px;
+}
+.footer-inner{max-width:1100px;margin:0 auto;}
+.footer-top{display:grid;grid-template-columns:2fr 1fr 1fr 1fr;gap:40px;margin-bottom:48px;}
+@media(max-width:800px){.footer-top{grid-template-columns:1fr 1fr;}}
+@media(max-width:480px){.footer-top{grid-template-columns:1fr;}}
+.footer-brand p{font-size:13px;color:var(--muted);line-height:1.7;margin-top:14px;max-width:260px;}
+.footer-col h5{font-family:'Clash Display',sans-serif;font-size:13px;font-weight:600;margin-bottom:16px;color:white;}
+.footer-col a{
+  display:block;font-size:13px;color:var(--muted);
+  cursor:pointer;margin-bottom:10px;transition:color 0.2s;text-decoration:none;
+}
+.footer-col a:hover{color:var(--text);}
+.footer-bottom{
+  display:flex;align-items:center;justify-content:space-between;
+  border-top:1px solid var(--border);padding-top:24px;flex-wrap:wrap;gap:12px;
+}
+.footer-bottom p{font-size:12px;color:var(--muted);}
+.footer-accent{
+  font-size:12px;color:var(--accent-g);font-weight:600;
+}
+
+/* ── RESPONSIVE ── */
+@media(max-width:900px){
+  nav{padding:0 24px;}
+  .hero{padding:100px 24px 60px;}
+  .hero-inner{grid-template-columns:1fr;gap:40px;}
+  .hero-visual{display:none;}
+  .section{padding:72px 24px;}
+  .section-full{padding:72px 24px;}
+  .cta-band{margin:0 24px 60px;padding:44px 32px;}
+  footer{padding:48px 24px 24px;}
+  .contact-wrap{padding:120px 24px 60px;}
+}
+@media(max-width:600px){
+  .nav-links{display:none;}
+  .nav-mobile-btn{display:block;}
+  .steps::before{display:none;}
+  .stats-band{grid-template-columns:1fr 1fr;}
+  .pricing-hero{padding:120px 24px 40px;}
+  .about-hero{padding:120px 24px 60px;}
+}
+
+
+/* ── BLOG PAGE ── */
+.blog-hero{
+  padding:140px 48px 60px;
+  background:radial-gradient(ellipse at top left,rgba(61,110,255,0.09) 0%,transparent 60%);
+}
+.blog-hero-inner{max-width:1100px;margin:0 auto;}
+.blog-search-bar{
+  display:flex;align-items:center;gap:12px;
+  background:var(--bg2);border:1px solid var(--border2);
+  border-radius:12px;padding:10px 16px;max-width:480px;margin-top:28px;
+}
+.blog-search-bar input{
+  flex:1;background:none;border:none;color:var(--text);
+  font-family:'Cabinet Grotesk',sans-serif;font-size:14px;outline:none;
+}
+.blog-search-bar input::placeholder{color:var(--muted);}
+.blog-search-icon{color:var(--muted);font-size:16px;}
+.blog-tags{display:flex;gap:8px;flex-wrap:wrap;margin-top:24px;}
+.blog-tag{
+  padding:6px 16px;border-radius:20px;font-size:12px;font-weight:600;
+  border:1px solid var(--border);color:var(--muted);cursor:pointer;
+  background:transparent;transition:all 0.2s;font-family:'Cabinet Grotesk',sans-serif;
+}
+.blog-tag:hover,.blog-tag.active{background:var(--accent);color:white;border-color:var(--accent);}
+.blog-grid-wrap{max-width:1100px;margin:0 auto;padding:0 48px 80px;}
+@media(max-width:900px){.blog-grid-wrap{padding:0 24px 60px;}}
+.blog-featured{
+  display:grid;grid-template-columns:1.6fr 1fr;gap:24px;margin-bottom:24px;
+}
+@media(max-width:800px){.blog-featured{grid-template-columns:1fr;}}
+.blog-card{
+  background:var(--bg2);border:1px solid var(--border);
+  border-radius:18px;overflow:hidden;
+  transition:transform 0.25s,box-shadow 0.25s;cursor:pointer;
+}
+.blog-card:hover{transform:translateY(-5px);box-shadow:0 24px 48px rgba(0,0,0,0.35);border-color:var(--border2);}
+.blog-thumb{
+  height:200px;display:flex;align-items:center;justify-content:center;
+  font-size:52px;position:relative;overflow:hidden;
+}
+.blog-card.featured-card .blog-thumb{height:260px;}
+.blog-body{padding:24px;}
+.blog-meta{display:flex;align-items:center;gap:10px;margin-bottom:12px;flex-wrap:wrap;}
+.blog-cat{
+  font-size:11px;font-weight:700;letter-spacing:1.5px;text-transform:uppercase;
+  padding:3px 10px;border-radius:20px;
+}
+.cat-automation{background:rgba(61,110,255,0.15);color:#7a9fff;}
+.cat-culture{background:rgba(0,229,176,0.12);color:var(--accent-g);}
+.cat-compliance{background:rgba(255,77,109,0.12);color:#ff8099;}
+.cat-growth{background:rgba(245,197,24,0.12);color:var(--gold);}
+.cat-product{background:rgba(160,100,255,0.12);color:#c084ff;}
+.blog-date{font-size:12px;color:var(--muted);}
+.blog-read{font-size:12px;color:var(--muted);}
+.blog-card h3{
+  font-family:'Clash Display',sans-serif;font-weight:700;
+  line-height:1.25;margin-bottom:10px;
+  transition:color 0.2s;
+}
+.blog-card:hover h3{color:var(--accent);}
+.featured-card h3{font-size:22px;}
+.blog-card.small-card h3{font-size:16px;}
+.blog-card p.excerpt{font-size:13px;color:var(--muted);line-height:1.7;margin-bottom:16px;}
+.blog-card.small-card p.excerpt{display:none;}
+.blog-author{display:flex;align-items:center;gap:8px;}
+.b-av{
+  width:28px;height:28px;border-radius:50%;
+  display:flex;align-items:center;justify-content:center;
+  font-size:10px;font-weight:800;color:white;flex-shrink:0;
+}
+.b-av-name{font-size:12px;font-weight:600;}
+.b-av-role{font-size:11px;color:var(--muted);}
+.blog-main-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:20px;margin-bottom:20px;}
+@media(max-width:800px){.blog-main-grid{grid-template-columns:1fr 1fr;}}
+@media(max-width:500px){.blog-main-grid{grid-template-columns:1fr;}}
+.blog-card.regular-card .blog-thumb{height:160px;}
+.blog-card.regular-card h3{font-size:16px;}
+.blog-newsletter{
+  background:linear-gradient(135deg,rgba(61,110,255,0.1),rgba(0,229,176,0.05));
+  border:1px solid rgba(61,110,255,0.2);border-radius:18px;
+  padding:44px 40px;text-align:center;margin-bottom:60px;
+}
+.blog-newsletter h3{font-family:'Clash Display',sans-serif;font-size:26px;font-weight:700;margin-bottom:10px;}
+.blog-newsletter p{font-size:14px;color:var(--muted);margin-bottom:24px;}
+.newsletter-form{display:flex;gap:10px;max-width:420px;margin:0 auto;flex-wrap:wrap;}
+.newsletter-form input{
+  flex:1;padding:12px 16px;border-radius:10px;min-width:200px;
+  background:var(--bg3);border:1px solid var(--border);
+  color:var(--text);font-family:'Cabinet Grotesk',sans-serif;font-size:14px;outline:none;
+  transition:border-color 0.2s;
+}
+.newsletter-form input:focus{border-color:var(--accent);}
+.newsletter-form button{
+  padding:12px 22px;border-radius:10px;background:var(--accent);
+  color:white;border:none;font-family:'Cabinet Grotesk',sans-serif;
+  font-size:14px;font-weight:700;cursor:pointer;white-space:nowrap;
+  transition:background 0.2s;
+}
+.newsletter-form button:hover{background:#2d5ef0;}
+
+/* ── BLOG POST READER ── */
+.blog-post-page{display:none;}
+.blog-post-page.open{display:block;}
+.blog-post-inner{max-width:740px;margin:0 auto;padding:120px 32px 80px;}
+.back-btn{
+  display:inline-flex;align-items:center;gap:8px;
+  font-size:13px;font-weight:600;color:var(--muted);
+  cursor:pointer;margin-bottom:32px;background:none;border:none;
+  transition:color 0.2s;font-family:'Cabinet Grotesk',sans-serif;
+}
+.back-btn:hover{color:var(--text);}
+.post-header-cat{margin-bottom:16px;}
+.post-title{
+  font-family:'Clash Display',sans-serif;font-size:clamp(28px,4vw,44px);
+  font-weight:700;letter-spacing:-1px;line-height:1.15;margin-bottom:18px;
+}
+.post-meta-bar{
+  display:flex;align-items:center;gap:16px;flex-wrap:wrap;
+  padding:16px 0;border-top:1px solid var(--border);border-bottom:1px solid var(--border);
+  margin-bottom:36px;
+}
+.post-author-row{display:flex;align-items:center;gap:10px;}
+.post-meta-bar .b-av{width:36px;height:36px;font-size:12px;}
+.post-date{font-size:13px;color:var(--muted);}
+.post-read{font-size:13px;color:var(--muted);}
+.post-content h2{
+  font-family:'Clash Display',sans-serif;font-size:22px;font-weight:700;
+  margin:36px 0 14px;
+}
+.post-content p{font-size:15px;color:#b8c0d4;line-height:1.85;margin-bottom:18px;}
+.post-content ul{padding-left:20px;margin-bottom:18px;}
+.post-content ul li{font-size:15px;color:#b8c0d4;line-height:1.8;margin-bottom:6px;}
+.post-content blockquote{
+  border-left:3px solid var(--accent);padding-left:20px;
+  margin:24px 0;font-style:italic;color:#9aa3c0;font-size:16px;line-height:1.75;
+}
+.post-content .highlight-box{
+  background:rgba(61,110,255,0.08);border:1px solid rgba(61,110,255,0.2);
+  border-radius:12px;padding:20px 24px;margin:24px 0;
+}
+.post-content .highlight-box p{color:var(--text);margin:0;}
+
+
+/* ── NAV DROPDOWN ── */
+.nav-dropdown{position:relative;display:inline-block;}
+.nav-dropdown:hover .nav-dropdown-menu{opacity:1;visibility:visible;transform:translateY(0);}
+.nav-dropdown-menu{
+  position:absolute;top:calc(100% + 10px);left:0;
+  background:var(--bg2);border:1px solid var(--border2);
+  border-radius:12px;padding:8px;min-width:220px;
+  opacity:0;visibility:hidden;transform:translateY(-8px);
+  transition:all 0.22s ease;z-index:200;
+  box-shadow:0 16px 40px rgba(0,0,0,0.4);
+}
+.nav-dropdown-menu a{
+  display:flex;align-items:center;gap:10px;
+  padding:10px 14px;border-radius:8px;font-size:13px;font-weight:500;
+  color:var(--muted);cursor:pointer;transition:all 0.15s;text-decoration:none;
+}
+.nav-dropdown-menu a:hover{background:var(--card);color:var(--text);}
+
+/* ── PRODUCTS PAGE ── */
+.products-hero{
+  padding:140px 48px 70px;
+  background:radial-gradient(ellipse at center top,rgba(61,110,255,0.12) 0%,transparent 65%);
+}
+.products-hero-inner{max-width:1100px;margin:0 auto;text-align:center;}
+.prod-grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(280px,1fr));gap:24px;max-width:1100px;margin:0 auto;padding:0 48px 80px;}
+@media(max-width:700px){.prod-grid{padding:0 24px 60px;}}
+.prod-card{
+  background:var(--bg2);border:1px solid var(--border);
+  border-radius:20px;padding:36px 30px;
+  transition:all 0.25s;cursor:pointer;position:relative;overflow:hidden;
+}
+.prod-card::before{
+  content:'';position:absolute;inset:0;opacity:0;transition:opacity 0.25s;
+}
+.prod-card.blue::before{background:linear-gradient(135deg,rgba(61,110,255,0.06),transparent);}
+.prod-card.green::before{background:linear-gradient(135deg,rgba(0,229,176,0.06),transparent);}
+.prod-card.purple::before{background:linear-gradient(135deg,rgba(160,100,255,0.06),transparent);}
+.prod-card.gold::before{background:linear-gradient(135deg,rgba(245,197,24,0.06),transparent);}
+.prod-card:hover{transform:translateY(-6px);box-shadow:0 28px 56px rgba(0,0,0,0.35);}
+.prod-card:hover::before{opacity:1;}
+.prod-card.blue:hover{border-color:rgba(61,110,255,0.4);}
+.prod-card.green:hover{border-color:rgba(0,229,176,0.3);}
+.prod-card.purple:hover{border-color:rgba(160,100,255,0.3);}
+.prod-card.gold:hover{border-color:rgba(245,197,24,0.3);}
+.prod-icon{
+  width:58px;height:58px;border-radius:16px;
+  display:flex;align-items:center;justify-content:center;font-size:26px;margin-bottom:20px;
+}
+.prod-icon.blue{background:rgba(61,110,255,0.15);}
+.prod-icon.green{background:rgba(0,229,176,0.12);}
+.prod-icon.purple{background:rgba(160,100,255,0.12);}
+.prod-icon.gold{background:rgba(245,197,24,0.12);}
+.prod-label{
+  font-size:10px;font-weight:700;letter-spacing:2px;text-transform:uppercase;
+  margin-bottom:8px;
+}
+.prod-label.blue{color:#7a9fff;}
+.prod-label.green{color:var(--accent-g);}
+.prod-label.purple{color:#c084ff;}
+.prod-label.gold{color:var(--gold);}
+.prod-card h3{font-family:'Clash Display',sans-serif;font-size:22px;font-weight:700;margin-bottom:10px;}
+.prod-card p{font-size:14px;color:var(--muted);line-height:1.7;margin-bottom:22px;}
+.prod-features-list{list-style:none;margin-bottom:24px;}
+.prod-features-list li{
+  font-size:13px;color:#9aa3bf;padding:6px 0;
+  border-bottom:1px solid var(--border);
+  display:flex;align-items:center;gap:8px;
+}
+.prod-features-list li:last-child{border:none;}
+.prod-check{color:var(--accent-g);}
+.prod-cta-btn{
+  display:inline-flex;align-items:center;gap:8px;
+  font-size:13px;font-weight:700;
+  font-family:'Cabinet Grotesk',sans-serif;
+  border:none;background:none;cursor:pointer;transition:gap 0.2s;
+  padding:0;
+}
+.prod-card.blue .prod-cta-btn{color:#7a9fff;}
+.prod-card.green .prod-cta-btn{color:var(--accent-g);}
+.prod-card.purple .prod-cta-btn{color:#c084ff;}
+.prod-card.gold .prod-cta-btn{color:var(--gold);}
+.prod-cta-btn:hover{gap:14px;}
+
+/* ── INNER PRODUCT PAGES (Training, eLearning, Recruitment) ── */
+.inner-hero{
+  padding:130px 48px 60px;position:relative;overflow:hidden;
+}
+@media(max-width:900px){.inner-hero{padding:110px 24px 50px;}}
+.inner-hero-inner{max-width:1100px;margin:0 auto;display:grid;grid-template-columns:1fr 1fr;gap:60px;align-items:center;}
+@media(max-width:800px){.inner-hero-inner{grid-template-columns:1fr;}}
+.inner-hero-glow{
+  position:absolute;top:-100px;right:-100px;
+  width:500px;height:500px;border-radius:50%;pointer-events:none;
+}
+.product-badge{
+  display:inline-flex;align-items:center;gap:8px;
+  padding:5px 14px;border-radius:20px;font-size:12px;font-weight:600;
+  margin-bottom:18px;border:1px solid;
+}
+.inner-hero h1{
+  font-family:'Clash Display',sans-serif;
+  font-size:clamp(32px,4vw,54px);font-weight:700;
+  letter-spacing:-1.5px;line-height:1.1;margin-bottom:18px;
+}
+.inner-hero p{font-size:16px;color:var(--muted);line-height:1.8;margin-bottom:28px;}
+.inner-visual{
+  background:var(--bg2);border:1px solid var(--border);
+  border-radius:18px;padding:28px;
+}
+.inner-visual-title{font-family:'Clash Display',sans-serif;font-size:14px;font-weight:600;margin-bottom:18px;display:flex;align-items:center;gap:8px;}
+.iv-row{
+  display:flex;align-items:center;justify-content:space-between;
+  background:var(--bg3);border:1px solid var(--border);
+  border-radius:10px;padding:12px 16px;margin-bottom:10px;
+}
+.iv-left{display:flex;align-items:center;gap:10px;}
+.iv-icon{font-size:18px;}
+.iv-label{font-size:13px;font-weight:600;}
+.iv-sub{font-size:11px;color:var(--muted);}
+.iv-badge{padding:3px 10px;border-radius:20px;font-size:11px;font-weight:600;}
+.iv-pct{font-family:'Clash Display',sans-serif;font-size:16px;font-weight:700;color:var(--accent-g);}
+.module-grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(220px,1fr));gap:18px;max-width:1100px;margin:0 auto 60px;}
+.module-card{
+  background:var(--card);border:1px solid var(--border);
+  border-radius:14px;padding:24px 20px;transition:all 0.2s;
+}
+.module-card:hover{border-color:var(--border2);transform:translateY(-3px);}
+.module-card .m-icon{font-size:24px;margin-bottom:12px;}
+.module-card h4{font-family:'Clash Display',sans-serif;font-size:15px;font-weight:600;margin-bottom:7px;}
+.module-card p{font-size:13px;color:var(--muted);line-height:1.6;}
+.inner-section{max-width:1100px;margin:0 auto;padding:0 48px 70px;}
+@media(max-width:900px){.inner-section{padding:0 24px 60px;}}
+
+/* ── FADE IN ── */
+.reveal{opacity:0;transform:translateY(20px);transition:opacity 0.55s ease,transform 0.55s ease;}
+.reveal.visible{opacity:1;transform:translateY(0);}
+</style>
+</head>
+<body>
+
+<!-- ══ NAV ══ -->
+<nav>
+  <div class="nav-logo" onclick="showPage('home')">
+    <div class="nav-logo-mark">T</div>
+    <div class="nav-logo-text">True<span>HR</span></div>
+  </div>
+  <div class="nav-links">
+    <button class="nav-link active" id="nl-home"    onclick="showPage('home')">Home</button>
+    <div class="nav-dropdown">
+      <button class="nav-link" id="nl-products" onclick="showPage('products')">Products ▾</button>
+      <div class="nav-dropdown-menu">
+        <a onclick="showPage('products')">🗂 All Products</a>
+        <a onclick="showPage('recruitment')">🎯 Recruitment</a>
+        <a onclick="showPage('training')">📚 Training & Development</a>
+        <a onclick="showPage('elearning')">🖥 eLearning</a>
+      </div>
+    </div>
+    <button class="nav-link"        id="nl-pricing" onclick="showPage('pricing')">Pricing</button>
+    <button class="nav-link"        id="nl-about"   onclick="showPage('about')">About</button>
+    <button class="nav-link"        id="nl-blog"    onclick="showPage('blog')">Blog</button>
+    <button class="nav-link"        id="nl-contact" onclick="showPage('contact')">Contact</button>
+  </div>
+  <button class="nav-cta" onclick="showPage('contact')">Get a Demo →</button>
+  <button class="nav-mobile-btn" onclick="toggleMobileMenu()">☰</button>
+</nav>
+
+<!-- ══════════════════════ HOME PAGE ══════════════════════ -->
+<div class="page active" id="page-home">
+
+  <!-- Hero -->
+  <section class="hero">
+    <div class="hero-glow"></div>
+    <div class="hero-glow2"></div>
+    <div class="hero-inner">
+      <div class="hero-left">
+        <div class="hero-badge">
+          <span class="hero-badge-dot"></span>
+          Now live · 250+ businesses onboarded
+        </div>
+        <h1>HR that runs<br>itself — so you<br>can focus on <em>people.</em></h1>
+        <p class="hero-sub">TrueHR automates the workflows that drain your HR team every day. Onboarding, leave, compliance, communications — all in one platform built for MSEs and SMEs.</p>
+        <div class="hero-actions">
+          <button class="btn-primary" onclick="showPage('contact')">Request a Demo →</button>
+          <button class="btn-ghost" onclick="showPage('pricing')">View Pricing</button>
+        </div>
+        <div class="hero-trust">
+          <div class="trust-avatars">
+            <div class="trust-av" style="background:#3d6eff;">AM</div>
+            <div class="trust-av" style="background:#00c9a7;">KO</div>
+            <div class="trust-av" style="background:#f5c518;color:#111;">FN</div>
+            <div class="trust-av" style="background:#ff4d6d;">JB</div>
+          </div>
+          <span>Trusted by <strong style="color:var(--text)">250+ pilot businesses</strong></span>
+        </div>
+      </div>
+      <div class="hero-visual">
+        <div class="dashboard-card">
+          <div class="dash-header">
+            <span class="dash-title">HR Dashboard</span>
+            <span class="dash-dot"></span>
+          </div>
+          <div class="dash-metrics">
+            <div class="dash-metric green"><div class="dm-val">94%</div><div class="dm-lbl">Tasks automated</div></div>
+            <div class="dash-metric blue"><div class="dm-val">12</div><div class="dm-lbl">Pending approvals</div></div>
+            <div class="dash-metric gold"><div class="dm-val">3</div><div class="dm-lbl">New hires today</div></div>
+          </div>
+          <div class="dash-list">
+            <div class="dash-row">
+              <div class="dash-row-left">
+                <div class="dash-av" style="background:#3d6eff;">AM</div>
+                <div><div class="dash-name">Amara M.</div><div class="dash-action">Leave request</div></div>
+              </div>
+              <span class="badge green">Approved</span>
+            </div>
+            <div class="dash-row">
+              <div class="dash-row-left">
+                <div class="dash-av" style="background:#00c9a7;">KO</div>
+                <div><div class="dash-name">Kwame O.</div><div class="dash-action">Onboarding</div></div>
+              </div>
+              <span class="badge blue">In progress</span>
+            </div>
+            <div class="dash-row">
+              <div class="dash-row-left">
+                <div class="dash-av" style="background:#f5c518;color:#111;">FN</div>
+                <div><div class="dash-name">Fatima N.</div><div class="dash-action">Contract renewal</div></div>
+              </div>
+              <span class="badge yellow">Pending</span>
+            </div>
+          </div>
+        </div>
+        <div class="floating-card">
+          <div class="fc-icon">⚡</div>
+          <div><div class="fc-val">60% less admin</div><div class="fc-lbl">Avg. time saved per week</div></div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- Stats -->
+  <div class="section">
+    <div class="stats-band reveal">
+      <div class="stat-item"><div class="stat-num">250+</div><div class="stat-lbl">Pilot clients onboarded</div></div>
+      <div class="stat-item"><div class="stat-num">12K+</div><div class="stat-lbl">Employee accounts active</div></div>
+      <div class="stat-item"><div class="stat-num">94%</div><div class="stat-lbl">Pilot-to-paid conversion</div></div>
+      <div class="stat-item"><div class="stat-num">60%</div><div class="stat-lbl">Reduction in HR admin time</div></div>
+    </div>
+
+    <!-- Features -->
+    <div class="reveal">
+      <div class="s-label">What TrueHR Does</div>
+      <div class="s-title">Everything your HR team<br>needs, automated.</div>
+      <p class="s-sub">From the first day a hire accepts their offer to the day they leave, TrueHR handles the operations so your team handles the humans.</p>
+    </div>
+    <div class="features-grid reveal">
+      <div class="feat-card">
+        <div class="feat-icon blue">📋</div>
+        <h3>Smart Onboarding</h3>
+        <p>Automated onboarding flows from offer letter to day-one access. New hires done in hours, not days.</p>
+      </div>
+      <div class="feat-card">
+        <div class="feat-icon green">📅</div>
+        <h3>Leave & Attendance</h3>
+        <p>Self-service leave requests with auto-approvals, calendar sync, and real-time balance tracking for every employee.</p>
+      </div>
+      <div class="feat-card">
+        <div class="feat-icon gold">💬</div>
+        <h3>Team Communication</h3>
+        <p>HR announcements, policy sharing, and team updates — all inside TrueHR, not scattered across email and WhatsApp.</p>
+      </div>
+      <div class="feat-card">
+        <div class="feat-icon red">⚖️</div>
+        <h3>Compliance Tracking</h3>
+        <p>Automatic compliance flags, document management, and full audit trails to protect your business from hidden risk.</p>
+      </div>
+      <div class="feat-card">
+        <div class="feat-icon purple">📊</div>
+        <h3>HR Analytics</h3>
+        <p>Real-time dashboards that give HR and leadership instant visibility into headcount, attendance, and team health.</p>
+      </div>
+      <div class="feat-card">
+        <div class="feat-icon teal">⚙️</div>
+        <h3>Workflow Automation</h3>
+        <p>Build custom HR workflows with no code. Approvals, reminders, escalations — set up in minutes, runs forever.</p>
+      </div>
+    </div>
+  </div>
+
+  <hr class="divider"/>
+
+  <!-- Products Showcase -->
+  <div class="section-full">
+    <div class="inner">
+      <div class="reveal" style="text-align:center;margin-bottom:48px;">
+        <div class="s-label" style="display:flex;justify-content:center;">Our Product Suite</div>
+        <div class="s-title" style="text-align:center;">One platform. Every HR need.</div>
+        <p style="color:var(--muted);font-size:15px;text-align:center;max-width:500px;margin:12px auto 0;line-height:1.7;">TrueHR's products work together seamlessly — or stand alone. Pick what your business needs today and add more as you grow.</p>
+      </div>
+      <div style="display:grid;grid-template-columns:repeat(auto-fit,minmax(220px,1fr));gap:16px;" class="reveal">
+        <div style="background:var(--card);border:1px solid var(--border);border-radius:14px;padding:24px 20px;cursor:pointer;transition:all 0.2s;" onmouseover="this.style.borderColor='rgba(61,110,255,0.4)'" onmouseout="this.style.borderColor='var(--border)'" onclick="showPage('home')">
+          <div style="font-size:28px;margin-bottom:12px;">🗂</div>
+          <div style="font-family:'Clash Display',sans-serif;font-size:15px;font-weight:700;margin-bottom:6px;">HRIS Core</div>
+          <p style="font-size:13px;color:var(--muted);line-height:1.6;">Automate workflows, manage employee data, and run HR operations end-to-end.</p>
+          <div style="font-size:12px;color:#7a9fff;font-weight:600;margin-top:12px;cursor:pointer;">Learn more →</div>
+        </div>
+        <div style="background:var(--card);border:1px solid var(--border);border-radius:14px;padding:24px 20px;cursor:pointer;transition:all 0.2s;" onmouseover="this.style.borderColor='rgba(0,229,176,0.35)'" onmouseout="this.style.borderColor='var(--border)'" onclick="showPage('recruitment')">
+          <div style="font-size:28px;margin-bottom:12px;">🎯</div>
+          <div style="font-family:'Clash Display',sans-serif;font-size:15px;font-weight:700;margin-bottom:6px;">Recruitment</div>
+          <p style="font-size:13px;color:var(--muted);line-height:1.6;">Full applicant tracking — from job post to signed offer letter, all in one pipeline.</p>
+          <div style="font-size:12px;color:var(--accent-g);font-weight:600;margin-top:12px;cursor:pointer;">Learn more →</div>
+        </div>
+        <div style="background:var(--card);border:1px solid var(--border);border-radius:14px;padding:24px 20px;cursor:pointer;transition:all 0.2s;" onmouseover="this.style.borderColor='rgba(160,100,255,0.35)'" onmouseout="this.style.borderColor='var(--border)'" onclick="showPage('training')">
+          <div style="font-size:28px;margin-bottom:12px;">📚</div>
+          <div style="font-family:'Clash Display',sans-serif;font-size:15px;font-weight:700;margin-bottom:6px;">Training & Dev</div>
+          <p style="font-size:13px;color:var(--muted);line-height:1.6;">Build development plans, close skill gaps, and track training progress across your team.</p>
+          <div style="font-size:12px;color:#c084ff;font-weight:600;margin-top:12px;cursor:pointer;">Learn more →</div>
+        </div>
+        <div style="background:var(--card);border:1px solid var(--border);border-radius:14px;padding:24px 20px;cursor:pointer;transition:all 0.2s;" onmouseover="this.style.borderColor='rgba(245,197,24,0.35)'" onmouseout="this.style.borderColor='var(--border)'" onclick="showPage('elearning')">
+          <div style="font-size:28px;margin-bottom:12px;">🖥</div>
+          <div style="font-family:'Clash Display',sans-serif;font-size:15px;font-weight:700;margin-bottom:6px;">eLearning</div>
+          <p style="font-size:13px;color:var(--muted);line-height:1.6;">Deliver online courses, quizzes, and certifications to your team on any device.</p>
+          <div style="font-size:12px;color:var(--gold);font-weight:600;margin-top:12px;cursor:pointer;">Learn more →</div>
+        </div>
+      </div>
+      <div style="text-align:center;margin-top:32px;">
+        <button class="btn-ghost" onclick="showPage('products')" style="margin:0 auto;">View All Products →</button>
+      </div>
+    </div>
+  </div>
+
+  <hr class="divider"/>
+
+  <!-- How it works -->
+  <div class="section-full">
+    <div class="inner">
+      <div class="reveal" style="text-align:center;margin-bottom:52px;">
+        <div class="s-label" style="justify-content:center;display:flex;">How It Works</div>
+        <div class="s-title" style="text-align:center;">Up and running in days,<br>not months.</div>
+      </div>
+      <div class="steps reveal">
+        <div class="step">
+          <div class="step-num">1</div>
+          <h4>Set Up Your Account</h4>
+          <p>Create your TrueHR workspace and import your team. Takes less than 30 minutes.</p>
+        </div>
+        <div class="step">
+          <div class="step-num">2</div>
+          <h4>Configure Workflows</h4>
+          <p>Use our no-code builder to automate your specific HR processes and approval chains.</p>
+        </div>
+        <div class="step">
+          <div class="step-num">3</div>
+          <h4>Invite Your Team</h4>
+          <p>Employees get their own portal to manage requests, documents, and communications.</p>
+        </div>
+        <div class="step">
+          <div class="step-num">4</div>
+          <h4>Watch It Run</h4>
+          <p>TrueHR handles the admin. Your HR team focuses on strategy and people.</p>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <hr class="divider"/>
+
+  <!-- Testimonials -->
+  <div class="section">
+    <div class="reveal">
+      <div class="s-label">What Clients Say</div>
+      <div class="s-title">250+ businesses already<br>made the switch.</div>
+    </div>
+    <div class="testi-grid reveal">
+      <div class="testi-card">
+        <div class="testi-stars">★★★★★</div>
+        <p>"TrueHR gave us back hours every single week. Our HR manager stopped dreading Mondays."</p>
+        <div class="testi-author">
+          <div class="tav" style="background:#3d6eff;">AM</div>
+          <div><div class="tav-name">Amara M.</div><div class="tav-role">Operations Director · Retail SME</div></div>
+        </div>
+      </div>
+      <div class="testi-card">
+        <div class="testi-stars">★★★★★</div>
+        <p>"Onboarding used to take 3 days of back-and-forth. With TrueHR, it's done before the new hire's first morning."</p>
+        <div class="testi-author">
+          <div class="tav" style="background:#00c9a7;">KO</div>
+          <div><div class="tav-name">Kwame O.</div><div class="tav-role">CEO · Logistics Company</div></div>
+        </div>
+      </div>
+      <div class="testi-card">
+        <div class="testi-stars">★★★★★</div>
+        <p>"Finally a system our employees actually use. Leave, payslips, announcements — all in one place."</p>
+        <div class="testi-author">
+          <div class="tav" style="background:#ff4d6d;">FN</div>
+          <div><div class="tav-name">Fatima N.</div><div class="tav-role">HR Manager · Healthcare Clinic</div></div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- CTA Band -->
+  <div class="cta-band reveal">
+    <div>
+      <h2>Ready to automate your<br>HR operations?</h2>
+      <p>Join 250+ businesses that have already made the switch to TrueHR.</p>
+    </div>
+    <div class="cta-btns">
+      <button class="btn-white" onclick="showPage('contact')">Request a Quote</button>
+      <button class="btn-outline-w" onclick="showPage('pricing')">View Pricing</button>
+    </div>
+  </div>
+
+  <footer>
+    <div class="footer-inner">
+      <div class="footer-top">
+        <div class="footer-brand">
+          <div class="nav-logo" style="margin-bottom:0">
+            <div class="nav-logo-mark">T</div>
+            <div class="nav-logo-text">True<span>HR</span></div>
+          </div>
+          <p>The HR operating system built for growing businesses. Automate workflows, empower employees, and get back to what matters.</p>
+        </div>
+        <div class="footer-col">
+          <h5>Product</h5>
+          <a onclick="showPage('home')">Features</a>
+          <a onclick="showPage('pricing')">Pricing</a>
+          <a onclick="showPage('contact')">Book a Demo</a>
+        </div>
+        <div class="footer-col">
+          <h5>Company</h5>
+          <a onclick="showPage('about')">About Us</a>
+          <a onclick="showPage('contact')">Contact</a>
+        </div>
+        <div class="footer-col">
+          <h5>Contact</h5>
+          <a>sirmelvine@gmail.com</a>
+          <a onclick="showPage('contact')">Request a Quote</a>
+        </div>
+      </div>
+      <div class="footer-bottom">
+        <p>© 2024 TrueHR. All rights reserved.</p>
+        <span class="footer-accent">Built by Mwesigwa Bill Melvine</span>
+      </div>
+    </div>
+  </footer>
+</div>
+
+<!-- ══════════════════════ PRICING PAGE ══════════════════════ -->
+<div class="page" id="page-pricing">
+  <div class="pricing-hero">
+    <div class="s-label" style="justify-content:center;display:flex;">Simple Pricing</div>
+    <div class="s-title" style="text-align:center;margin-bottom:12px;">Transparent pricing.<br>No surprises.</div>
+    <p style="color:var(--muted);font-size:16px;max-width:480px;margin:0 auto 36px;line-height:1.7;">Start from just $10 per user per month. Scale as you grow. Cancel anytime.</p>
+    <div class="pricing-toggle">
+      <button class="toggle-btn active" id="tb-monthly" onclick="toggleBilling('monthly')">Monthly</button>
+      <button class="toggle-btn" id="tb-annual" onclick="toggleBilling('annual')">Annual <span class="save-badge">Save 20%</span></button>
+    </div>
+    <div class="pricing-cards">
+
+      <div class="p-card">
+        <div class="p-tier">Starter</div>
+        <div class="p-price" id="price-starter"><sup>$</sup>10</div>
+        <div class="p-per">per user / month</div>
+        <hr class="p-divider"/>
+        <ul class="p-features">
+          <li><span class="p-check">✓</span> Core HR workflows</li>
+          <li><span class="p-check">✓</span> Employee self-service portal</li>
+          <li><span class="p-check">✓</span> Leave & attendance management</li>
+          <li><span class="p-check">✓</span> Document storage</li>
+          <li><span class="p-check">✓</span> Up to 100 users</li>
+          <li><span class="p-check">✓</span> Email support</li>
+        </ul>
+        <button class="p-btn" onclick="showPage('contact')">Get Started</button>
+      </div>
+
+      <div class="p-card featured">
+        <div class="p-tier">Pro</div>
+        <div class="p-price" id="price-pro"><sup>$</sup>18</div>
+        <div class="p-per">per user / month</div>
+        <hr class="p-divider"/>
+        <ul class="p-features">
+          <li><span class="p-check">✓</span> Everything in Starter</li>
+          <li><span class="p-check">✓</span> Advanced workflow automation</li>
+          <li><span class="p-check">✓</span> Team communication hub</li>
+          <li><span class="p-check">✓</span> Analytics & reporting</li>
+          <li><span class="p-check">✓</span> Performance management</li>
+          <li><span class="p-check">✓</span> Priority support</li>
+        </ul>
+        <button class="p-btn" onclick="showPage('contact')">Get Started</button>
+      </div>
+
+      <div class="p-card">
+        <div class="p-tier">Enterprise</div>
+        <div class="p-price" style="font-size:32px;padding-top:10px;">Custom</div>
+        <div class="p-per">tailored to your organisation</div>
+        <hr class="p-divider"/>
+        <ul class="p-features">
+          <li><span class="p-check">✓</span> Everything in Pro</li>
+          <li><span class="p-check">✓</span> Dedicated onboarding manager</li>
+          <li><span class="p-check">✓</span> Custom integrations & API</li>
+          <li><span class="p-check">✓</span> SLA guarantee</li>
+          <li><span class="p-check">✓</span> Unlimited users</li>
+          <li><span class="p-check">✓</span> 24/7 dedicated support</li>
+        </ul>
+        <button class="p-btn" onclick="showPage('contact')">Request a Quote</button>
+      </div>
+
+    </div>
+
+    <div class="pricing-faq">
+      <div class="faq-title">Frequently Asked Questions</div>
+      <div class="faq-item" onclick="toggleFaq(this)">
+        <div class="faq-q">Can I change plans later? <span class="faq-icon">▾</span></div>
+        <div class="faq-a"><p>Absolutely. You can upgrade or downgrade your plan at any time. Changes take effect at the start of your next billing cycle.</p></div>
+      </div>
+      <div class="faq-item" onclick="toggleFaq(this)">
+        <div class="faq-q">Is there a free trial? <span class="faq-icon">▾</span></div>
+        <div class="faq-a"><p>Yes — we offer a 14-day free trial on all plans, no credit card required. Book a demo and we'll get you set up immediately.</p></div>
+      </div>
+      <div class="faq-item" onclick="toggleFaq(this)">
+        <div class="faq-q">How does per-user pricing work? <span class="faq-icon">▾</span></div>
+        <div class="faq-a"><p>You pay for the number of active users on your account each month. Add or remove users anytime and your bill adjusts automatically.</p></div>
+      </div>
+      <div class="faq-item" onclick="toggleFaq(this)">
+        <div class="faq-q">What support is included? <span class="faq-icon">▾</span></div>
+        <div class="faq-a"><p>Starter includes email support. Pro adds priority response times. Enterprise includes a dedicated account manager and 24/7 support.</p></div>
+      </div>
+    </div>
+  </div>
+
+  <div class="cta-band reveal" style="margin-top:0;">
+    <div>
+      <h2>Not sure which plan<br>is right for you?</h2>
+      <p>Talk to our team and we'll recommend the best fit for your business size and needs.</p>
+    </div>
+    <div class="cta-btns">
+      <button class="btn-white" onclick="showPage('contact')">Talk to Us</button>
+    </div>
+  </div>
+
+  <footer>
+    <div class="footer-inner">
+      <div class="footer-top">
+        <div class="footer-brand">
+          <div class="nav-logo"><div class="nav-logo-mark">T</div><div class="nav-logo-text">True<span>HR</span></div></div>
+          <p>The HR operating system built for growing businesses.</p>
+        </div>
+        <div class="footer-col"><h5>Product</h5><a onclick="showPage('home')">Features</a><a onclick="showPage('pricing')">Pricing</a></div>
+        <div class="footer-col"><h5>Company</h5><a onclick="showPage('about')">About</a><a onclick="showPage('contact')">Contact</a></div>
+        <div class="footer-col"><h5>Contact</h5><a>sirmelvine@gmail.com</a></div>
+      </div>
+      <div class="footer-bottom">
+        <p>© 2024 TrueHR. All rights reserved.</p>
+        <span class="footer-accent">Built by Mwesigwa Bill Melvine</span>
+      </div>
+    </div>
+  </footer>
+</div>
+
+<!-- ══════════════════════ ABOUT PAGE ══════════════════════ -->
+<div class="page" id="page-about">
+  <div class="about-hero">
+    <div class="about-grid">
+      <div>
+        <div class="s-label">Our Story</div>
+        <h1 class="s-title">Built by people<br>who lived the problem.</h1>
+        <p style="font-size:15px;color:var(--muted);line-height:1.8;margin-bottom:24px;">TrueHR was born out of direct frustration with the HR technology gap in small and mid-sized businesses. After watching HR teams across multiple industries drown in manual work, we decided to build the platform we always wished existed.</p>
+        <p style="font-size:15px;color:var(--muted);line-height:1.8;">We spent over a year embedded with real SME clients before writing a single line of production code. The result is a product shaped entirely by the people who use it — not by what enterprise vendors think small businesses need.</p>
+      </div>
+      <div class="about-visual">
+        <div class="about-stat-row">
+          <div class="about-stat"><div class="asn">250+</div><div class="asl">Pilot clients</div></div>
+          <div class="about-stat"><div class="asn">12K+</div><div class="asl">Active users</div></div>
+        </div>
+        <div class="about-stat-row">
+          <div class="about-stat"><div class="asn">94%</div><div class="asl">Conversion rate</div></div>
+          <div class="about-stat"><div class="asn">60%</div><div class="asl">Less admin time</div></div>
+        </div>
+        <div class="mission-card" style="margin-top:16px;">
+          <p>"Our mission is simple: give every growing business access to the kind of HR infrastructure that was previously only available to large enterprises."</p>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <div class="section" style="padding-top:0;">
+    <div class="s-label">Our Values</div>
+    <div class="s-title" style="margin-bottom:32px;">What drives us every day.</div>
+    <div class="values-grid reveal">
+      <div class="val-card"><div class="val-icon">🎯</div><h4>People First</h4><p>HR is about humans. We build tools that free up HR professionals to do the human work that actually matters.</p></div>
+      <div class="val-card"><div class="val-icon">⚡</div><h4>Relentless Simplicity</h4><p>Powerful doesn't have to mean complex. We obsess over making sophisticated technology feel effortless.</p></div>
+      <div class="val-card"><div class="val-icon">🤝</div><h4>Built With Clients</h4><p>Every feature we ship was validated by real businesses. We build with our users, not just for them.</p></div>
+      <div class="val-card"><div class="val-icon">🔒</div><h4>Trust & Security</h4><p>HR data is sensitive. We treat it with the highest standards of security, privacy, and compliance.</p></div>
+      <div class="val-card"><div class="val-icon">📈</div><h4>Grow Together</h4><p>We succeed when our clients succeed. Our pricing and support model is designed to grow alongside your business.</p></div>
+      <div class="val-card"><div class="val-icon">🌍</div><h4>Built for Africa & Beyond</h4><p>Designed with the realities of emerging market businesses in mind — flexible, resilient, and locally aware.</p></div>
+    </div>
+
+    <div class="s-label" style="margin-top:16px;">The Team</div>
+    <div class="s-title" style="margin-bottom:32px;">The people behind TrueHR.</div>
+    <div class="team-grid reveal">
+      <div class="team-card">
+        <div class="team-av" style="background:linear-gradient(135deg,#3d6eff,#00e5b0);">MB</div>
+        <div class="team-name">Mwesigwa Bill Melvine</div>
+        <div class="team-role">Head of Systems</div>
+        <div class="team-bio">Architects the automation engine that powers TrueHR. Systems design expert with deep roots in HR operations technology.</div>
+      </div>
+      <div class="team-card">
+        <div class="team-av" style="background:linear-gradient(135deg,#f5c518,#ff4d6d);">HR</div>
+        <div class="team-name">Head of Product</div>
+        <div class="team-role">Product & Design</div>
+        <div class="team-bio">Translates the pain points of 250+ pilot clients into an intuitive, powerful product experience.</div>
+      </div>
+      <div class="team-card">
+        <div class="team-av" style="background:linear-gradient(135deg,#a064ff,#3d6eff);">GS</div>
+        <div class="team-name">Growth Lead</div>
+        <div class="team-role">Sales & Partnerships</div>
+        <div class="team-bio">Drives TrueHR's go-to-market strategy and builds partnerships with the SME ecosystem across the region.</div>
+      </div>
+    </div>
+  </div>
+
+  <div class="cta-band reveal">
+    <div>
+      <h2>Want to learn more<br>about TrueHR?</h2>
+      <p>We'd love to show you the platform in action.</p>
+    </div>
+    <div class="cta-btns">
+      <button class="btn-white" onclick="showPage('contact')">Book a Demo</button>
+      <button class="btn-outline-w" onclick="showPage('pricing')">See Pricing</button>
+    </div>
+  </div>
+
+  <footer>
+    <div class="footer-inner">
+      <div class="footer-top">
+        <div class="footer-brand">
+          <div class="nav-logo"><div class="nav-logo-mark">T</div><div class="nav-logo-text">True<span>HR</span></div></div>
+          <p>The HR operating system built for growing businesses.</p>
+        </div>
+        <div class="footer-col"><h5>Product</h5><a onclick="showPage('home')">Features</a><a onclick="showPage('pricing')">Pricing</a></div>
+        <div class="footer-col"><h5>Company</h5><a onclick="showPage('about')">About</a><a onclick="showPage('contact')">Contact</a></div>
+        <div class="footer-col"><h5>Contact</h5><a>sirmelvine@gmail.com</a></div>
+      </div>
+      <div class="footer-bottom">
+        <p>© 2024 TrueHR. All rights reserved.</p>
+        <span class="footer-accent">Built by Mwesigwa Bill Melvine</span>
+      </div>
+    </div>
+  </footer>
+</div>
+
+<!-- ══════════════════════ CONTACT PAGE ══════════════════════ -->
+<div class="page" id="page-contact">
+  <div class="contact-wrap">
+    <div class="contact-info">
+      <div class="s-label">Get In Touch</div>
+      <h1>Let's find the right plan for your business.</h1>
+      <p>Whether you're ready to get started or just want to see TrueHR in action, our team will get back to you within 24 hours.</p>
+      <div class="contact-methods">
+        <div class="cm-item">
+          <div class="cm-icon">📧</div>
+          <div><div class="cm-label">Email us directly</div><div class="cm-val">sirmelvine@gmail.com</div></div>
+        </div>
+        <div class="cm-item">
+          <div class="cm-icon">⚡</div>
+          <div><div class="cm-label">Response time</div><div class="cm-val">Within 24 hours</div></div>
+        </div>
+        <div class="cm-item">
+          <div class="cm-icon">🌍</div>
+          <div><div class="cm-label">Serving</div><div class="cm-val">MSEs & SMEs across Africa and beyond</div></div>
+        </div>
+        <div class="cm-item">
+          <div class="cm-icon">🎯</div>
+          <div><div class="cm-label">Free trial</div><div class="cm-val">14 days, no credit card required</div></div>
+        </div>
+      </div>
+    </div>
+
+    <div class="contact-form-card">
+      <div id="contact-form-view">
+        <h3>Request a Quote or Demo</h3>
+        <p class="sub">Fill in your details and we'll get back to you shortly.</p>
+        <div class="form-row">
+          <div class="fg"><label>First Name</label><input type="text" id="c-fname" placeholder="Jane"/></div>
+          <div class="fg"><label>Last Name</label><input type="text" id="c-lname" placeholder="Mwangi"/></div>
+        </div>
+        <div class="fg"><label>Work Email</label><input type="email" id="c-email" placeholder="jane@company.com"/></div>
+        <div class="fg"><label>Company Name</label><input type="text" id="c-company" placeholder="Acme Ltd"/></div>
+        <div class="form-row">
+          <div class="fg">
+            <label>Company Size</label>
+            <select id="c-size">
+              <option value="">Select size</option>
+              <option>1–20 employees</option>
+              <option>21–50 employees</option>
+              <option>51–100 employees</option>
+              <option>100+ employees</option>
+            </select>
+          </div>
+          <div class="fg">
+            <label>I'm interested in</label>
+            <select id="c-interest">
+              <option value="Quote Request">A Quote</option>
+              <option value="Book a Demo">A Demo</option>
+              <option value="General Enquiry">General Enquiry</option>
+            </select>
+          </div>
+        </div>
+        <div class="fg"><label>Message (optional)</label><textarea id="c-message" rows="3" placeholder="Tell us a bit about your HR challenges..."></textarea></div>
+        <button class="form-submit-btn" id="c-submit-btn" onclick="submitContact()">Send Message →</button>
+      </div>
+      <div class="success-box" id="contact-success">
+        <div class="s-icon">✅</div>
+        <h4>Message received!</h4>
+        <p>Thanks for reaching out. Mwesigwa Bill Melvine and the TrueHR team will be in touch within 24 hours.</p>
+      </div>
+    </div>
+  </div>
+
+  <footer>
+    <div class="footer-inner">
+      <div class="footer-top">
+        <div class="footer-brand">
+          <div class="nav-logo"><div class="nav-logo-mark">T</div><div class="nav-logo-text">True<span>HR</span></div></div>
+          <p>The HR operating system built for growing businesses.</p>
+        </div>
+        <div class="footer-col"><h5>Product</h5><a onclick="showPage('home')">Features</a><a onclick="showPage('pricing')">Pricing</a></div>
+        <div class="footer-col"><h5>Company</h5><a onclick="showPage('about')">About</a><a onclick="showPage('contact')">Contact</a></div>
+        <div class="footer-col"><h5>Contact</h5><a>sirmelvine@gmail.com</a></div>
+      </div>
+      <div class="footer-bottom">
+        <p>© 2024 TrueHR. All rights reserved.</p>
+        <span class="footer-accent">Built by Mwesigwa Bill Melvine</span>
+      </div>
+    </div>
+  </footer>
+</div>
+
+
+<!-- ══════════════════════ BLOG PAGE ══════════════════════ -->
+<div class="page" id="page-blog">
+
+  <div class="blog-hero">
+    <div class="blog-hero-inner">
+      <div class="s-label">TrueHR Blog</div>
+      <div class="s-title" style="max-width:600px;">Insights for modern<br>HR teams.</div>
+      <p style="color:var(--muted);font-size:15px;max-width:500px;line-height:1.75;margin-top:12px;">Practical guides, industry trends, and HR automation tips — written for the people running HR at growing businesses.</p>
+      <div class="blog-search-bar">
+        <span class="blog-search-icon">🔍</span>
+        <input type="text" placeholder="Search articles…" id="blog-search" oninput="filterBlog()"/>
+      </div>
+      <div class="blog-tags">
+        <button class="blog-tag active" onclick="setTag(this,'all')">All</button>
+        <button class="blog-tag" onclick="setTag(this,'automation')">Automation</button>
+        <button class="blog-tag" onclick="setTag(this,'compliance')">Compliance</button>
+        <button class="blog-tag" onclick="setTag(this,'culture')">HR Culture</button>
+        <button class="blog-tag" onclick="setTag(this,'growth')">Business Growth</button>
+        <button class="blog-tag" onclick="setTag(this,'product')">Product Updates</button>
+      </div>
+    </div>
+  </div>
+
+  <div class="blog-grid-wrap">
+
+    <!-- Featured posts -->
+    <div class="blog-featured reveal">
+      <div class="blog-card featured-card" onclick="openPost('post1')">
+        <div class="blog-thumb" style="background:linear-gradient(135deg,#0d1a40,#1a3a80);">🤖</div>
+        <div class="blog-body">
+          <div class="blog-meta">
+            <span class="blog-cat cat-automation">Automation</span>
+            <span class="blog-date">Dec 10, 2024</span>
+            <span class="blog-read">· 6 min read</span>
+          </div>
+          <h3>Why 70% of SME HR Tasks Are Still Manual — And How to Fix It</h3>
+          <p class="excerpt">Most HR teams at small and mid-sized businesses are still running on spreadsheets, WhatsApp approvals, and paper forms. We break down exactly why this happens and the step-by-step path out of it.</p>
+          <div class="blog-author">
+            <div class="b-av" style="background:linear-gradient(135deg,#3d6eff,#00e5b0);">MB</div>
+            <div><div class="b-av-name">Mwesigwa Bill Melvine</div><div class="b-av-role">Head of Systems · TrueHR</div></div>
+          </div>
+        </div>
+      </div>
+      <div style="display:flex;flex-direction:column;gap:20px;">
+        <div class="blog-card small-card" onclick="openPost('post2')">
+          <div class="blog-thumb" style="background:linear-gradient(135deg,#0d2d20,#0a4030);height:130px;">📋</div>
+          <div class="blog-body">
+            <div class="blog-meta">
+              <span class="blog-cat cat-compliance">Compliance</span>
+              <span class="blog-date">Dec 3, 2024</span>
+            </div>
+            <h3>5 Compliance Risks Every SME HR Team Overlooks</h3>
+            <div class="blog-author" style="margin-top:10px;">
+              <div class="b-av" style="background:#ff4d6d;">FN</div>
+              <div><div class="b-av-name">Fatima N.</div><div class="b-av-role">HR Specialist</div></div>
+            </div>
+          </div>
+        </div>
+        <div class="blog-card small-card" onclick="openPost('post3')">
+          <div class="blog-thumb" style="background:linear-gradient(135deg,#2a1a00,#4a3000);height:130px;">🚀</div>
+          <div class="blog-body">
+            <div class="blog-meta">
+              <span class="blog-cat cat-growth">Business Growth</span>
+              <span class="blog-date">Nov 25, 2024</span>
+            </div>
+            <h3>Scaling From 20 to 100 Employees: Your HR Checklist</h3>
+            <div class="blog-author" style="margin-top:10px;">
+              <div class="b-av" style="background:#f5c518;color:#111;">KO</div>
+              <div><div class="b-av-name">Kwame O.</div><div class="b-av-role">Guest Author</div></div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <!-- Main grid -->
+    <div class="blog-main-grid reveal" id="blog-main-grid">
+      <div class="blog-card regular-card" data-tag="culture" onclick="openPost('post4')">
+        <div class="blog-thumb" style="background:linear-gradient(135deg,#0a2a20,#0d4035);">💼</div>
+        <div class="blog-body">
+          <div class="blog-meta"><span class="blog-cat cat-culture">HR Culture</span><span class="blog-date">Nov 18, 2024</span></div>
+          <h3>How to Build an HR Department That Employees Actually Trust</h3>
+          <div class="blog-author" style="margin-top:12px;">
+            <div class="b-av" style="background:#00e5b0;color:#0a0f1e;">AM</div>
+            <div><div class="b-av-name">Amara M.</div><div class="b-av-role">Guest Author</div></div>
+          </div>
+        </div>
+      </div>
+      <div class="blog-card regular-card" data-tag="automation" onclick="openPost('post5')">
+        <div class="blog-thumb" style="background:linear-gradient(135deg,#0a0f2e,#1a2060);">⚡</div>
+        <div class="blog-body">
+          <div class="blog-meta"><span class="blog-cat cat-automation">Automation</span><span class="blog-date">Nov 11, 2024</span></div>
+          <h3>The 8 HR Workflows You Should Automate First</h3>
+          <div class="blog-author" style="margin-top:12px;">
+            <div class="b-av" style="background:linear-gradient(135deg,#3d6eff,#00e5b0);">MB</div>
+            <div><div class="b-av-name">Mwesigwa Bill Melvine</div><div class="b-av-role">Head of Systems</div></div>
+          </div>
+        </div>
+      </div>
+      <div class="blog-card regular-card" data-tag="product" onclick="openPost('post6')">
+        <div class="blog-thumb" style="background:linear-gradient(135deg,#1a0a2e,#2d1060);">✨</div>
+        <div class="blog-body">
+          <div class="blog-meta"><span class="blog-cat cat-product">Product Update</span><span class="blog-date">Nov 4, 2024</span></div>
+          <h3>Introducing TrueHR's No-Code Workflow Builder</h3>
+          <div class="blog-author" style="margin-top:12px;">
+            <div class="b-av" style="background:#a064ff;">HR</div>
+            <div><div class="b-av-name">TrueHR Team</div><div class="b-av-role">Product</div></div>
+          </div>
+        </div>
+      </div>
+      <div class="blog-card regular-card" data-tag="compliance" onclick="openPost('post2')">
+        <div class="blog-thumb" style="background:linear-gradient(135deg,#1a0a0a,#3a1020);">📊</div>
+        <div class="blog-body">
+          <div class="blog-meta"><span class="blog-cat cat-compliance">Compliance</span><span class="blog-date">Oct 28, 2024</span></div>
+          <h3>Labour Law Basics Every SME Owner Needs to Know in 2024</h3>
+          <div class="blog-author" style="margin-top:12px;">
+            <div class="b-av" style="background:#ff4d6d;">FN</div>
+            <div><div class="b-av-name">Fatima N.</div><div class="b-av-role">HR Specialist</div></div>
+          </div>
+        </div>
+      </div>
+      <div class="blog-card regular-card" data-tag="culture" onclick="openPost('post3')">
+        <div class="blog-thumb" style="background:linear-gradient(135deg,#0f1a0a,#1e3010);">🌱</div>
+        <div class="blog-body">
+          <div class="blog-meta"><span class="blog-cat cat-culture">HR Culture</span><span class="blog-date">Oct 21, 2024</span></div>
+          <h3>Remote Teams & HR: Managing People You Can't See in the Office</h3>
+          <div class="blog-author" style="margin-top:12px;">
+            <div class="b-av" style="background:#f5c518;color:#111;">KO</div>
+            <div><div class="b-av-name">Kwame O.</div><div class="b-av-role">Guest Author</div></div>
+          </div>
+        </div>
+      </div>
+      <div class="blog-card regular-card" data-tag="growth" onclick="openPost('post1')">
+        <div class="blog-thumb" style="background:linear-gradient(135deg,#0a1a10,#103020);">💰</div>
+        <div class="blog-body">
+          <div class="blog-meta"><span class="blog-cat cat-growth">Business Growth</span><span class="blog-date">Oct 14, 2024</span></div>
+          <h3>The Hidden Cost of Manual HR: What It's Really Costing Your Business</h3>
+          <div class="blog-author" style="margin-top:12px;">
+            <div class="b-av" style="background:linear-gradient(135deg,#3d6eff,#00e5b0);">MB</div>
+            <div><div class="b-av-name">Mwesigwa Bill Melvine</div><div class="b-av-role">Head of Systems</div></div>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <!-- Newsletter -->
+    <div class="blog-newsletter reveal">
+      <h3>Get HR insights in your inbox</h3>
+      <p>Join 1,200+ HR professionals getting practical tips and TrueHR updates every fortnight.</p>
+      <div class="newsletter-form">
+        <input type="email" placeholder="your@email.com" id="nl-email"/>
+        <button onclick="subscribeNewsletter()">Subscribe →</button>
+      </div>
+    </div>
+
+  </div>
+
+  <!-- Blog Post Reader (overlays on top of blog page) -->
+  <div class="blog-post-page" id="blog-post-reader">
+    <div class="blog-post-inner">
+      <button class="back-btn" onclick="closePost()">← Back to Blog</button>
+      <div id="post-content-area"></div>
+    </div>
+  </div>
+
+  <footer>
+    <div class="footer-inner">
+      <div class="footer-top">
+        <div class="footer-brand">
+          <div class="nav-logo"><div class="nav-logo-mark">T</div><div class="nav-logo-text">True<span>HR</span></div></div>
+          <p>The HR operating system built for growing businesses.</p>
+        </div>
+        <div class="footer-col"><h5>Product</h5><a onclick="showPage('home')">Features</a><a onclick="showPage('pricing')">Pricing</a></div>
+        <div class="footer-col"><h5>Company</h5><a onclick="showPage('about')">About</a><a onclick="showPage('blog')">Blog</a></div>
+        <div class="footer-col"><h5>Contact</h5><a>sirmelvine@gmail.com</a></div>
+      </div>
+      <div class="footer-bottom">
+        <p>© 2024 TrueHR. All rights reserved.</p>
+        <span class="footer-accent">Built by Mwesigwa Bill Melvine</span>
+      </div>
+    </div>
+  </footer>
+</div>
+
+
+<!-- ══════════════════ PRODUCTS PAGE ══════════════════ -->
+<div class="page" id="page-products">
+  <div class="products-hero">
+    <div class="products-hero-inner">
+      <div class="s-label" style="display:flex;justify-content:center;">Our Products</div>
+      <div class="s-title" style="text-align:center;">One platform.<br>Every HR need covered.</div>
+      <p style="color:var(--muted);font-size:16px;max-width:520px;margin:14px auto 0;line-height:1.75;">TrueHR is a suite of purpose-built HR tools designed to work together — or independently — for MSEs and SMEs at every stage of growth.</p>
+    </div>
+  </div>
+
+  <div class="prod-grid reveal">
+
+    <div class="prod-card blue" onclick="showPage('home')">
+      <div class="prod-icon blue">🗂</div>
+      <div class="prod-label blue">Core Platform</div>
+      <h3>HRIS & Workflow Automation</h3>
+      <p>The heart of TrueHR. Automate your core HR workflows, manage employee data, and give every team member a self-service portal.</p>
+      <ul class="prod-features-list">
+        <li><span class="prod-check">✓</span> Employee & Admin portals</li>
+        <li><span class="prod-check">✓</span> Leave & attendance management</li>
+        <li><span class="prod-check">✓</span> No-code workflow automation</li>
+        <li><span class="prod-check">✓</span> Compliance & document storage</li>
+      </ul>
+      <button class="prod-cta-btn">Explore HRIS →</button>
+    </div>
+
+    <div class="prod-card green" onclick="showPage('recruitment')">
+      <div class="prod-icon green">🎯</div>
+      <div class="prod-label green">Recruitment</div>
+      <h3>Talent Acquisition Suite</h3>
+      <p>From job posting to signed offer letter — TrueHR Recruit manages your entire hiring pipeline in one organised, automated system.</p>
+      <ul class="prod-features-list">
+        <li><span class="prod-check">✓</span> Job posting & applications</li>
+        <li><span class="prod-check">✓</span> Applicant tracking system</li>
+        <li><span class="prod-check">✓</span> Interview scheduling</li>
+        <li><span class="prod-check">✓</span> Offer letter automation</li>
+      </ul>
+      <button class="prod-cta-btn">Explore Recruitment →</button>
+    </div>
+
+    <div class="prod-card purple" onclick="showPage('training')">
+      <div class="prod-icon purple">📚</div>
+      <div class="prod-label purple">Training & Development</div>
+      <h3>Staff Development Hub</h3>
+      <p>Plan, assign, and track employee training programmes. Build a culture of continuous growth with structured development paths.</p>
+      <ul class="prod-features-list">
+        <li><span class="prod-check">✓</span> Training plans & scheduling</li>
+        <li><span class="prod-check">✓</span> Progress tracking & reports</li>
+        <li><span class="prod-check">✓</span> Skill gap analysis</li>
+        <li><span class="prod-check">✓</span> Certification management</li>
+      </ul>
+      <button class="prod-cta-btn">Explore Training →</button>
+    </div>
+
+    <div class="prod-card gold" onclick="showPage('elearning')">
+      <div class="prod-icon gold">🖥</div>
+      <div class="prod-label gold">eLearning</div>
+      <h3>Digital Learning Platform</h3>
+      <p>Deliver online courses, quizzes, and multimedia learning content directly to your employees — anytime, anywhere, on any device.</p>
+      <ul class="prod-features-list">
+        <li><span class="prod-check">✓</span> Course builder & library</li>
+        <li><span class="prod-check">✓</span> Quizzes & assessments</li>
+        <li><span class="prod-check">✓</span> Completion certificates</li>
+        <li><span class="prod-check">✓</span> Mobile-friendly learning</li>
+      </ul>
+      <button class="prod-cta-btn">Explore eLearning →</button>
+    </div>
+
+  </div>
+
+  <div class="cta-band reveal" style="margin-top:0;">
+    <div>
+      <h2>Not sure where to start?</h2>
+      <p>Our team will recommend the right TrueHR products for your business size and goals.</p>
+    </div>
+    <div class="cta-btns">
+      <button class="btn-white" onclick="showPage('contact')">Talk to Us →</button>
+    </div>
+  </div>
+
+  <footer>
+    <div class="footer-inner">
+      <div class="footer-top">
+        <div class="footer-brand"><div class="nav-logo"><div class="nav-logo-mark">T</div><div class="nav-logo-text">True<span>HR</span></div></div><p>The HR operating system for growing businesses.</p></div>
+        <div class="footer-col"><h5>Products</h5><a onclick="showPage('recruitment')">Recruitment</a><a onclick="showPage('training')">Training & Dev</a><a onclick="showPage('elearning')">eLearning</a></div>
+        <div class="footer-col"><h5>Company</h5><a onclick="showPage('about')">About</a><a onclick="showPage('blog')">Blog</a><a onclick="showPage('contact')">Contact</a></div>
+        <div class="footer-col"><h5>Contact</h5><a>sirmelvine@gmail.com</a></div>
+      </div>
+      <div class="footer-bottom"><p>© 2024 TrueHR. All rights reserved.</p><span class="footer-accent">Built by Mwesigwa Bill Melvine</span></div>
+    </div>
+  </footer>
+</div>
+
+<!-- ══════════════════ RECRUITMENT PAGE ══════════════════ -->
+<div class="page" id="page-recruitment">
+  <div class="inner-hero" style="background:radial-gradient(ellipse at top right,rgba(0,229,176,0.1) 0%,transparent 60%);">
+    <div class="inner-hero-inner">
+      <div>
+        <div class="product-badge" style="background:rgba(0,229,176,0.1);color:var(--accent-g);border-color:rgba(0,229,176,0.25);">🎯 TrueHR Recruitment</div>
+        <h1>Hire better.<br>Hire <span style="background:linear-gradient(90deg,#00e5b0,#3d6eff);-webkit-background-clip:text;-webkit-text-fill-color:transparent;background-clip:text;">faster.</span></h1>
+        <p>Stop managing candidates in spreadsheets and email threads. TrueHR Recruit gives you a complete applicant tracking system built for SMEs — from first application to signed offer.</p>
+        <div style="display:flex;gap:12px;flex-wrap:wrap;">
+          <button class="btn-primary" onclick="showPage('contact')">Request a Demo →</button>
+          <button class="btn-ghost" onclick="showPage('pricing')">View Pricing</button>
+        </div>
+      </div>
+      <div class="inner-visual">
+        <div class="inner-visual-title">📋 Active Pipeline</div>
+        <div class="iv-row">
+          <div class="iv-left"><div class="iv-icon">📥</div><div><div class="iv-label">Applications</div><div class="iv-sub">This week</div></div></div>
+          <span class="iv-pct">24 new</span>
+        </div>
+        <div class="iv-row">
+          <div class="iv-left"><div class="iv-icon">📞</div><div><div class="iv-label">Phone Screens</div><div class="iv-sub">Scheduled</div></div></div>
+          <span class="iv-badge" style="background:rgba(61,110,255,0.15);color:#7a9fff;">8 today</span>
+        </div>
+        <div class="iv-row">
+          <div class="iv-left"><div class="iv-icon">🤝</div><div><div class="iv-label">Final Interviews</div><div class="iv-sub">In progress</div></div></div>
+          <span class="iv-badge" style="background:rgba(245,197,24,0.12);color:var(--gold);">3 pending</span>
+        </div>
+        <div class="iv-row">
+          <div class="iv-left"><div class="iv-icon">✉️</div><div><div class="iv-label">Offers Sent</div><div class="iv-sub">Awaiting response</div></div></div>
+          <span class="iv-badge" style="background:rgba(0,229,176,0.12);color:var(--accent-g);">2 accepted</span>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <div class="inner-section">
+    <div class="s-label">Features</div>
+    <div class="s-title" style="margin-bottom:32px;">Everything you need to<br>build a great team.</div>
+    <div class="module-grid reveal">
+      <div class="module-card"><div class="m-icon">📢</div><h4>Job Posting</h4><p>Publish open roles to your careers page and major job boards with one click. Manage all applications in one place.</p></div>
+      <div class="module-card"><div class="m-icon">🗃</div><h4>Applicant Tracking</h4><p>Kanban-style pipeline to move candidates through stages — Applied, Screening, Interview, Offer, Hired.</p></div>
+      <div class="module-card"><div class="m-icon">🗓</div><h4>Interview Scheduling</h4><p>Auto-schedule interviews based on interviewer availability. Send calendar invites and reminders automatically.</p></div>
+      <div class="module-card"><div class="m-icon">🤖</div><h4>CV Screening</h4><p>Smart filters to shortlist candidates by keyword, experience, or qualification — saving hours of manual review.</p></div>
+      <div class="module-card"><div class="m-icon">✉️</div><h4>Offer Management</h4><p>Generate, send, and track offer letters digitally. Get e-signatures and automatically trigger onboarding.</p></div>
+      <div class="module-card"><div class="m-icon">📊</div><h4>Hiring Analytics</h4><p>Track time-to-hire, source quality, pipeline conversion rates, and recruiter performance in real time.</p></div>
+    </div>
+
+    <div class="stats-band reveal" style="margin-bottom:0;">
+      <div class="stat-item"><div class="stat-num">3x</div><div class="stat-lbl">Faster time-to-hire vs manual</div></div>
+      <div class="stat-item"><div class="stat-num">80%</div><div class="stat-lbl">Reduction in recruiter admin</div></div>
+      <div class="stat-item"><div class="stat-num">100%</div><div class="stat-lbl">Digital — no paper applications</div></div>
+      <div class="stat-item"><div class="stat-num">2-day</div><div class="stat-lbl">Average setup time</div></div>
+    </div>
+  </div>
+
+  <div class="cta-band reveal">
+    <div><h2>Ready to hire smarter?</h2><p>See TrueHR Recruit in action with a personalised demo.</p></div>
+    <div class="cta-btns"><button class="btn-white" onclick="showPage('contact')">Book a Demo →</button><button class="btn-outline-w" onclick="showPage('products')">All Products</button></div>
+  </div>
+
+  <footer>
+    <div class="footer-inner">
+      <div class="footer-top">
+        <div class="footer-brand"><div class="nav-logo"><div class="nav-logo-mark">T</div><div class="nav-logo-text">True<span>HR</span></div></div><p>The HR operating system for growing businesses.</p></div>
+        <div class="footer-col"><h5>Products</h5><a onclick="showPage('products')">All Products</a><a onclick="showPage('training')">Training & Dev</a><a onclick="showPage('elearning')">eLearning</a></div>
+        <div class="footer-col"><h5>Company</h5><a onclick="showPage('about')">About</a><a onclick="showPage('pricing')">Pricing</a><a onclick="showPage('contact')">Contact</a></div>
+        <div class="footer-col"><h5>Contact</h5><a>sirmelvine@gmail.com</a></div>
+      </div>
+      <div class="footer-bottom"><p>© 2024 TrueHR. All rights reserved.</p><span class="footer-accent">Built by Mwesigwa Bill Melvine</span></div>
+    </div>
+  </footer>
+</div>
+
+<!-- ══════════════════ TRAINING & DEVELOPMENT PAGE ══════════════════ -->
+<div class="page" id="page-training">
+  <div class="inner-hero" style="background:radial-gradient(ellipse at top left,rgba(160,100,255,0.1) 0%,transparent 60%);">
+    <div class="inner-hero-inner">
+      <div>
+        <div class="product-badge" style="background:rgba(160,100,255,0.1);color:#c084ff;border-color:rgba(160,100,255,0.25);">📚 Training & Development</div>
+        <h1>Grow your team's<br><span style="background:linear-gradient(90deg,#a064ff,#3d6eff);-webkit-background-clip:text;-webkit-text-fill-color:transparent;background-clip:text;">skills & potential.</span></h1>
+        <p>TrueHR T&D gives HR managers and team leaders a structured system to plan, deliver, and track employee development — closing skill gaps and building a stronger workforce.</p>
+        <div style="display:flex;gap:12px;flex-wrap:wrap;">
+          <button class="btn-primary" onclick="showPage('contact')">Request a Demo →</button>
+          <button class="btn-ghost" onclick="showPage('elearning')">See eLearning →</button>
+        </div>
+      </div>
+      <div class="inner-visual">
+        <div class="inner-visual-title">📊 Development Dashboard</div>
+        <div class="iv-row">
+          <div class="iv-left"><div class="iv-icon">👥</div><div><div class="iv-label">Staff on Training Plans</div><div class="iv-sub">Active programmes</div></div></div>
+          <span class="iv-pct">34 staff</span>
+        </div>
+        <div class="iv-row">
+          <div class="iv-left"><div class="iv-icon">✅</div><div><div class="iv-label">Completions This Month</div><div class="iv-sub">Certified</div></div></div>
+          <span class="iv-badge" style="background:rgba(160,100,255,0.15);color:#c084ff;">12 done</span>
+        </div>
+        <div class="iv-row">
+          <div class="iv-left"><div class="iv-icon">📈</div><div><div class="iv-label">Average Progress</div><div class="iv-sub">Across all programmes</div></div></div>
+          <span class="iv-pct">68%</span>
+        </div>
+        <div class="iv-row">
+          <div class="iv-left"><div class="iv-icon">🏆</div><div><div class="iv-label">Certifications Issued</div><div class="iv-sub">This quarter</div></div></div>
+          <span class="iv-badge" style="background:rgba(245,197,24,0.12);color:var(--gold);">28 total</span>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <div class="inner-section">
+    <div class="s-label">Features</div>
+    <div class="s-title" style="margin-bottom:32px;">Build a culture of<br>continuous learning.</div>
+    <div class="module-grid reveal">
+      <div class="module-card"><div class="m-icon">🗺</div><h4>Training Plans</h4><p>Create structured development plans for individuals, teams, or departments with clear milestones and timelines.</p></div>
+      <div class="module-card"><div class="m-icon">📋</div><h4>Skills Gap Analysis</h4><p>Identify exactly which skills your team is missing and generate targeted training recommendations automatically.</p></div>
+      <div class="module-card"><div class="m-icon">📅</div><h4>Session Scheduling</h4><p>Book training sessions, workshops, and external courses. Send calendar invites and automated reminders to attendees.</p></div>
+      <div class="module-card"><div class="m-icon">📊</div><h4>Progress Tracking</h4><p>Real-time dashboards showing completion rates, assessment scores, and development milestones for every employee.</p></div>
+      <div class="module-card"><div class="m-icon">🏅</div><h4>Certifications</h4><p>Issue digital certificates upon programme completion. Maintain a full audit trail of all qualifications earned.</p></div>
+      <div class="module-card"><div class="m-icon">🔗</div><h4>eLearning Integration</h4><p>Seamlessly link training plans to TrueHR eLearning modules — one unified experience for learners and managers.</p></div>
+    </div>
+
+    <div class="stats-band reveal" style="margin-bottom:0;">
+      <div class="stat-item"><div class="stat-num">2x</div><div class="stat-lbl">Improvement in training completion rates</div></div>
+      <div class="stat-item"><div class="stat-num">40%</div><div class="stat-lbl">Reduction in skills gaps within 6 months</div></div>
+      <div class="stat-item"><div class="stat-num">100%</div><div class="stat-lbl">Digital records — no paper training logs</div></div>
+      <div class="stat-item"><div class="stat-num">1-day</div><div class="stat-lbl">Average time to build your first plan</div></div>
+    </div>
+  </div>
+
+  <div class="cta-band reveal">
+    <div><h2>Ready to invest in<br>your team's growth?</h2><p>See how TrueHR T&D can close your skill gaps — book a demo today.</p></div>
+    <div class="cta-btns"><button class="btn-white" onclick="showPage('contact')">Book a Demo →</button><button class="btn-outline-w" onclick="showPage('elearning')">See eLearning</button></div>
+  </div>
+
+  <footer>
+    <div class="footer-inner">
+      <div class="footer-top">
+        <div class="footer-brand"><div class="nav-logo"><div class="nav-logo-mark">T</div><div class="nav-logo-text">True<span>HR</span></div></div><p>The HR operating system for growing businesses.</p></div>
+        <div class="footer-col"><h5>Products</h5><a onclick="showPage('products')">All Products</a><a onclick="showPage('recruitment')">Recruitment</a><a onclick="showPage('elearning')">eLearning</a></div>
+        <div class="footer-col"><h5>Company</h5><a onclick="showPage('about')">About</a><a onclick="showPage('pricing')">Pricing</a><a onclick="showPage('contact')">Contact</a></div>
+        <div class="footer-col"><h5>Contact</h5><a>sirmelvine@gmail.com</a></div>
+      </div>
+      <div class="footer-bottom"><p>© 2024 TrueHR. All rights reserved.</p><span class="footer-accent">Built by Mwesigwa Bill Melvine</span></div>
+    </div>
+  </footer>
+</div>
+
+<!-- ══════════════════ eLEARNING PAGE ══════════════════ -->
+<div class="page" id="page-elearning">
+  <div class="inner-hero" style="background:radial-gradient(ellipse at top,rgba(245,197,24,0.07) 0%,transparent 60%);">
+    <div class="inner-hero-inner">
+      <div>
+        <div class="product-badge" style="background:rgba(245,197,24,0.1);color:var(--gold);border-color:rgba(245,197,24,0.25);">🖥 TrueHR eLearning</div>
+        <h1>Learning that<br>fits <span style="background:linear-gradient(90deg,#f5c518,#ff9d00);-webkit-background-clip:text;-webkit-text-fill-color:transparent;background-clip:text;">their schedule.</span></h1>
+        <p>Deliver engaging online courses to your entire workforce — onboarding modules, compliance training, skills programmes, and more — without needing a dedicated L&D team.</p>
+        <div style="display:flex;gap:12px;flex-wrap:wrap;">
+          <button class="btn-primary" onclick="showPage('contact')">Request a Demo →</button>
+          <button class="btn-ghost" onclick="showPage('training')">See Training & Dev →</button>
+        </div>
+      </div>
+      <div class="inner-visual">
+        <div class="inner-visual-title">🎓 Learning Portal</div>
+        <div class="iv-row">
+          <div class="iv-left"><div class="iv-icon">▶️</div><div><div class="iv-label">Onboarding Essentials</div><div class="iv-sub">12 modules · 2.5 hrs</div></div></div>
+          <span class="iv-pct">87%</span>
+        </div>
+        <div class="iv-row">
+          <div class="iv-left"><div class="iv-icon">⚖️</div><div><div class="iv-label">Compliance Basics</div><div class="iv-sub">6 modules · 1 hr</div></div></div>
+          <span class="iv-badge" style="background:rgba(0,229,176,0.12);color:var(--accent-g);">Completed</span>
+        </div>
+        <div class="iv-row">
+          <div class="iv-left"><div class="iv-icon">💡</div><div><div class="iv-label">Leadership Foundations</div><div class="iv-sub">8 modules · 3 hrs</div></div></div>
+          <span class="iv-badge" style="background:rgba(245,197,24,0.12);color:var(--gold);">In Progress</span>
+        </div>
+        <div class="iv-row">
+          <div class="iv-left"><div class="iv-icon">🛡</div><div><div class="iv-label">Data Privacy & Security</div><div class="iv-sub">4 modules · 45 mins</div></div></div>
+          <span class="iv-badge" style="background:rgba(61,110,255,0.15);color:#7a9fff;">Assigned</span>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <div class="inner-section">
+    <div class="s-label">Platform Features</div>
+    <div class="s-title" style="margin-bottom:32px;">A complete digital<br>learning experience.</div>
+    <div class="module-grid reveal">
+      <div class="module-card"><div class="m-icon">🏗</div><h4>Course Builder</h4><p>Create rich courses with video, text, images, and interactive elements — no coding or technical skills needed.</p></div>
+      <div class="module-card"><div class="m-icon">📱</div><h4>Mobile Learning</h4><p>Employees access their courses on any device — phone, tablet, or desktop. Learning happens on their schedule.</p></div>
+      <div class="module-card"><div class="m-icon">🧠</div><h4>Quizzes & Assessments</h4><p>Test comprehension with auto-graded quizzes, knowledge checks, and scenario-based assessments.</p></div>
+      <div class="module-card"><div class="m-icon">🏆</div><h4>Certificates</h4><p>Auto-issue branded completion certificates. Employees build a verified learning record they can be proud of.</p></div>
+      <div class="module-card"><div class="m-icon">📂</div><h4>Course Library</h4><p>Access a library of pre-built courses on compliance, safety, onboarding, and professional skills — ready to assign immediately.</p></div>
+      <div class="module-card"><div class="m-icon">📈</div><h4>Learning Analytics</h4><p>Track course completion, quiz scores, time spent, and learner progress across your entire organisation in real time.</p></div>
+    </div>
+
+    <div class="stats-band reveal" style="margin-bottom:0;">
+      <div class="stat-item"><div class="stat-num">5x</div><div class="stat-lbl">Higher completion vs in-person only training</div></div>
+      <div class="stat-item"><div class="stat-num">90%</div><div class="stat-lbl">Of learners prefer self-paced digital learning</div></div>
+      <div class="stat-item"><div class="stat-num">50%</div><div class="stat-lbl">Lower training delivery cost vs classroom</div></div>
+      <div class="stat-item"><div class="stat-num">∞</div><div class="stat-lbl">Unlimited course access on all paid plans</div></div>
+    </div>
+  </div>
+
+  <div class="cta-band reveal">
+    <div><h2>Start delivering world-class<br>learning today.</h2><p>Get TrueHR eLearning set up in hours. No IT team required.</p></div>
+    <div class="cta-btns"><button class="btn-white" onclick="showPage('contact')">Book a Demo →</button><button class="btn-outline-w" onclick="showPage('training')">See Training & Dev</button></div>
+  </div>
+
+  <footer>
+    <div class="footer-inner">
+      <div class="footer-top">
+        <div class="footer-brand"><div class="nav-logo"><div class="nav-logo-mark">T</div><div class="nav-logo-text">True<span>HR</span></div></div><p>The HR operating system for growing businesses.</p></div>
+        <div class="footer-col"><h5>Products</h5><a onclick="showPage('products')">All Products</a><a onclick="showPage('recruitment')">Recruitment</a><a onclick="showPage('training')">Training & Dev</a></div>
+        <div class="footer-col"><h5>Company</h5><a onclick="showPage('about')">About</a><a onclick="showPage('pricing')">Pricing</a><a onclick="showPage('contact')">Contact</a></div>
+        <div class="footer-col"><h5>Contact</h5><a>sirmelvine@gmail.com</a></div>
+      </div>
+      <div class="footer-bottom"><p>© 2024 TrueHR. All rights reserved.</p><span class="footer-accent">Built by Mwesigwa Bill Melvine</span></div>
+    </div>
+  </footer>
+</div>
+
+<!-- ══ SCRIPTS ══ -->
+<script src="https://cdn.jsdelivr.net/npm/@emailjs/browser@4/dist/email.min.js"></script>
+<script>
+  // EmailJS credentials
+  const SVC  = 'service_bgmpuzr';
+  const TPL  = 'template_beg6j6h';
+  const KEY  = 'gzyJL7sP0rNjOC8fN';
+  emailjs.init(KEY);
+
+  // ── PAGE ROUTING ──
+  const ALL_PAGES = ['home','pricing','about','contact','blog','products','recruitment','training','elearning'];
+  function showPage(id) {
+    document.querySelectorAll('.page').forEach(p => p.classList.remove('active'));
+    document.querySelectorAll('.nav-link').forEach(l => l.classList.remove('active'));
+    document.getElementById('page-' + id).classList.add('active');
+    const nl = document.getElementById('nl-' + id);
+    if (nl) nl.classList.add('active');
+    window.scrollTo({top:0,behavior:'smooth'});
+    setTimeout(initReveal, 100);
+  }
+
+  // ── MOBILE MENU ──
+  function toggleMobileMenu() {
+    const links = document.querySelector('.nav-links');
+    links.style.display = links.style.display === 'flex' ? 'none' : 'flex';
+    links.style.flexDirection = 'column';
+    links.style.position = 'absolute';
+    links.style.top = '68px';
+    links.style.left = '0'; links.style.right = '0';
+    links.style.background = 'rgba(7,11,20,0.98)';
+    links.style.padding = '16px 24px 24px';
+    links.style.borderBottom = '1px solid rgba(255,255,255,0.08)';
+  }
+
+  // ── BILLING TOGGLE ──
+  function toggleBilling(type) {
+    document.getElementById('tb-monthly').classList.toggle('active', type === 'monthly');
+    document.getElementById('tb-annual').classList.toggle('active', type === 'annual');
+    const ps = document.getElementById('price-starter');
+    const pp = document.getElementById('price-pro');
+    if (type === 'annual') {
+      ps.innerHTML = '<sup>$</sup>8';
+      pp.innerHTML = '<sup>$</sup>14';
+    } else {
+      ps.innerHTML = '<sup>$</sup>10';
+      pp.innerHTML = '<sup>$</sup>18';
+    }
+  }
+
+  // ── FAQ ──
+  function toggleFaq(el) { el.classList.toggle('open'); }
+
+  // ── CONTACT FORM ──
+  function submitContact() {
+    const fname   = document.getElementById('c-fname').value.trim();
+    const lname   = document.getElementById('c-lname').value.trim();
+    const email   = document.getElementById('c-email').value.trim();
+    const company = document.getElementById('c-company').value.trim();
+    const size    = document.getElementById('c-size').value;
+    const interest= document.getElementById('c-interest').value;
+    const message = document.getElementById('c-message').value.trim();
+    const btn     = document.getElementById('c-submit-btn');
+
+    if (!fname || !email) { alert('Please fill in your first name and email.'); return; }
+
+    btn.disabled = true;
+    btn.textContent = 'Sending…';
+
+    emailjs.send(SVC, TPL, {
+      to_email:     'sirmelvine@gmail.com',
+      from_name:    fname + ' ' + lname,
+      from_email:   email,
+      company_size: size || 'Not specified',
+      plan:         company || 'Not specified',
+      request_type: interest + (message ? ' — ' + message : ''),
+    })
+    .then(() => {
+      document.getElementById('contact-form-view').style.display = 'none';
+      document.getElementById('contact-success').style.display = 'block';
+    })
+    .catch(err => {
+      console.error(err);
+      btn.disabled = false;
+      btn.textContent = 'Send Message →';
+      alert('Something went wrong. Please email sirmelvine@gmail.com directly.');
+    });
+  }
+
+
+  // ── BLOG DATA ──
+  const posts = {
+    post1: {
+      title: "Why 70% of SME HR Tasks Are Still Manual — And How to Fix It",
+      cat: "Automation", catClass: "cat-automation",
+      date: "December 10, 2024", read: "6 min read",
+      author: "Mwesigwa Bill Melvine", authorRole: "Head of Systems · TrueHR", authorBg: "linear-gradient(135deg,#3d6eff,#00e5b0)", authorInitials: "MB",
+      content: `
+        <p>Walk into almost any small or mid-sized business in Africa today and ask to see the HR department's leave tracker. There's a high chance it's an Excel spreadsheet. Ask where onboarding documents are stored — probably in a shared WhatsApp group or a folder nobody's organised since 2021.</p>
+        <p>This isn't a criticism. It's a reality. And it's one that costs businesses thousands of dollars every year in lost time, compliance failures, and staff frustration.</p>
+        <h2>Why Manual HR Persists</h2>
+        <p>There are three main reasons SMEs stay stuck in manual HR processes:</p>
+        <ul>
+          <li><strong>Enterprise tools are priced out of reach.</strong> Most HRIS platforms are built for companies with 500+ employees and priced accordingly.</li>
+          <li><strong>Generic tools don't go deep enough.</strong> Basic tools like Google Forms or Trello can handle simple workflows but fall apart under the complexity of real HR.</li>
+          <li><strong>Change feels risky.</strong> "We've always done it this way" is a powerful force, especially when budgets are tight and time is short.</li>
+        </ul>
+        <blockquote>"The biggest cost of manual HR isn't the time it wastes. It's the decisions you can't make because you don't have the data."</blockquote>
+        <h2>The Real Cost</h2>
+        <p>Our research across 250+ pilot clients found that HR teams at SMEs spend an average of 14 hours per week on tasks that could be automated. At a conservative cost of $15/hour, that's over $10,000 per HR staff member per year — just on admin.</p>
+        <div class="highlight-box"><p>💡 <strong>Quick win:</strong> Start by automating just your leave request process. It's the highest-volume, lowest-complexity HR workflow in most businesses — and the fastest way to see the value of automation.</p></div>
+        <h2>The Path Forward</h2>
+        <p>The good news is that fixing manual HR doesn't require a massive IT project or a huge budget. Modern HRIS platforms like TrueHR are designed to get businesses running in hours — not months — at a price point that makes sense for growing teams.</p>
+        <p>The key is starting with the workflows that cause the most pain, automating those first, and building from there. You don't need to fix everything at once.</p>
+      `
+    },
+    post2: {
+      title: "5 Compliance Risks Every SME HR Team Overlooks",
+      cat: "Compliance", catClass: "cat-compliance",
+      date: "December 3, 2024", read: "5 min read",
+      author: "Fatima N.", authorRole: "HR Specialist", authorBg: "#ff4d6d", authorInitials: "FN",
+      content: `
+        <p>Compliance is the part of HR that nobody talks about until something goes wrong. And when it goes wrong at an SME, the consequences can be severe — fines, legal action, and reputational damage that takes years to recover from.</p>
+        <p>Here are the five compliance risks we see most often when onboarding new TrueHR clients.</p>
+        <h2>1. Incomplete Employment Contracts</h2>
+        <p>Many SMEs use outdated contract templates, or worse, verbal agreements. Employment contracts must clearly cover probation periods, termination clauses, leave entitlements, and job scope. Missing any of these creates legal exposure.</p>
+        <h2>2. Inconsistent Leave Record-Keeping</h2>
+        <p>If your leave records live in a spreadsheet that only one person maintains, you're one resignation away from losing your entire leave history — and one dispute away from a compliance nightmare.</p>
+        <h2>3. No Audit Trail for Disciplinary Actions</h2>
+        <p>When disciplinary processes aren't documented properly, businesses lose unfair dismissal claims even when they've acted reasonably. Every warning, meeting, and outcome needs to be on record.</p>
+        <blockquote>"It's not enough to do the right thing. You have to be able to prove you did the right thing."</blockquote>
+        <h2>4. Outdated Policies</h2>
+        <p>Labour laws change. Your HR policies need to keep pace. Most SMEs set policies once and never revisit them — leaving the business operating under rules that may no longer be legally compliant.</p>
+        <h2>5. No Data Privacy Controls</h2>
+        <p>Employee data — salaries, performance reviews, personal information — is sensitive and regulated. Storing it in unprotected spreadsheets or shared drives is a data breach risk and a compliance violation.</p>
+        <div class="highlight-box"><p>🛡️ <strong>TrueHR automatically maintains audit trails, stores documents securely, and flags when policies need review — protecting your business without adding to your workload.</strong></p></div>
+      `
+    },
+    post3: {
+      title: "Scaling From 20 to 100 Employees: Your HR Checklist",
+      cat: "Business Growth", catClass: "cat-growth",
+      date: "November 25, 2024", read: "7 min read",
+      author: "Kwame O.", authorRole: "Guest Author · CEO, Logistics", authorBg: "#f5c518", authorInitials: "KO",
+      content: `
+        <p>Growing from 20 to 100 employees is one of the most exciting — and most stressful — transitions a business can make. The HR processes that worked fine at 20 people will absolutely break at 60. And by the time you hit 100, you need proper infrastructure or everything starts to crack.</p>
+        <p>I went through this with my own logistics business. Here's the checklist I wish I'd had.</p>
+        <h2>At 20–40 Employees</h2>
+        <ul>
+          <li>Formalise your employment contracts and HR policies</li>
+          <li>Set up a proper leave management system (stop using WhatsApp)</li>
+          <li>Create a structured onboarding process with a checklist</li>
+          <li>Start tracking attendance systematically</li>
+        </ul>
+        <h2>At 40–70 Employees</h2>
+        <ul>
+          <li>Hire or designate a dedicated HR person</li>
+          <li>Implement an HRIS platform — manual tracking no longer works</li>
+          <li>Build a performance review process (even a simple one)</li>
+          <li>Create a staff handbook covering all key policies</li>
+        </ul>
+        <h2>At 70–100 Employees</h2>
+        <ul>
+          <li>Automate your most time-consuming HR workflows</li>
+          <li>Introduce employee self-service for documents and requests</li>
+          <li>Set up HR analytics to track headcount, turnover, and absence</li>
+          <li>Review compensation structures and benefits</li>
+        </ul>
+        <blockquote>"The businesses that scale smoothly are the ones who invest in HR infrastructure before they desperately need it — not after."</blockquote>
+        <div class="highlight-box"><p>📋 <strong>TrueHR is designed exactly for this journey — from 10 employees to 100+, with no need to switch platforms as you grow.</strong></p></div>
+      `
+    }
+  };
+
+  let activeTag = 'all';
+
+  function setTag(btn, tag) {
+    document.querySelectorAll('.blog-tag').forEach(b => b.classList.remove('active'));
+    btn.classList.add('active');
+    activeTag = tag;
+    filterBlog();
+  }
+
+  function filterBlog() {
+    const q = document.getElementById('blog-search').value.toLowerCase();
+    document.querySelectorAll('#blog-main-grid .blog-card').forEach(card => {
+      const tagMatch = activeTag === 'all' || card.dataset.tag === activeTag;
+      const titleMatch = card.querySelector('h3').textContent.toLowerCase().includes(q);
+      card.style.display = (tagMatch && (q === '' || titleMatch)) ? '' : 'none';
+    });
+  }
+
+  function openPost(id) {
+    const post = posts[id];
+    if (!post) return;
+    document.getElementById('post-content-area').innerHTML = `
+      <div class="post-header-cat"><span class="blog-cat ${post.catClass}">${post.cat}</span></div>
+      <h1 class="post-title">${post.title}</h1>
+      <div class="post-meta-bar">
+        <div class="post-author-row">
+          <div class="b-av" style="background:${post.authorBg};color:${post.authorBg === '#f5c518' ? '#111' : 'white'}">${post.authorInitials}</div>
+          <div><div class="b-av-name">${post.author}</div><div class="b-av-role">${post.authorRole}</div></div>
+        </div>
+        <span class="post-date">${post.date}</span>
+        <span class="post-read">${post.read}</span>
+      </div>
+      <div class="post-content">${post.content}</div>
+    `;
+    document.getElementById('blog-post-reader').style.display = 'block';
+    document.querySelector('#page-blog .blog-hero').style.display = 'none';
+    document.querySelector('.blog-grid-wrap').style.display = 'none';
+    window.scrollTo({top:0,behavior:'smooth'});
+  }
+
+  function closePost() {
+    document.getElementById('blog-post-reader').style.display = 'none';
+    document.querySelector('#page-blog .blog-hero').style.display = '';
+    document.querySelector('.blog-grid-wrap').style.display = '';
+    window.scrollTo({top:0,behavior:'smooth'});
+  }
+
+  function subscribeNewsletter() {
+    const email = document.getElementById('nl-email').value.trim();
+    if (!email) { alert('Please enter your email address.'); return; }
+    emailjs.send(SVC, TPL, {
+      to_email: 'sirmelvine@gmail.com',
+      from_name: 'Newsletter Subscriber',
+      from_email: email,
+      company_size: 'N/A',
+      plan: 'N/A',
+      request_type: 'Newsletter Subscription',
+    }).then(() => {
+      alert('You\'re subscribed! Welcome to the TrueHR community 🎉');
+      document.getElementById('nl-email').value = '';
+    }).catch(() => {
+      alert('Something went wrong. Please try again.');
+    });
+  }
+
+  // ── SCROLL REVEAL ──
+  function initReveal() {
+    const obs = new IntersectionObserver(entries => {
+      entries.forEach(e => { if (e.isIntersecting) e.target.classList.add('visible'); });
+    }, { threshold: 0.08 });
+    document.querySelectorAll('.reveal:not(.visible)').forEach(el => obs.observe(el));
+  }
+  initReveal();
+</script>
+</body>
+</html>

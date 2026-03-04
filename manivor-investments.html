@@ -1,0 +1,1136 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8"/>
+<meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+<title>Manivor Investments Limited — General Supplies Uganda</title>
+<link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:wght@400;500;600;700&family=Outfit:wght@300;400;500;600;700&display=swap" rel="stylesheet"/>
+<style>
+:root{
+  --bg:     #060810;
+  --bg2:    #0b0f1c;
+  --bg3:    #10151f;
+  --border: rgba(255,255,255,0.07);
+  --border2:rgba(255,255,255,0.13);
+  --text:   #e4e8f0;
+  --muted:  #6b7590;
+  --gold:   #c9a84c;
+  --gold2:  #e8c97a;
+  --gold-g: rgba(201,168,76,0.12);
+  --card:   rgba(255,255,255,0.03);
+  --card-h: rgba(255,255,255,0.06);
+  --red:    #e05252;
+}
+*{box-sizing:border-box;margin:0;padding:0;}
+html{scroll-behavior:smooth;}
+body{
+  font-family:'Outfit',sans-serif;
+  background:var(--bg);color:var(--text);
+  min-height:100vh;overflow-x:hidden;
+}
+/* NOISE */
+body::after{
+  content:'';position:fixed;inset:0;
+  background-image:url("data:image/svg+xml,%3Csvg viewBox='0 0 200 200' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.85' numOctaves='4' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23n)' opacity='0.035'/%3E%3C/svg%3E");
+  pointer-events:none;z-index:0;
+}
+
+/* PAGES */
+.page{display:none;animation:fadeIn 0.45s ease;}
+.page.active{display:block;}
+@keyframes fadeIn{from{opacity:0;transform:translateY(12px);}to{opacity:1;transform:translateY(0);}}
+
+/* NAV */
+nav{
+  position:fixed;top:0;left:0;right:0;z-index:200;
+  display:flex;align-items:center;justify-content:space-between;
+  padding:0 56px;height:72px;
+  background:rgba(6,8,16,0.9);backdrop-filter:blur(20px);
+  border-bottom:1px solid var(--border);
+}
+.logo{display:flex;align-items:center;gap:12px;cursor:pointer;}
+.logo-mark{
+  width:40px;height:40px;border-radius:4px;
+  background:linear-gradient(135deg,var(--gold),#8a6520);
+  display:flex;align-items:center;justify-content:center;
+  font-family:'Cormorant Garamond',serif;font-weight:700;font-size:20px;color:white;
+  letter-spacing:-1px;
+}
+.logo-text{
+  display:flex;flex-direction:column;line-height:1.1;
+}
+.logo-name{font-family:'Cormorant Garamond',serif;font-size:17px;font-weight:700;color:white;letter-spacing:0.5px;}
+.logo-sub{font-size:9px;letter-spacing:2.5px;text-transform:uppercase;color:var(--gold);font-weight:500;}
+.nav-links{display:flex;align-items:center;gap:4px;}
+.nav-link{
+  padding:8px 18px;border-radius:6px;font-size:13px;font-weight:500;
+  color:var(--muted);cursor:pointer;transition:all 0.2s;border:none;background:none;
+  font-family:'Outfit',sans-serif;letter-spacing:0.3px;
+}
+.nav-link:hover{color:var(--text);background:var(--card);}
+.nav-link.active{color:var(--gold);background:var(--gold-g);}
+.nav-cta{
+  padding:9px 24px;border-radius:6px;font-size:13px;font-weight:600;
+  background:var(--gold);color:#0a0c14;border:none;cursor:pointer;
+  transition:all 0.2s;font-family:'Outfit',sans-serif;letter-spacing:0.3px;
+}
+.nav-cta:hover{background:var(--gold2);transform:translateY(-1px);box-shadow:0 6px 20px rgba(201,168,76,0.3);}
+.nav-mob{display:none;background:none;border:none;color:white;font-size:22px;cursor:pointer;}
+
+/* HERO */
+.hero{
+  min-height:100vh;display:flex;align-items:center;
+  padding:120px 56px 80px;position:relative;overflow:hidden;
+}
+.hero-grid-bg{
+  position:absolute;inset:0;
+  background-image:
+    linear-gradient(rgba(201,168,76,0.04) 1px,transparent 1px),
+    linear-gradient(90deg,rgba(201,168,76,0.04) 1px,transparent 1px);
+  background-size:60px 60px;
+}
+.hero-glow{
+  position:absolute;top:-150px;right:-150px;
+  width:600px;height:600px;border-radius:50%;
+  background:radial-gradient(circle,rgba(201,168,76,0.08) 0%,transparent 70%);
+  pointer-events:none;
+}
+.hero-inner{
+  max-width:1100px;margin:0 auto;width:100%;
+  display:grid;grid-template-columns:1fr 1fr;gap:72px;align-items:center;
+  position:relative;z-index:1;
+}
+.ppda-badge{
+  display:inline-flex;align-items:center;gap:8px;
+  background:rgba(201,168,76,0.1);border:1px solid rgba(201,168,76,0.3);
+  padding:6px 14px;border-radius:4px;font-size:11px;font-weight:600;
+  color:var(--gold);letter-spacing:1.5px;text-transform:uppercase;margin-bottom:22px;
+}
+.ppda-dot{width:6px;height:6px;border-radius:50%;background:var(--gold);animation:blink 2s infinite;}
+@keyframes blink{0%,100%{opacity:1;}50%{opacity:0.3;}}
+.hero h1{
+  font-family:'Cormorant Garamond',serif;
+  font-size:clamp(38px,5vw,68px);font-weight:600;
+  line-height:1.05;letter-spacing:-1px;margin-bottom:20px;color:white;
+}
+.hero h1 span{
+  background:linear-gradient(90deg,var(--gold),var(--gold2));
+  -webkit-background-clip:text;-webkit-text-fill-color:transparent;background-clip:text;
+}
+.hero-sub{font-size:16px;color:var(--muted);line-height:1.8;max-width:480px;margin-bottom:34px;font-weight:300;}
+.hero-actions{display:flex;gap:14px;flex-wrap:wrap;align-items:center;}
+.btn-gold{
+  padding:13px 30px;border-radius:6px;font-size:14px;font-weight:600;
+  background:var(--gold);color:#0a0c14;border:none;cursor:pointer;
+  transition:all 0.2s;font-family:'Outfit',sans-serif;
+  display:inline-flex;align-items:center;gap:8px;
+}
+.btn-gold:hover{background:var(--gold2);transform:translateY(-2px);box-shadow:0 8px 24px rgba(201,168,76,0.3);}
+.btn-outline{
+  padding:13px 30px;border-radius:6px;font-size:14px;font-weight:500;
+  background:transparent;color:var(--text);
+  border:1px solid var(--border2);cursor:pointer;
+  transition:all 0.2s;font-family:'Outfit',sans-serif;
+}
+.btn-outline:hover{background:var(--card);border-color:rgba(201,168,76,0.3);color:var(--gold);}
+.hero-trust{margin-top:32px;display:flex;align-items:center;gap:16px;flex-wrap:wrap;}
+.trust-item{display:flex;align-items:center;gap:8px;font-size:12px;color:var(--muted);}
+.trust-icon{font-size:15px;}
+.trust-divider{width:1px;height:20px;background:var(--border2);}
+
+/* HERO RIGHT — CATEGORIES PREVIEW */
+.hero-right{position:relative;}
+.cat-preview{
+  background:var(--bg2);border:1px solid var(--border);
+  border-radius:12px;padding:24px;
+  box-shadow:0 40px 80px rgba(0,0,0,0.5);
+}
+.cp-title{
+  font-family:'Cormorant Garamond',serif;font-size:16px;font-weight:600;
+  color:var(--gold);margin-bottom:16px;letter-spacing:0.5px;
+  display:flex;align-items:center;justify-content:space-between;
+}
+.cp-grid{display:grid;grid-template-columns:1fr 1fr;gap:10px;}
+.cp-item{
+  background:var(--bg3);border:1px solid var(--border);
+  border-radius:8px;padding:14px 12px;
+  display:flex;align-items:center;gap:10px;
+  transition:all 0.2s;cursor:pointer;
+}
+.cp-item:hover{border-color:rgba(201,168,76,0.3);background:var(--gold-g);}
+.cp-icon{font-size:20px;flex-shrink:0;}
+.cp-label{font-size:12px;font-weight:600;color:var(--text);}
+.cp-sub{font-size:10px;color:var(--muted);margin-top:1px;}
+.hero-float{
+  position:absolute;bottom:-16px;right:-20px;
+  background:var(--bg2);border:1px solid rgba(201,168,76,0.25);
+  border-radius:10px;padding:12px 18px;
+  display:flex;align-items:center;gap:12px;
+  box-shadow:0 16px 32px rgba(0,0,0,0.4);
+}
+.hf-icon{font-size:22px;}
+.hf-val{font-family:'Cormorant Garamond',serif;font-size:18px;font-weight:700;color:var(--gold);}
+.hf-lbl{font-size:10px;color:var(--muted);letter-spacing:0.5px;}
+
+/* COMMONS */
+.container{max-width:1100px;margin:0 auto;padding:0 56px;}
+@media(max-width:900px){.container{padding:0 24px;}}
+.sec{padding:88px 0;}
+.sec-full{padding:88px 56px;background:var(--bg2);}
+@media(max-width:900px){.sec-full{padding:72px 24px;}}
+.sec-inner{max-width:1100px;margin:0 auto;}
+.s-eyebrow{
+  font-size:10px;font-weight:600;letter-spacing:3px;text-transform:uppercase;
+  color:var(--gold);margin-bottom:10px;
+}
+.s-title{
+  font-family:'Cormorant Garamond',serif;
+  font-size:clamp(28px,4vw,48px);font-weight:600;
+  letter-spacing:-0.5px;line-height:1.15;margin-bottom:14px;color:white;
+}
+.s-body{font-size:15px;color:var(--muted);line-height:1.8;max-width:540px;margin-bottom:44px;font-weight:300;}
+.divider{border:none;border-top:1px solid var(--border);margin:0;}
+
+/* STATS */
+.stats-row{
+  display:grid;grid-template-columns:repeat(4,1fr);
+  background:var(--bg2);border:1px solid var(--border);border-radius:12px;overflow:hidden;
+  margin-bottom:80px;
+}
+@media(max-width:700px){.stats-row{grid-template-columns:1fr 1fr;}}
+.stat-cell{
+  padding:34px 24px;text-align:center;border-right:1px solid var(--border);
+}
+.stat-cell:last-child{border-right:none;}
+.stat-n{
+  font-family:'Cormorant Garamond',serif;font-size:44px;font-weight:700;
+  background:linear-gradient(90deg,var(--gold),var(--gold2));
+  -webkit-background-clip:text;-webkit-text-fill-color:transparent;background-clip:text;
+  line-height:1;margin-bottom:6px;
+}
+.stat-l{font-size:12px;color:var(--muted);letter-spacing:0.3px;line-height:1.45;}
+
+/* CATEGORY CARDS */
+.cat-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:20px;}
+@media(max-width:900px){.cat-grid{grid-template-columns:1fr 1fr;}}
+@media(max-width:560px){.cat-grid{grid-template-columns:1fr;}}
+.cat-card{
+  background:var(--bg2);border:1px solid var(--border);
+  border-radius:12px;padding:0;overflow:hidden;
+  transition:all 0.25s;cursor:pointer;position:relative;
+}
+.cat-card:hover{transform:translateY(-5px);box-shadow:0 24px 48px rgba(0,0,0,0.4);border-color:rgba(201,168,76,0.25);}
+.cat-thumb{
+  height:130px;display:flex;align-items:center;justify-content:center;
+  font-size:44px;position:relative;
+}
+.cat-body{padding:20px;}
+.cat-body h3{
+  font-family:'Cormorant Garamond',serif;font-size:19px;font-weight:600;
+  color:white;margin-bottom:7px;
+}
+.cat-body p{font-size:13px;color:var(--muted);line-height:1.65;}
+.cat-tags{display:flex;flex-wrap:wrap;gap:6px;margin-top:12px;}
+.cat-tag{
+  font-size:10px;font-weight:600;letter-spacing:1px;text-transform:uppercase;
+  background:var(--bg3);border:1px solid var(--border);
+  color:var(--muted);padding:3px 9px;border-radius:3px;
+}
+
+/* WHY US */
+.why-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:18px;}
+@media(max-width:800px){.why-grid{grid-template-columns:1fr 1fr;}}
+@media(max-width:500px){.why-grid{grid-template-columns:1fr;}}
+.why-card{
+  background:var(--card);border:1px solid var(--border);
+  border-radius:10px;padding:26px 22px;
+  transition:all 0.2s;
+}
+.why-card:hover{border-color:rgba(201,168,76,0.25);background:var(--gold-g);}
+.why-icon{font-size:26px;margin-bottom:14px;}
+.why-card h4{font-family:'Cormorant Garamond',serif;font-size:18px;font-weight:600;color:white;margin-bottom:8px;}
+.why-card p{font-size:13px;color:var(--muted);line-height:1.7;}
+
+/* REVIEWS */
+.reviews-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:18px;}
+@media(max-width:800px){.reviews-grid{grid-template-columns:1fr 1fr;}}
+@media(max-width:520px){.reviews-grid{grid-template-columns:1fr;}}
+.review-card{
+  background:var(--bg2);border:1px solid var(--border);
+  border-radius:12px;padding:26px;transition:all 0.2s;
+}
+.review-card:hover{border-color:rgba(201,168,76,0.2);transform:translateY(-3px);}
+.review-stars{color:var(--gold);font-size:13px;letter-spacing:2px;margin-bottom:13px;}
+.review-card p{font-size:13px;color:#9aa3bf;line-height:1.78;font-style:italic;margin-bottom:18px;}
+.review-author{display:flex;align-items:center;gap:10px;}
+.r-av{
+  width:36px;height:36px;border-radius:50%;
+  display:flex;align-items:center;justify-content:center;
+  font-size:12px;font-weight:700;color:white;flex-shrink:0;
+}
+.r-name{font-size:13px;font-weight:600;color:var(--text);}
+.r-org{font-size:11px;color:var(--muted);}
+
+/* CTA BAND */
+.cta-band{
+  background:linear-gradient(135deg,#1a1300 0%,#2a1e00 50%,#1a1300 100%);
+  border:1px solid rgba(201,168,76,0.2);
+  border-radius:16px;padding:60px 52px;margin:0 0 80px;
+  display:flex;align-items:center;justify-content:space-between;
+  gap:28px;flex-wrap:wrap;position:relative;overflow:hidden;
+}
+.cta-band::before{
+  content:'';position:absolute;top:-80px;right:-80px;
+  width:300px;height:300px;border-radius:50%;
+  background:radial-gradient(circle,rgba(201,168,76,0.1) 0%,transparent 70%);
+}
+.cta-band h2{
+  font-family:'Cormorant Garamond',serif;
+  font-size:clamp(24px,3vw,38px);font-weight:600;color:white;line-height:1.2;
+  position:relative;z-index:1;
+}
+.cta-band p{font-size:14px;color:rgba(255,255,255,0.6);margin-top:8px;position:relative;z-index:1;}
+.cta-buttons{display:flex;gap:12px;flex-wrap:wrap;position:relative;z-index:1;}
+
+/* FOOTER */
+footer{
+  background:var(--bg2);border-top:1px solid var(--border);
+  padding:64px 56px 32px;
+}
+@media(max-width:900px){footer{padding:48px 24px 24px;}}
+.footer-inner{max-width:1100px;margin:0 auto;}
+.footer-top{display:grid;grid-template-columns:2.2fr 1fr 1fr 1fr;gap:40px;margin-bottom:48px;}
+@media(max-width:800px){.footer-top{grid-template-columns:1fr 1fr;}}
+@media(max-width:480px){.footer-top{grid-template-columns:1fr;}}
+.footer-brand p{font-size:13px;color:var(--muted);line-height:1.75;margin-top:14px;max-width:260px;font-weight:300;}
+.ppda-tag{
+  display:inline-flex;align-items:center;gap:6px;margin-top:14px;
+  background:var(--gold-g);border:1px solid rgba(201,168,76,0.25);
+  padding:4px 12px;border-radius:4px;font-size:10px;font-weight:600;
+  color:var(--gold);letter-spacing:1.5px;text-transform:uppercase;
+}
+.footer-col h5{
+  font-family:'Cormorant Garamond',serif;font-size:14px;font-weight:600;
+  color:white;margin-bottom:16px;letter-spacing:0.5px;
+}
+.footer-col a{
+  display:block;font-size:13px;color:var(--muted);
+  cursor:pointer;margin-bottom:10px;transition:color 0.2s;text-decoration:none;font-weight:300;
+}
+.footer-col a:hover{color:var(--gold);}
+.footer-bottom{
+  display:flex;align-items:center;justify-content:space-between;
+  border-top:1px solid var(--border);padding-top:24px;flex-wrap:wrap;gap:10px;
+}
+.footer-bottom p{font-size:12px;color:var(--muted);}
+.footer-gold{font-size:12px;color:var(--gold);font-weight:500;}
+
+/* PRODUCTS PAGE */
+.prod-page-hero{
+  padding:140px 56px 60px;
+  background:radial-gradient(ellipse at top,rgba(201,168,76,0.06) 0%,transparent 60%);
+}
+@media(max-width:900px){.prod-page-hero{padding:120px 24px 50px;}}
+.prod-page-inner{max-width:1100px;margin:0 auto;}
+.cat-full-grid{display:grid;grid-template-columns:repeat(2,1fr);gap:24px;margin-bottom:60px;}
+@media(max-width:700px){.cat-full-grid{grid-template-columns:1fr;}}
+.cat-full-card{
+  background:var(--bg2);border:1px solid var(--border);
+  border-radius:14px;padding:32px 28px;
+  transition:all 0.25s;position:relative;overflow:hidden;
+}
+.cat-full-card::before{
+  content:'';position:absolute;top:0;left:0;right:0;height:2px;
+  opacity:0;transition:opacity 0.25s;
+}
+.cat-full-card:hover{transform:translateY(-4px);box-shadow:0 20px 44px rgba(0,0,0,0.4);border-color:rgba(201,168,76,0.2);}
+.cat-full-card:hover::before{opacity:1;background:linear-gradient(90deg,var(--gold),transparent);}
+.cfc-header{display:flex;align-items:center;gap:16px;margin-bottom:16px;}
+.cfc-icon{
+  width:52px;height:52px;border-radius:10px;
+  background:var(--gold-g);border:1px solid rgba(201,168,76,0.2);
+  display:flex;align-items:center;justify-content:center;font-size:24px;flex-shrink:0;
+}
+.cfc-title{font-family:'Cormorant Garamond',serif;font-size:22px;font-weight:600;color:white;}
+.cfc-count{font-size:11px;color:var(--gold);font-weight:600;letter-spacing:1px;margin-top:2px;}
+.cfc-desc{font-size:14px;color:var(--muted);line-height:1.75;margin-bottom:18px;font-weight:300;}
+.cfc-items{display:flex;flex-wrap:wrap;gap:7px;}
+.cfc-item{
+  font-size:12px;color:var(--muted);
+  background:var(--bg3);border:1px solid var(--border);
+  padding:4px 11px;border-radius:4px;transition:all 0.15s;
+}
+.cat-full-card:hover .cfc-item{border-color:rgba(201,168,76,0.15);color:var(--text);}
+.cfc-cta{
+  margin-top:20px;display:inline-flex;align-items:center;gap:6px;
+  font-size:13px;font-weight:600;color:var(--gold);background:none;border:none;
+  cursor:pointer;font-family:'Outfit',sans-serif;transition:gap 0.2s;padding:0;
+}
+.cfc-cta:hover{gap:12px;}
+
+/* ABOUT PAGE */
+.about-hero{
+  padding:140px 56px 60px;
+  background:radial-gradient(ellipse at top right,rgba(201,168,76,0.07) 0%,transparent 55%);
+}
+@media(max-width:900px){.about-hero{padding:120px 24px 50px;}}
+.about-grid{
+  display:grid;grid-template-columns:1fr 1fr;gap:64px;
+  max-width:1100px;margin:0 auto;align-items:center;
+}
+@media(max-width:700px){.about-grid{grid-template-columns:1fr;gap:40px;}}
+.about-visual{
+  background:var(--bg2);border:1px solid var(--border);
+  border-radius:14px;padding:32px;
+}
+.about-stat-grid{display:grid;grid-template-columns:1fr 1fr;gap:14px;margin-bottom:16px;}
+.a-stat{
+  background:var(--bg3);border:1px solid var(--border);
+  border-radius:10px;padding:18px 16px;
+}
+.a-stat .an{
+  font-family:'Cormorant Garamond',serif;font-size:34px;font-weight:700;
+  background:linear-gradient(90deg,var(--gold),var(--gold2));
+  -webkit-background-clip:text;-webkit-text-fill-color:transparent;background-clip:text;
+  margin-bottom:4px;line-height:1;
+}
+.a-stat .al{font-size:11px;color:var(--muted);}
+.mission-box{
+  background:var(--gold-g);border:1px solid rgba(201,168,76,0.2);
+  border-radius:10px;padding:20px;
+}
+.mission-box p{font-size:13px;color:#c8b87a;line-height:1.75;font-style:italic;font-weight:300;}
+.ppda-cert{
+  background:var(--bg2);border:1px solid rgba(201,168,76,0.3);
+  border-radius:12px;padding:24px;margin-top:28px;
+  display:flex;align-items:center;gap:16px;max-width:1100px;margin-left:auto;margin-right:auto;
+}
+.ppda-seal{
+  width:60px;height:60px;border-radius:50%;
+  background:linear-gradient(135deg,var(--gold),#8a6520);
+  display:flex;align-items:center;justify-content:center;
+  font-size:26px;flex-shrink:0;
+}
+.ppda-cert h4{font-family:'Cormorant Garamond',serif;font-size:17px;font-weight:600;color:var(--gold);margin-bottom:4px;}
+.ppda-cert p{font-size:13px;color:var(--muted);line-height:1.6;font-weight:300;}
+.values-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:16px;max-width:1100px;margin:0 auto;}
+@media(max-width:700px){.values-grid{grid-template-columns:1fr 1fr;}}
+.val-card{
+  background:var(--card);border:1px solid var(--border);
+  border-radius:10px;padding:22px 18px;
+}
+.val-card:hover{border-color:rgba(201,168,76,0.2);background:var(--gold-g);}
+.val-icon{font-size:24px;margin-bottom:10px;}
+.val-card h4{font-family:'Cormorant Garamond',serif;font-size:16px;font-weight:600;color:white;margin-bottom:6px;}
+.val-card p{font-size:12px;color:var(--muted);line-height:1.65;font-weight:300;}
+
+/* CONTACT PAGE */
+.contact-wrap{
+  max-width:1100px;margin:0 auto;
+  padding:140px 56px 80px;
+  display:grid;grid-template-columns:1fr 1.3fr;gap:60px;
+}
+@media(max-width:800px){.contact-wrap{grid-template-columns:1fr;padding:120px 24px 60px;}}
+.contact-left h1{
+  font-family:'Cormorant Garamond',serif;
+  font-size:clamp(30px,4vw,46px);font-weight:600;
+  color:white;line-height:1.15;margin-bottom:14px;letter-spacing:-0.5px;
+}
+.contact-left p{font-size:15px;color:var(--muted);line-height:1.8;margin-bottom:32px;font-weight:300;}
+.contact-methods{display:flex;flex-direction:column;gap:12px;}
+.cm{
+  display:flex;align-items:center;gap:14px;
+  background:var(--card);border:1px solid var(--border);
+  border-radius:10px;padding:14px 18px;transition:border-color 0.2s;
+}
+.cm:hover{border-color:rgba(201,168,76,0.25);}
+.cm-icon{font-size:19px;flex-shrink:0;}
+.cm-lbl{font-size:11px;color:var(--muted);letter-spacing:0.5px;margin-bottom:2px;}
+.cm-val{font-size:14px;font-weight:500;color:var(--text);}
+.form-card{
+  background:var(--bg2);border:1px solid var(--border);
+  border-radius:16px;padding:40px;
+}
+.form-card h3{
+  font-family:'Cormorant Garamond',serif;font-size:24px;font-weight:600;
+  color:white;margin-bottom:6px;
+}
+.form-card .sub{font-size:13px;color:var(--muted);margin-bottom:26px;font-weight:300;}
+.fg{margin-bottom:15px;}
+.fg label{display:block;font-size:12px;font-weight:600;margin-bottom:6px;color:#9aa3bf;letter-spacing:0.5px;text-transform:uppercase;}
+.fg input,.fg select,.fg textarea{
+  width:100%;padding:12px 14px;
+  background:var(--bg3);border:1px solid var(--border);
+  border-radius:8px;color:var(--text);
+  font-family:'Outfit',sans-serif;font-size:14px;font-weight:300;
+  transition:border-color 0.2s;resize:none;outline:none;
+}
+.fg input:focus,.fg select:focus,.fg textarea:focus{
+  border-color:rgba(201,168,76,0.4);background:rgba(201,168,76,0.03);
+}
+.fg select option{background:var(--bg2);}
+.form-row{display:grid;grid-template-columns:1fr 1fr;gap:14px;}
+@media(max-width:500px){.form-row{grid-template-columns:1fr;}}
+.submit-btn{
+  width:100%;padding:14px;border-radius:8px;
+  background:var(--gold);color:#0a0c14;
+  font-family:'Outfit',sans-serif;font-size:14px;font-weight:700;
+  border:none;cursor:pointer;transition:all 0.2s;margin-top:6px;letter-spacing:0.3px;
+}
+.submit-btn:hover{background:var(--gold2);transform:translateY(-1px);}
+.submit-btn:disabled{opacity:0.55;cursor:not-allowed;transform:none;}
+.success-box{
+  display:none;text-align:center;padding:44px 16px;
+}
+.success-box .sico{font-size:54px;margin-bottom:14px;}
+.success-box h4{font-family:'Cormorant Garamond',serif;font-size:24px;font-weight:600;color:white;margin-bottom:8px;}
+.success-box p{font-size:14px;color:var(--muted);font-weight:300;}
+
+/* REVEAL */
+.reveal{opacity:0;transform:translateY(18px);transition:opacity 0.55s ease,transform 0.55s ease;}
+.reveal.visible{opacity:1;transform:translateY(0);}
+
+/* RESPONSIVE */
+@media(max-width:900px){
+  nav{padding:0 24px;}
+  .hero{padding:100px 24px 60px;}
+  .hero-inner{grid-template-columns:1fr;gap:40px;}
+  .hero-right{display:none;}
+  .sec{padding:64px 0;}
+  .stats-row{grid-template-columns:1fr 1fr;}
+}
+@media(max-width:600px){
+  .nav-links{display:none;}
+  .nav-mob{display:block;}
+  .cat-grid{grid-template-columns:1fr;}
+  .reviews-grid{grid-template-columns:1fr;}
+  .why-grid{grid-template-columns:1fr;}
+}
+</style>
+</head>
+<body>
+
+<!-- ══ NAV ══ -->
+<nav>
+  <div class="logo" onclick="showPage('home')">
+    <div class="logo-mark">M</div>
+    <div class="logo-text">
+      <span class="logo-name">Manivor Investments</span>
+      <span class="logo-sub">General Supplies · Uganda</span>
+    </div>
+  </div>
+  <div class="nav-links">
+    <button class="nav-link active" id="nl-home"    onclick="showPage('home')">Home</button>
+    <button class="nav-link"        id="nl-products" onclick="showPage('products')">Our Supplies</button>
+    <button class="nav-link"        id="nl-about"   onclick="showPage('about')">About Us</button>
+    <button class="nav-link"        id="nl-contact" onclick="showPage('contact')">Contact</button>
+  </div>
+  <button class="nav-cta" onclick="showPage('contact')">Get a Quote →</button>
+  <button class="nav-mob" onclick="toggleMob()">☰</button>
+</nav>
+
+<!-- ══════════════════════ HOME ══════════════════════ -->
+<div class="page active" id="page-home">
+
+  <section class="hero">
+    <div class="hero-grid-bg"></div>
+    <div class="hero-glow"></div>
+    <div class="hero-inner">
+      <div>
+        <div class="ppda-badge"><span class="ppda-dot"></span>PPDA Registered Supplier</div>
+        <h1>Uganda's trusted<br>partner for <span>general<br>supplies.</span></h1>
+        <p class="hero-sub">Manivor Investments Limited delivers quality supplies across merchandise, transportation, catering, stationery, and more — serving government, institutions, and businesses across Uganda.</p>
+        <div class="hero-actions">
+          <button class="btn-gold" onclick="showPage('contact')">Request a Quote →</button>
+          <button class="btn-outline" onclick="showPage('products')">View Our Supplies</button>
+        </div>
+        <div class="hero-trust">
+          <div class="trust-item"><span class="trust-icon">📍</span>Plot 55B Upper Kololo Drive</div>
+          <div class="trust-divider"></div>
+          <div class="trust-item"><span class="trust-icon">✅</span>PPDA Registered</div>
+          <div class="trust-divider"></div>
+          <div class="trust-item"><span class="trust-icon">🇺🇬</span>Serving All Uganda</div>
+        </div>
+      </div>
+      <div class="hero-right">
+        <div class="cat-preview">
+          <div class="cp-title">Our Supply Categories <span style="font-size:11px;color:var(--muted);font-family:'Outfit',sans-serif;font-weight:400;">6 categories</span></div>
+          <div class="cp-grid">
+            <div class="cp-item"><span class="cp-icon">🛒</span><div><div class="cp-label">General Merchandise</div><div class="cp-sub">Wide product range</div></div></div>
+            <div class="cp-item"><span class="cp-icon">🚛</span><div><div class="cp-label">Transportation</div><div class="cp-sub">Haulage & logistics</div></div></div>
+            <div class="cp-item"><span class="cp-icon">🍽</span><div><div class="cp-label">Catering</div><div class="cp-sub">Food & equipment</div></div></div>
+            <div class="cp-item"><span class="cp-icon">📎</span><div><div class="cp-label">Stationery</div><div class="cp-sub">Office supplies</div></div></div>
+            <div class="cp-item"><span class="cp-icon">🔧</span><div><div class="cp-label">Hardware & Tools</div><div class="cp-sub">Equipment & spares</div></div></div>
+            <div class="cp-item"><span class="cp-icon">🧹</span><div><div class="cp-label">Cleaning & Hygiene</div><div class="cp-sub">Janitorial supplies</div></div></div>
+          </div>
+        </div>
+        <div class="hero-float">
+          <div class="hf-icon">🏆</div>
+          <div>
+            <div class="hf-val">PPDA Verified</div>
+            <div class="hf-lbl">Government approved supplier</div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- Stats -->
+  <div class="container">
+    <div class="stats-row reveal">
+      <div class="stat-cell"><div class="stat-n">10+</div><div class="stat-l">Years in business</div></div>
+      <div class="stat-cell"><div class="stat-n">6</div><div class="stat-l">Supply categories</div></div>
+      <div class="stat-cell"><div class="stat-n">100+</div><div class="stat-l">Clients served</div></div>
+      <div class="stat-cell"><div class="stat-n">100%</div><div class="stat-l">PPDA compliant</div></div>
+    </div>
+  </div>
+
+  <hr class="divider"/>
+
+  <!-- Categories Preview -->
+  <div class="container sec">
+    <div class="reveal">
+      <div class="s-eyebrow">What We Supply</div>
+      <div class="s-title">Quality supplies.<br>Every category.</div>
+      <p class="s-body">From daily office essentials to large-scale catering contracts and haulage services — Manivor Investments is your single-source supplier across Uganda.</p>
+    </div>
+    <div class="cat-grid reveal">
+      <div class="cat-card" onclick="showPage('products')">
+        <div class="cat-thumb" style="background:linear-gradient(135deg,#1a1400,#2e2200);">🛒</div>
+        <div class="cat-body">
+          <h3>General Merchandise</h3>
+          <p>A comprehensive range of everyday goods for offices, institutions, and commercial operations.</p>
+          <div class="cat-tags"><span class="cat-tag">Consumables</span><span class="cat-tag">Household</span><span class="cat-tag">Commercial</span></div>
+        </div>
+      </div>
+      <div class="cat-card" onclick="showPage('products')">
+        <div class="cat-thumb" style="background:linear-gradient(135deg,#0a1a10,#0d2e18);">🚛</div>
+        <div class="cat-body">
+          <h3>Transportation</h3>
+          <p>Reliable haulage, logistics, and goods transportation across Kampala and upcountry destinations.</p>
+          <div class="cat-tags"><span class="cat-tag">Haulage</span><span class="cat-tag">Logistics</span><span class="cat-tag">Upcountry</span></div>
+        </div>
+      </div>
+      <div class="cat-card" onclick="showPage('products')">
+        <div class="cat-thumb" style="background:linear-gradient(135deg,#1a0a00,#2e1500);">🍽</div>
+        <div class="cat-body">
+          <h3>Catering Supplies</h3>
+          <p>Food commodities, cooking equipment, and catering consumables for events, institutions, and canteens.</p>
+          <div class="cat-tags"><span class="cat-tag">Food Items</span><span class="cat-tag">Equipment</span><span class="cat-tag">Events</span></div>
+        </div>
+      </div>
+      <div class="cat-card" onclick="showPage('products')">
+        <div class="cat-thumb" style="background:linear-gradient(135deg,#0a0a1a,#141430);">📎</div>
+        <div class="cat-body">
+          <h3>Stationery & Office</h3>
+          <p>Complete office stationery, printing materials, and administrative supplies delivered to your door.</p>
+          <div class="cat-tags"><span class="cat-tag">Paper</span><span class="cat-tag">Printing</span><span class="cat-tag">Office Gear</span></div>
+        </div>
+      </div>
+      <div class="cat-card" onclick="showPage('products')">
+        <div class="cat-thumb" style="background:linear-gradient(135deg,#1a1000,#2e1c00);">🔧</div>
+        <div class="cat-body">
+          <h3>Hardware & Tools</h3>
+          <p>Industrial and light hardware, hand tools, safety equipment, and maintenance supplies.</p>
+          <div class="cat-tags"><span class="cat-tag">Tools</span><span class="cat-tag">Safety</span><span class="cat-tag">Maintenance</span></div>
+        </div>
+      </div>
+      <div class="cat-card" onclick="showPage('products')">
+        <div class="cat-thumb" style="background:linear-gradient(135deg,#001a14,#002e22);">🧹</div>
+        <div class="cat-body">
+          <h3>Cleaning & Hygiene</h3>
+          <p>Professional janitorial supplies, detergents, sanitary products, and hygiene consumables.</p>
+          <div class="cat-tags"><span class="cat-tag">Janitorial</span><span class="cat-tag">Sanitary</span><span class="cat-tag">Hygiene</span></div>
+        </div>
+      </div>
+    </div>
+    <div style="text-align:center;margin-top:36px;">
+      <button class="btn-outline" onclick="showPage('products')">View Full Catalogue →</button>
+    </div>
+  </div>
+
+  <hr class="divider"/>
+
+  <!-- Why Us -->
+  <div class="sec-full">
+    <div class="sec-inner">
+      <div class="reveal" style="text-align:center;margin-bottom:44px;">
+        <div class="s-eyebrow" style="text-align:center;">Why Choose Us</div>
+        <div class="s-title" style="text-align:center;">Reliable. Registered. Ready.</div>
+      </div>
+      <div class="why-grid reveal">
+        <div class="why-card"><div class="why-icon">✅</div><h4>PPDA Registered</h4><p>Fully registered with the Public Procurement and Disposal of Public Assets Authority — qualified for all government and institutional tenders.</p></div>
+        <div class="why-card"><div class="why-icon">🚀</div><h4>Fast Delivery</h4><p>We understand procurement timelines. Our logistics team ensures your supplies arrive on time, every time.</p></div>
+        <div class="why-card"><div class="why-icon">💰</div><h4>Competitive Pricing</h4><p>Bulk purchasing power and lean operations mean we consistently offer market-leading prices without compromising quality.</p></div>
+        <div class="why-card"><div class="why-icon">🤝</div><h4>Trusted Partnerships</h4><p>Long-standing relationships with government bodies, NGOs, schools, and private businesses built on trust and reliability.</p></div>
+        <div class="why-card"><div class="why-icon">📦</div><h4>One-Stop Supplier</h4><p>Reduce your procurement complexity. Source merchandise, stationery, catering, transport, and more from a single supplier.</p></div>
+        <div class="why-card"><div class="why-icon">📍</div><h4>Centrally Located</h4><p>Based at Plot 55B Upper Kololo Drive, Kampala — easily accessible for collections, meetings, and site visits.</p></div>
+      </div>
+    </div>
+  </div>
+
+  <hr class="divider"/>
+
+  <!-- Reviews -->
+  <div class="container sec">
+    <div class="reveal">
+      <div class="s-eyebrow">Client Reviews</div>
+      <div class="s-title">What our clients say.</div>
+    </div>
+    <div class="reviews-grid reveal">
+      <div class="review-card">
+        <div class="review-stars">★★★★★</div>
+        <p>"Manivor Investments has been our go-to supplier for office stationery and cleaning supplies for over three years. Always on time and competitively priced."</p>
+        <div class="review-author">
+          <div class="r-av" style="background:linear-gradient(135deg,#c9a84c,#8a6520);">JO</div>
+          <div><div class="r-name">James Opio</div><div class="r-org">Procurement Manager · Government Ministry</div></div>
+        </div>
+      </div>
+      <div class="review-card">
+        <div class="review-stars">★★★★★</div>
+        <p>"We contracted Manivor for catering supplies at our annual conference. The quality was excellent and the delivery was perfectly coordinated. Highly recommend."</p>
+        <div class="review-author">
+          <div class="r-av" style="background:#c9284c;">RA</div>
+          <div><div class="r-name">Ruth Akello</div><div class="r-org">Events Coordinator · International NGO</div></div>
+        </div>
+      </div>
+      <div class="review-card">
+        <div class="review-stars">★★★★★</div>
+        <p>"Their transportation service is reliable and professional. We've used them for upcountry deliveries multiple times — zero issues and great communication throughout."</p>
+        <div class="review-author">
+          <div class="r-av" style="background:#2a6e34;">SK</div>
+          <div><div class="r-name">Samuel Kato</div><div class="r-org">Operations Director · Construction Firm</div></div>
+        </div>
+      </div>
+      <div class="review-card">
+        <div class="review-stars">★★★★★</div>
+        <p>"As a school, we need a supplier we can trust for stationery, cleaning, and general supplies. Manivor has never let us down in four years of partnership."</p>
+        <div class="review-author">
+          <div class="r-av" style="background:#2a4e8e;">PM</div>
+          <div><div class="r-name">Patricia Mugisha</div><div class="r-org">Administrator · Private School</div></div>
+        </div>
+      </div>
+      <div class="review-card">
+        <div class="review-stars">★★★★★</div>
+        <p>"Quick quote turnaround, fair pricing, and the goods are always exactly as ordered. A truly professional Ugandan supplies company."</p>
+        <div class="review-author">
+          <div class="r-av" style="background:#8e4a2a;">DN</div>
+          <div><div class="r-name">David Nkurunziza</div><div class="r-org">Finance Officer · Healthcare Facility</div></div>
+        </div>
+      </div>
+      <div class="review-card">
+        <div class="review-stars">★★★★★</div>
+        <p>"PPDA registration gives us confidence in the procurement process. Manivor's documentation is always complete and their compliance record is clean."</p>
+        <div class="review-author">
+          <div class="r-av" style="background:#4a2a8e;">GW</div>
+          <div><div class="r-name">Grace Wasswa</div><div class="r-org">Procurement Officer · Local Government</div></div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- CTA Band -->
+  <div class="container">
+    <div class="cta-band reveal">
+      <div>
+        <h2>Ready to place an order<br>or request a quote?</h2>
+        <p>Contact us today and our team will respond within 24 hours with a detailed quotation.</p>
+      </div>
+      <div class="cta-buttons">
+        <button class="btn-gold" onclick="showPage('contact')">Request a Quote →</button>
+        <button class="btn-outline" onclick="showPage('products')">Browse Supplies</button>
+      </div>
+    </div>
+  </div>
+
+  <footer>
+    <div class="footer-inner">
+      <div class="footer-top">
+        <div class="footer-brand">
+          <div class="logo"><div class="logo-mark">M</div><div class="logo-text"><span class="logo-name">Manivor Investments</span><span class="logo-sub">General Supplies</span></div></div>
+          <p>Your trusted general supplies partner across Uganda. PPDA registered and ready to serve government, institutions, and businesses.</p>
+          <div class="ppda-tag">✅ PPDA Registered Supplier</div>
+        </div>
+        <div class="footer-col">
+          <h5>Quick Links</h5>
+          <a onclick="showPage('home')">Home</a>
+          <a onclick="showPage('products')">Our Supplies</a>
+          <a onclick="showPage('about')">About Us</a>
+          <a onclick="showPage('contact')">Get a Quote</a>
+        </div>
+        <div class="footer-col">
+          <h5>Supply Categories</h5>
+          <a onclick="showPage('products')">General Merchandise</a>
+          <a onclick="showPage('products')">Transportation</a>
+          <a onclick="showPage('products')">Catering</a>
+          <a onclick="showPage('products')">Stationery</a>
+          <a onclick="showPage('products')">Hardware & Tools</a>
+          <a onclick="showPage('products')">Cleaning & Hygiene</a>
+        </div>
+        <div class="footer-col">
+          <h5>Contact</h5>
+          <a>📍 Plot 55B Upper Kololo Drive</a>
+          <a>🇺🇬 Kampala, Uganda</a>
+          <a href="tel:+256701476462">📞 +256 701 476 462</a>
+          <a href="tel:+256743598613">📞 +256 743 598 613</a>
+          <a>✉️ sirmelvine@gmail.com</a>
+        </div>
+      </div>
+      <div class="footer-bottom">
+        <p>© 2024 Manivor Investments Limited. All rights reserved.</p>
+        <span class="footer-gold">Plot 55B Upper Kololo Drive, Kampala, Uganda</span>
+      </div>
+    </div>
+  </footer>
+</div>
+
+<!-- ══════════════════════ SUPPLIES PAGE ══════════════════════ -->
+<div class="page" id="page-products">
+  <div class="prod-page-hero">
+    <div class="prod-page-inner">
+      <div class="s-eyebrow">Our Full Catalogue</div>
+      <div class="s-title">Everything we supply.</div>
+      <p style="font-size:15px;color:var(--muted);max-width:520px;line-height:1.8;margin-top:12px;font-weight:300;">Manivor Investments Limited supplies a comprehensive range of goods and services across six core categories. Browse below and contact us for a custom quotation.</p>
+    </div>
+  </div>
+
+  <div style="max-width:1100px;margin:0 auto;padding:0 56px 80px;">
+    <div class="cat-full-grid reveal">
+
+      <div class="cat-full-card">
+        <div class="cfc-header">
+          <div class="cfc-icon">🛒</div>
+          <div><div class="cfc-title">General Merchandise</div><div class="cfc-count">BROAD RANGE</div></div>
+        </div>
+        <p class="cfc-desc">A wide assortment of everyday goods for institutional, commercial, and government procurement. From household items to bulk consumables — we supply it all.</p>
+        <div class="cfc-items">
+          <span class="cfc-item">Food commodities</span><span class="cfc-item">Household goods</span><span class="cfc-item">Personal care items</span><span class="cfc-item">Packaging materials</span><span class="cfc-item">Disposables</span><span class="cfc-item">Bulk consumables</span><span class="cfc-item">Uniforms & workwear</span><span class="cfc-item">Safety wear</span>
+        </div>
+        <button class="cfc-cta" onclick="showPage('contact')">Request a Quote →</button>
+      </div>
+
+      <div class="cat-full-card">
+        <div class="cfc-header">
+          <div class="cfc-icon">🚛</div>
+          <div><div class="cfc-title">Transportation & Logistics</div><div class="cfc-count">NATIONWIDE</div></div>
+        </div>
+        <p class="cfc-desc">Reliable haulage, cargo transport, and logistics services across Kampala and all upcountry destinations. Ideal for bulk goods movement and tender-based deliveries.</p>
+        <div class="cfc-items">
+          <span class="cfc-item">Cargo haulage</span><span class="cfc-item">Kampala delivery</span><span class="cfc-item">Upcountry transport</span><span class="cfc-item">Bulk goods movement</span><span class="cfc-item">Institutional deliveries</span><span class="cfc-item">Government contracts</span><span class="cfc-item">Last-mile delivery</span><span class="cfc-item">Fleet hire</span>
+        </div>
+        <button class="cfc-cta" onclick="showPage('contact')">Request a Quote →</button>
+      </div>
+
+      <div class="cat-full-card">
+        <div class="cfc-header">
+          <div class="cfc-icon">🍽</div>
+          <div><div class="cfc-title">Catering Supplies</div><div class="cfc-count">EVENTS & INSTITUTIONS</div></div>
+        </div>
+        <p class="cfc-desc">Complete catering supply solutions for schools, hospitals, government canteens, corporate events, and large-scale feeding programmes.</p>
+        <div class="cfc-items">
+          <span class="cfc-item">Dry foodstuffs</span><span class="cfc-item">Fresh produce</span><span class="cfc-item">Cooking oil & condiments</span><span class="cfc-item">Serving equipment</span><span class="cfc-item">Cutlery & crockery</span><span class="cfc-item">Gas & fuel</span><span class="cfc-item">Event catering packs</span><span class="cfc-item">Institutional meal supply</span>
+        </div>
+        <button class="cfc-cta" onclick="showPage('contact')">Request a Quote →</button>
+      </div>
+
+      <div class="cat-full-card">
+        <div class="cfc-header">
+          <div class="cfc-icon">📎</div>
+          <div><div class="cfc-title">Stationery & Office Supplies</div><div class="cfc-count">FULLY STOCKED</div></div>
+        </div>
+        <p class="cfc-desc">Everything your office, school, or institution needs — from basic stationery to printing supplies, filing systems, and administrative consumables.</p>
+        <div class="cfc-items">
+          <span class="cfc-item">Printing paper</span><span class="cfc-item">Pens & pencils</span><span class="cfc-item">Files & binders</span><span class="cfc-item">Envelopes</span><span class="cfc-item">Toner cartridges</span><span class="cfc-item">Notebooks</span><span class="cfc-item">Stamps & ink</span><span class="cfc-item">Desk accessories</span><span class="cfc-item">Notice boards</span><span class="cfc-item">Label makers</span>
+        </div>
+        <button class="cfc-cta" onclick="showPage('contact')">Request a Quote →</button>
+      </div>
+
+      <div class="cat-full-card">
+        <div class="cfc-header">
+          <div class="cfc-icon">🔧</div>
+          <div><div class="cfc-title">Hardware & Tools</div><div class="cfc-count">INDUSTRIAL & LIGHT</div></div>
+        </div>
+        <p class="cfc-desc">Hand tools, power tools, construction hardware, safety equipment, and maintenance supplies for industrial, commercial, and institutional clients.</p>
+        <div class="cfc-items">
+          <span class="cfc-item">Hand tools</span><span class="cfc-item">Power tools</span><span class="cfc-item">Nails & fasteners</span><span class="cfc-item">Paint & brushes</span><span class="cfc-item">Electrical fittings</span><span class="cfc-item">Plumbing supplies</span><span class="cfc-item">Safety helmets</span><span class="cfc-item">Protective gloves</span><span class="cfc-item">Ladders</span><span class="cfc-item">Generators</span>
+        </div>
+        <button class="cfc-cta" onclick="showPage('contact')">Request a Quote →</button>
+      </div>
+
+      <div class="cat-full-card">
+        <div class="cfc-header">
+          <div class="cfc-icon">🧹</div>
+          <div><div class="cfc-title">Cleaning & Hygiene</div><div class="cfc-count">PROFESSIONAL GRADE</div></div>
+        </div>
+        <p class="cfc-desc">Professional-grade cleaning products, janitorial supplies, and hygiene consumables for offices, schools, hospitals, and commercial premises.</p>
+        <div class="cfc-items">
+          <span class="cfc-item">Floor detergents</span><span class="cfc-item">Disinfectants</span><span class="cfc-item">Hand sanitisers</span><span class="cfc-item">Toilet paper</span><span class="cfc-item">Mops & brooms</span><span class="cfc-item">Waste bins</span><span class="cfc-item">Bin liners</span><span class="cfc-item">Air fresheners</span><span class="cfc-item">Soap dispensers</span><span class="cfc-item">PPE masks</span>
+        </div>
+        <button class="cfc-cta" onclick="showPage('contact')">Request a Quote →</button>
+      </div>
+
+    </div>
+
+    <div class="cta-band reveal" style="margin:0;">
+      <div>
+        <h2>Need something not listed?<br>We'll source it for you.</h2>
+        <p>Our procurement network is extensive. If it exists, we can supply it. Just ask.</p>
+      </div>
+      <div class="cta-buttons">
+        <button class="btn-gold" onclick="showPage('contact')">Send an Enquiry →</button>
+      </div>
+    </div>
+  </div>
+
+  <footer>
+    <div class="footer-inner">
+      <div class="footer-top">
+        <div class="footer-brand"><div class="logo"><div class="logo-mark">M</div><div class="logo-text"><span class="logo-name">Manivor Investments</span><span class="logo-sub">General Supplies</span></div></div><p>Your trusted general supplies partner across Uganda.</p><div class="ppda-tag">✅ PPDA Registered Supplier</div></div>
+        <div class="footer-col"><h5>Quick Links</h5><a onclick="showPage('home')">Home</a><a onclick="showPage('products')">Our Supplies</a><a onclick="showPage('about')">About Us</a><a onclick="showPage('contact')">Get a Quote</a></div>
+        <div class="footer-col"><h5>Categories</h5><a onclick="showPage('products')">General Merchandise</a><a onclick="showPage('products')">Transportation</a><a onclick="showPage('products')">Catering</a><a onclick="showPage('products')">Stationery</a></div>
+        <div class="footer-col"><h5>Contact</h5><a>📍 Plot 55B Upper Kololo Drive</a><a href="tel:+256701476462">📞 +256 701 476 462</a><a href="tel:+256743598613">📞 +256 743 598 613</a><a>✉️ sirmelvine@gmail.com</a></div>
+      </div>
+      <div class="footer-bottom"><p>© 2024 Manivor Investments Limited. All rights reserved.</p><span class="footer-gold">Kampala, Uganda</span></div>
+    </div>
+  </footer>
+</div>
+
+<!-- ══════════════════════ ABOUT PAGE ══════════════════════ -->
+<div class="page" id="page-about">
+  <div class="about-hero">
+    <div class="about-grid">
+      <div>
+        <div class="s-eyebrow">Our Story</div>
+        <div class="s-title" style="margin-bottom:16px;">Built on trust.<br>Driven by service.</div>
+        <p style="font-size:15px;color:var(--muted);line-height:1.85;margin-bottom:18px;font-weight:300;">Manivor Investments Limited is a Ugandan general supplies company with over a decade of experience serving government bodies, NGOs, schools, healthcare institutions, and private businesses across the country.</p>
+        <p style="font-size:15px;color:var(--muted);line-height:1.85;font-weight:300;">Founded with a commitment to reliable procurement and quality delivery, we have grown into a trusted, PPDA-registered supplier — known for competitive pricing, professionalism, and an ability to source and deliver a wide range of goods on time.</p>
+        <div style="display:flex;gap:12px;margin-top:28px;flex-wrap:wrap;">
+          <button class="btn-gold" onclick="showPage('contact')">Get a Quote →</button>
+          <button class="btn-outline" onclick="showPage('products')">View Supplies</button>
+        </div>
+      </div>
+      <div class="about-visual">
+        <div class="about-stat-grid">
+          <div class="a-stat"><div class="an">10+</div><div class="al">Years in operation</div></div>
+          <div class="a-stat"><div class="an">6</div><div class="al">Supply categories</div></div>
+          <div class="a-stat"><div class="an">100+</div><div class="al">Clients served</div></div>
+          <div class="a-stat"><div class="an">UG</div><div class="al">Nationwide reach</div></div>
+        </div>
+        <div class="mission-box">
+          <p>"Our mission is to be Uganda's most reliable single-source supplies partner — delivering quality goods on time, at competitive prices, with full procurement compliance."</p>
+        </div>
+      </div>
+    </div>
+
+    <div class="ppda-cert" style="margin-top:40px;">
+      <div class="ppda-seal">🏛</div>
+      <div>
+        <h4>PPDA Registered Supplier</h4>
+        <p>Manivor Investments Limited is fully registered with the Public Procurement and Disposal of Public Assets Authority (PPDA) of Uganda, making us an approved and compliant supplier for all government and institutional tenders. Our registration ensures full transparency, accountability, and adherence to Ugandan procurement law.</p>
+      </div>
+    </div>
+  </div>
+
+  <div style="max-width:1100px;margin:0 auto;padding:0 56px 20px;">
+    <div class="s-eyebrow" style="margin-top:8px;">Our Values</div>
+    <div class="s-title" style="margin-bottom:28px;">What we stand for.</div>
+    <div class="values-grid reveal">
+      <div class="val-card"><div class="val-icon">🎯</div><h4>Reliability</h4><p>We deliver what we promise, when we promise it. Our clients depend on us and we take that seriously.</p></div>
+      <div class="val-card"><div class="val-icon">💎</div><h4>Quality</h4><p>Every product we supply meets the standard expected. We source only from verified suppliers and trusted manufacturers.</p></div>
+      <div class="val-card"><div class="val-icon">🤝</div><h4>Integrity</h4><p>Honest pricing, transparent documentation, and clean procurement compliance in every engagement.</p></div>
+      <div class="val-card"><div class="val-icon">🚀</div><h4>Efficiency</h4><p>Quick quote turnarounds, streamlined processes, and fast delivery — because your time and deadlines matter.</p></div>
+      <div class="val-card"><div class="val-icon">🌍</div><h4>Ugandan Pride</h4><p>A proudly Ugandan company, serving Ugandan institutions, and contributing to local economic growth.</p></div>
+      <div class="val-card"><div class="val-icon">📋</div><h4>Compliance</h4><p>Full PPDA compliance on all government and institutional contracts. Our documentation is always complete and audit-ready.</p></div>
+    </div>
+  </div>
+
+  <div style="max-width:1100px;margin:0 auto;padding:20px 56px 80px;">
+    <div class="s-eyebrow">Client Reviews</div>
+    <div class="s-title" style="margin-bottom:32px;">Trusted by institutions<br>across Uganda.</div>
+    <div class="reviews-grid reveal">
+      <div class="review-card"><div class="review-stars">★★★★★</div><p>"Manivor Investments has been supplying our office for years. Professional, punctual, and always great quality."</p><div class="review-author"><div class="r-av" style="background:linear-gradient(135deg,#c9a84c,#8a6520);">JO</div><div><div class="r-name">James Opio</div><div class="r-org">Government Ministry</div></div></div></div>
+      <div class="review-card"><div class="review-stars">★★★★★</div><p>"Excellent catering supply service for our major conference. Delivery was on time and everything was exactly as ordered."</p><div class="review-author"><div class="r-av" style="background:#c9284c;">RA</div><div><div class="r-name">Ruth Akello</div><div class="r-org">International NGO</div></div></div></div>
+      <div class="review-card"><div class="review-stars">★★★★★</div><p>"Their PPDA compliance made the procurement process smooth and completely audit-ready. Highly recommended."</p><div class="review-author"><div class="r-av" style="background:#4a2a8e;">GW</div><div><div class="r-name">Grace Wasswa</div><div class="r-org">Local Government</div></div></div></div>
+    </div>
+  </div>
+
+  <div class="container" style="padding-bottom:80px;">
+    <div class="cta-band reveal" style="margin-bottom:0;">
+      <div><h2>Ready to work<br>with us?</h2><p>Send us your requirements and we'll respond with a competitive quotation.</p></div>
+      <div class="cta-buttons"><button class="btn-gold" onclick="showPage('contact')">Contact Us →</button></div>
+    </div>
+  </div>
+
+  <footer>
+    <div class="footer-inner">
+      <div class="footer-top">
+        <div class="footer-brand"><div class="logo"><div class="logo-mark">M</div><div class="logo-text"><span class="logo-name">Manivor Investments</span><span class="logo-sub">General Supplies</span></div></div><p>Your trusted general supplies partner across Uganda.</p><div class="ppda-tag">✅ PPDA Registered Supplier</div></div>
+        <div class="footer-col"><h5>Quick Links</h5><a onclick="showPage('home')">Home</a><a onclick="showPage('products')">Our Supplies</a><a onclick="showPage('about')">About Us</a><a onclick="showPage('contact')">Get a Quote</a></div>
+        <div class="footer-col"><h5>Categories</h5><a onclick="showPage('products')">General Merchandise</a><a onclick="showPage('products')">Transportation</a><a onclick="showPage('products')">Catering</a><a onclick="showPage('products')">Stationery</a></div>
+        <div class="footer-col"><h5>Contact</h5><a>📍 Plot 55B Upper Kololo Drive</a><a href="tel:+256701476462">📞 +256 701 476 462</a><a href="tel:+256743598613">📞 +256 743 598 613</a><a>✉️ sirmelvine@gmail.com</a></div>
+      </div>
+      <div class="footer-bottom"><p>© 2024 Manivor Investments Limited. All rights reserved.</p><span class="footer-gold">Kampala, Uganda</span></div>
+    </div>
+  </footer>
+</div>
+
+<!-- ══════════════════════ CONTACT PAGE ══════════════════════ -->
+<div class="page" id="page-contact">
+  <div class="contact-wrap">
+    <div class="contact-left">
+      <div class="s-eyebrow">Get In Touch</div>
+      <h1>Request a quote or<br>send an enquiry.</h1>
+      <p>Fill in the form and our team will get back to you within 24 hours with a tailored quotation. For urgent orders, call us directly.</p>
+      <div class="contact-methods">
+        <div class="cm"><div class="cm-icon">📍</div><div><div class="cm-lbl">Our Location</div><div class="cm-val">Plot 55B Upper Kololo Drive, Kampala</div></div></div>
+        <div class="cm"><div class="cm-icon">📞</div><div><div class="cm-lbl">Phone (Primary)</div><div class="cm-val">+256 701 476 462</div></div></div>
+        <div class="cm"><div class="cm-icon">📞</div><div><div class="cm-lbl">Phone (Secondary)</div><div class="cm-val">+256 743 598 613</div></div></div>
+        <div class="cm"><div class="cm-icon">✉️</div><div><div class="cm-lbl">Email</div><div class="cm-val">sirmelvine@gmail.com</div></div></div>
+        <div class="cm"><div class="cm-icon">🏛</div><div><div class="cm-lbl">Registration</div><div class="cm-val">PPDA Registered Supplier · Uganda</div></div></div>
+        <div class="cm"><div class="cm-icon">🕐</div><div><div class="cm-lbl">Response Time</div><div class="cm-val">Within 24 hours on business days</div></div></div>
+      </div>
+    </div>
+
+    <div class="form-card">
+      <div id="contact-form-view">
+        <h3>Get a Quote</h3>
+        <p class="sub">Tell us what you need and we'll prepare a competitive quotation for you.</p>
+        <div class="form-row">
+          <div class="fg"><label>First Name</label><input type="text" id="c-fname" placeholder="John"/></div>
+          <div class="fg"><label>Last Name</label><input type="text" id="c-lname" placeholder="Doe"/></div>
+        </div>
+        <div class="fg"><label>Organisation / Company</label><input type="text" id="c-org" placeholder="Ministry of Finance / XYZ Ltd"/></div>
+        <div class="fg"><label>Email Address</label><input type="email" id="c-email" placeholder="john@organisation.ug"/></div>
+        <div class="fg"><label>Phone Number</label><input type="tel" id="c-phone" placeholder="+256 700 000 000"/></div>
+        <div class="form-row">
+          <div class="fg">
+            <label>Supply Category</label>
+            <select id="c-cat">
+              <option value="">Select category</option>
+              <option>General Merchandise</option>
+              <option>Transportation & Logistics</option>
+              <option>Catering Supplies</option>
+              <option>Stationery & Office</option>
+              <option>Hardware & Tools</option>
+              <option>Cleaning & Hygiene</option>
+              <option>Multiple Categories</option>
+              <option>Other / Not Listed</option>
+            </select>
+          </div>
+          <div class="fg">
+            <label>Order Scale</label>
+            <select id="c-scale">
+              <option value="">Select scale</option>
+              <option>Small (one-off order)</option>
+              <option>Medium (monthly supply)</option>
+              <option>Large (institutional contract)</option>
+              <option>Government / PPDA tender</option>
+            </select>
+          </div>
+        </div>
+        <div class="fg"><label>Describe Your Requirements</label><textarea id="c-msg" rows="4" placeholder="Please describe what you need — quantities, specifications, delivery location, timelines, etc."></textarea></div>
+        <button class="submit-btn" id="c-submit" onclick="submitQuote()">Send Quote Request →</button>
+      </div>
+      <div class="success-box" id="contact-success">
+        <div class="sico">✅</div>
+        <h4>Quote request received!</h4>
+        <p>Thank you for reaching out to Manivor Investments Limited. Our team will review your requirements and get back to you within 24 hours with a detailed quotation.</p>
+      </div>
+    </div>
+  </div>
+
+  <footer>
+    <div class="footer-inner">
+      <div class="footer-top">
+        <div class="footer-brand"><div class="logo"><div class="logo-mark">M</div><div class="logo-text"><span class="logo-name">Manivor Investments</span><span class="logo-sub">General Supplies</span></div></div><p>Your trusted general supplies partner across Uganda.</p><div class="ppda-tag">✅ PPDA Registered Supplier</div></div>
+        <div class="footer-col"><h5>Quick Links</h5><a onclick="showPage('home')">Home</a><a onclick="showPage('products')">Our Supplies</a><a onclick="showPage('about')">About Us</a><a onclick="showPage('contact')">Get a Quote</a></div>
+        <div class="footer-col"><h5>Categories</h5><a onclick="showPage('products')">General Merchandise</a><a onclick="showPage('products')">Transportation</a><a onclick="showPage('products')">Catering</a><a onclick="showPage('products')">Stationery</a></div>
+        <div class="footer-col"><h5>Contact</h5><a>📍 Plot 55B Upper Kololo Drive</a><a href="tel:+256701476462">📞 +256 701 476 462</a><a href="tel:+256743598613">📞 +256 743 598 613</a><a>✉️ sirmelvine@gmail.com</a></div>
+      </div>
+      <div class="footer-bottom"><p>© 2024 Manivor Investments Limited. All rights reserved.</p><span class="footer-gold">Kampala, Uganda</span></div>
+    </div>
+  </footer>
+</div>
+
+<!-- ══ SCRIPTS ══ -->
+<script src="https://cdn.jsdelivr.net/npm/@emailjs/browser@4/dist/email.min.js"></script>
+<script>
+  const SVC = 'service_bgmpuzr';
+  const TPL = 'template_beg6j6h';
+  const KEY = 'gzyJL7sP0rNjOC8fN';
+  emailjs.init(KEY);
+
+  // PAGE ROUTING
+  function showPage(id) {
+    document.querySelectorAll('.page').forEach(p => p.classList.remove('active'));
+    document.querySelectorAll('.nav-link').forEach(l => l.classList.remove('active'));
+    document.getElementById('page-' + id).classList.add('active');
+    const nl = document.getElementById('nl-' + id);
+    if(nl) nl.classList.add('active');
+    window.scrollTo({top:0,behavior:'smooth'});
+    setTimeout(initReveal, 80);
+  }
+
+  // MOBILE NAV
+  function toggleMob() {
+    const nl = document.querySelector('.nav-links');
+    if(nl.style.display === 'flex') {
+      nl.style.display = '';
+    } else {
+      Object.assign(nl.style, {
+        display:'flex', flexDirection:'column', position:'absolute',
+        top:'72px', left:'0', right:'0', background:'rgba(6,8,16,0.97)',
+        padding:'16px 24px 24px', borderBottom:'1px solid rgba(255,255,255,0.07)',
+        gap:'4px', zIndex:'300'
+      });
+    }
+  }
+
+  // QUOTE FORM
+  function submitQuote() {
+    const fname = document.getElementById('c-fname').value.trim();
+    const lname = document.getElementById('c-lname').value.trim();
+    const org   = document.getElementById('c-org').value.trim();
+    const email = document.getElementById('c-email').value.trim();
+    const phone = document.getElementById('c-phone').value.trim();
+    const cat   = document.getElementById('c-cat').value;
+    const scale = document.getElementById('c-scale').value;
+    const msg   = document.getElementById('c-msg').value.trim();
+    const btn   = document.getElementById('c-submit');
+
+    if(!fname || !email) { alert('Please fill in your name and email address.'); return; }
+
+    btn.disabled = true;
+    btn.textContent = 'Sending…';
+
+    emailjs.send(SVC, TPL, {
+      to_email:     'sirmelvine@gmail.com',
+      from_name:    fname + ' ' + lname + (org ? ' (' + org + ')' : ''),
+      from_email:   email,
+      company_size: phone || 'Not provided',
+      plan:         cat || 'Not specified',
+      request_type: 'Quote Request — ' + (scale || 'Scale not specified') + (msg ? '\n\nDetails: ' + msg : ''),
+    })
+    .then(() => {
+      document.getElementById('contact-form-view').style.display = 'none';
+      document.getElementById('contact-success').style.display = 'block';
+    })
+    .catch(err => {
+      console.error(err);
+      btn.disabled = false;
+      btn.textContent = 'Send Quote Request →';
+      alert('Something went wrong. Please call us on +256 701 476 462 or email sirmelvine@gmail.com directly.');
+    });
+  }
+
+  // SCROLL REVEAL
+  function initReveal() {
+    const obs = new IntersectionObserver(entries => {
+      entries.forEach(e => { if(e.isIntersecting) e.target.classList.add('visible'); });
+    }, { threshold: 0.07 });
+    document.querySelectorAll('.reveal:not(.visible)').forEach(el => obs.observe(el));
+  }
+  initReveal();
+</script>
+</body>
+</html>

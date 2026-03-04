@@ -1,0 +1,1156 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8"/>
+<meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+<title>Unison Talent Management | HR Solutions Africa</title>
+<link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:wght@400;500;600;700&family=DM+Sans:wght@300;400;500;600;700&display=swap" rel="stylesheet"/>
+<style>
+:root{
+  --navy:    #0b1f3a;
+  --navy2:   #102548;
+  --navy3:   #163060;
+  --gold:    #d4943a;
+  --gold2:   #e8b060;
+  --gold-g:  rgba(212,148,58,0.12);
+  --gold-b:  rgba(212,148,58,0.25);
+  --white:   #ffffff;
+  --text:    #e8edf5;
+  --muted:   #7a90b0;
+  --card:    rgba(255,255,255,0.04);
+  --border:  rgba(255,255,255,0.08);
+  --border2: rgba(255,255,255,0.15);
+  --light-bg:#f4f7fb;
+}
+*{box-sizing:border-box;margin:0;padding:0;}
+html{scroll-behavior:smooth;}
+body{
+  font-family:'DM Sans',sans-serif;
+  background:var(--navy);
+  color:var(--text);
+  min-height:100vh;
+  overflow-x:hidden;
+}
+body::before{
+  content:'';position:fixed;inset:0;
+  background-image:url("data:image/svg+xml,%3Csvg viewBox='0 0 256 256' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.9' numOctaves='4' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23n)' opacity='0.03'/%3E%3C/svg%3E");
+  pointer-events:none;z-index:0;
+}
+
+/* PAGES */
+.page{display:none;animation:fadeUp 0.4s ease;}
+.page.active{display:block;}
+@keyframes fadeUp{from{opacity:0;transform:translateY(14px);}to{opacity:1;transform:translateY(0);}}
+
+/* NAV */
+nav{
+  position:fixed;top:0;left:0;right:0;z-index:200;
+  display:flex;align-items:center;justify-content:space-between;
+  padding:0 56px;height:72px;
+  background:rgba(11,31,58,0.92);
+  backdrop-filter:blur(20px);
+  border-bottom:1px solid var(--border);
+}
+.logo{display:flex;align-items:center;gap:12px;cursor:pointer;}
+.logo-icon{
+  width:42px;height:42px;border-radius:8px;
+  background:linear-gradient(135deg,var(--gold),#a06820);
+  display:flex;align-items:center;justify-content:center;
+  font-family:'Cormorant Garamond',serif;font-weight:700;font-size:20px;color:white;
+}
+.logo-text{display:flex;flex-direction:column;line-height:1.15;}
+.logo-name{font-family:'Cormorant Garamond',serif;font-size:17px;font-weight:700;color:white;letter-spacing:0.3px;}
+.logo-sub{font-size:9px;letter-spacing:2.5px;text-transform:uppercase;color:var(--gold);font-weight:500;}
+.nav-links{display:flex;align-items:center;gap:4px;}
+.nav-link{
+  padding:8px 16px;border-radius:6px;font-size:13px;font-weight:500;
+  color:var(--muted);cursor:pointer;transition:all 0.2s;
+  border:none;background:none;font-family:'DM Sans',sans-serif;
+}
+.nav-link:hover{color:var(--text);background:var(--card);}
+.nav-link.active{color:var(--gold);background:var(--gold-g);}
+.nav-cta{
+  padding:9px 22px;border-radius:6px;font-size:13px;font-weight:600;
+  background:var(--gold);color:var(--navy);border:none;cursor:pointer;
+  transition:all 0.2s;font-family:'DM Sans',sans-serif;
+}
+.nav-cta:hover{background:var(--gold2);transform:translateY(-1px);box-shadow:0 6px 20px rgba(212,148,58,0.35);}
+.nav-mob{display:none;background:none;border:none;color:white;font-size:22px;cursor:pointer;}
+
+/* HERO */
+.hero{
+  min-height:100vh;display:flex;align-items:center;
+  padding:120px 56px 80px;position:relative;overflow:hidden;
+}
+.hero-grid{
+  position:absolute;inset:0;
+  background-image:
+    linear-gradient(rgba(212,148,58,0.04) 1px,transparent 1px),
+    linear-gradient(90deg,rgba(212,148,58,0.04) 1px,transparent 1px);
+  background-size:64px 64px;
+}
+.hero-glow{
+  position:absolute;top:-200px;right:-200px;
+  width:700px;height:700px;border-radius:50%;
+  background:radial-gradient(circle,rgba(212,148,58,0.09) 0%,transparent 70%);
+  pointer-events:none;
+}
+.hero-glow2{
+  position:absolute;bottom:-100px;left:-100px;
+  width:500px;height:500px;border-radius:50%;
+  background:radial-gradient(circle,rgba(22,48,96,0.6) 0%,transparent 70%);
+  pointer-events:none;
+}
+.hero-inner{
+  max-width:1100px;margin:0 auto;width:100%;
+  display:grid;grid-template-columns:1fr 1fr;gap:72px;align-items:center;
+  position:relative;z-index:1;
+}
+.hero-badge{
+  display:inline-flex;align-items:center;gap:8px;
+  background:var(--gold-g);border:1px solid var(--gold-b);
+  padding:6px 14px;border-radius:4px;font-size:11px;font-weight:600;
+  color:var(--gold);letter-spacing:1.5px;text-transform:uppercase;margin-bottom:22px;
+}
+.badge-dot{width:6px;height:6px;border-radius:50%;background:var(--gold);animation:blink 2s infinite;}
+@keyframes blink{0%,100%{opacity:1;}50%{opacity:0.3;}}
+.hero h1{
+  font-family:'Cormorant Garamond',serif;
+  font-size:clamp(38px,5vw,66px);font-weight:600;
+  line-height:1.06;letter-spacing:-1px;margin-bottom:20px;color:white;
+}
+.hero h1 em{
+  font-style:normal;
+  background:linear-gradient(90deg,var(--gold),var(--gold2));
+  -webkit-background-clip:text;-webkit-text-fill-color:transparent;background-clip:text;
+}
+.hero-sub{font-size:16px;color:var(--muted);line-height:1.8;max-width:480px;margin-bottom:34px;font-weight:300;}
+.hero-actions{display:flex;gap:14px;flex-wrap:wrap;}
+.btn-gold{
+  padding:13px 28px;border-radius:6px;font-size:14px;font-weight:600;
+  background:var(--gold);color:var(--navy);border:none;cursor:pointer;
+  transition:all 0.2s;font-family:'DM Sans',sans-serif;
+  display:inline-flex;align-items:center;gap:8px;
+}
+.btn-gold:hover{background:var(--gold2);transform:translateY(-2px);box-shadow:0 8px 24px rgba(212,148,58,0.35);}
+.btn-outline{
+  padding:13px 28px;border-radius:6px;font-size:14px;font-weight:500;
+  background:transparent;color:var(--text);
+  border:1px solid var(--border2);cursor:pointer;
+  transition:all 0.2s;font-family:'DM Sans',sans-serif;
+}
+.btn-outline:hover{background:var(--card);border-color:var(--gold-b);color:var(--gold);}
+.hero-trust{margin-top:28px;display:flex;align-items:center;gap:16px;flex-wrap:wrap;}
+.trust-item{display:flex;align-items:center;gap:7px;font-size:12px;color:var(--muted);}
+.trust-sep{width:1px;height:18px;background:var(--border2);}
+
+/* HERO RIGHT — SERVICES CARD */
+.services-card{
+  background:var(--navy2);border:1px solid var(--border);
+  border-radius:16px;padding:28px;
+  box-shadow:0 40px 80px rgba(0,0,0,0.4);
+}
+.sc-header{
+  display:flex;align-items:center;justify-content:space-between;
+  margin-bottom:18px;
+}
+.sc-title{font-family:'Cormorant Garamond',serif;font-size:15px;font-weight:600;color:var(--gold);}
+.sc-badge{font-size:10px;font-weight:700;color:var(--muted);letter-spacing:1px;text-transform:uppercase;}
+.sc-item{
+  display:flex;align-items:center;gap:14px;
+  background:var(--navy3);border:1px solid var(--border);
+  border-radius:10px;padding:14px 16px;margin-bottom:10px;
+  transition:all 0.2s;cursor:pointer;
+}
+.sc-item:hover{border-color:var(--gold-b);background:var(--gold-g);}
+.sc-icon{font-size:22px;flex-shrink:0;}
+.sc-label{font-size:13px;font-weight:600;color:var(--text);}
+.sc-desc{font-size:11px;color:var(--muted);margin-top:1px;}
+.hero-float{
+  position:absolute;bottom:-20px;left:-30px;
+  background:var(--navy2);border:1px solid var(--gold-b);
+  border-radius:12px;padding:14px 18px;
+  display:flex;align-items:center;gap:12px;
+  box-shadow:0 16px 32px rgba(0,0,0,0.4);
+}
+.hf-val{font-family:'Cormorant Garamond',serif;font-size:18px;font-weight:700;color:var(--gold);}
+.hf-lbl{font-size:10px;color:var(--muted);}
+
+/* COMMONS */
+.container{max-width:1100px;margin:0 auto;padding:0 56px;}
+@media(max-width:900px){.container{padding:0 24px;}}
+.sec{padding:88px 0;}
+.sec-full{padding:88px 56px;background:var(--navy2);}
+@media(max-width:900px){.sec-full{padding:72px 24px;}}
+.sec-inner{max-width:1100px;margin:0 auto;}
+.eyebrow{font-size:10px;font-weight:700;letter-spacing:3px;text-transform:uppercase;color:var(--gold);margin-bottom:10px;}
+.s-title{
+  font-family:'Cormorant Garamond',serif;
+  font-size:clamp(28px,4vw,46px);font-weight:600;
+  letter-spacing:-0.5px;line-height:1.15;margin-bottom:14px;color:white;
+}
+.s-body{font-size:15px;color:var(--muted);line-height:1.8;max-width:540px;margin-bottom:44px;font-weight:300;}
+.divider{border:none;border-top:1px solid var(--border);}
+
+/* STATS */
+.stats-band{
+  display:grid;grid-template-columns:repeat(4,1fr);
+  background:var(--navy2);border:1px solid var(--border);border-radius:14px;
+  overflow:hidden;margin-bottom:80px;
+}
+@media(max-width:700px){.stats-band{grid-template-columns:1fr 1fr;}}
+.stat-cell{padding:32px 24px;text-align:center;border-right:1px solid var(--border);}
+.stat-cell:last-child{border-right:none;}
+.stat-n{
+  font-family:'Cormorant Garamond',serif;font-size:42px;font-weight:700;
+  background:linear-gradient(90deg,var(--gold),var(--gold2));
+  -webkit-background-clip:text;-webkit-text-fill-color:transparent;background-clip:text;
+  line-height:1;margin-bottom:6px;
+}
+.stat-l{font-size:12px;color:var(--muted);line-height:1.45;}
+
+/* SERVICES GRID */
+.svc-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:20px;}
+@media(max-width:900px){.svc-grid{grid-template-columns:1fr 1fr;}}
+@media(max-width:560px){.svc-grid{grid-template-columns:1fr;}}
+.svc-card{
+  background:var(--navy2);border:1px solid var(--border);
+  border-radius:14px;padding:28px;
+  transition:all 0.25s;position:relative;overflow:hidden;cursor:pointer;
+}
+.svc-card::before{
+  content:'';position:absolute;inset:0;
+  background:linear-gradient(135deg,rgba(212,148,58,0.06),transparent);
+  opacity:0;transition:opacity 0.25s;
+}
+.svc-card:hover{transform:translateY(-5px);box-shadow:0 24px 48px rgba(0,0,0,0.35);border-color:var(--gold-b);}
+.svc-card:hover::before{opacity:1;}
+.svc-icon{
+  width:50px;height:50px;border-radius:12px;
+  background:var(--gold-g);border:1px solid var(--gold-b);
+  display:flex;align-items:center;justify-content:center;
+  font-size:22px;margin-bottom:18px;
+}
+.svc-card h3{font-family:'Cormorant Garamond',serif;font-size:20px;font-weight:600;color:white;margin-bottom:10px;}
+.svc-card p{font-size:13px;color:var(--muted);line-height:1.7;font-weight:300;}
+.svc-link{
+  display:inline-flex;align-items:center;gap:6px;
+  margin-top:14px;font-size:13px;font-weight:600;color:var(--gold);
+  background:none;border:none;cursor:pointer;font-family:'DM Sans',sans-serif;
+  transition:gap 0.2s;padding:0;
+}
+.svc-link:hover{gap:10px;}
+
+/* REVIEWS */
+.reviews-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:18px;}
+@media(max-width:800px){.reviews-grid{grid-template-columns:1fr 1fr;}}
+@media(max-width:520px){.reviews-grid{grid-template-columns:1fr;}}
+.rev-card{
+  background:var(--navy2);border:1px solid var(--border);
+  border-radius:14px;padding:26px;transition:all 0.2s;
+}
+.rev-card:hover{border-color:var(--gold-b);transform:translateY(-3px);}
+.rev-stars{color:var(--gold);font-size:13px;letter-spacing:2px;margin-bottom:12px;}
+.rev-card p{font-size:13px;color:#9aaac0;line-height:1.78;font-style:italic;margin-bottom:18px;font-weight:300;}
+.rev-author{display:flex;align-items:center;gap:10px;}
+.r-av{width:36px;height:36px;border-radius:50%;display:flex;align-items:center;justify-content:center;font-size:12px;font-weight:700;color:white;flex-shrink:0;}
+.r-name{font-size:13px;font-weight:600;color:var(--text);}
+.r-role{font-size:11px;color:var(--muted);}
+
+/* CTA BAND */
+.cta-band{
+  background:linear-gradient(135deg,#1a3a00,#0d2a1a,#0b1f3a);
+  border:1px solid var(--gold-b);border-radius:16px;
+  padding:60px 52px;margin-bottom:80px;
+  display:flex;align-items:center;justify-content:space-between;
+  gap:32px;flex-wrap:wrap;position:relative;overflow:hidden;
+}
+.cta-band::before{
+  content:'';position:absolute;top:-80px;right:-80px;
+  width:300px;height:300px;border-radius:50%;
+  background:radial-gradient(circle,rgba(212,148,58,0.1) 0%,transparent 70%);
+}
+.cta-band h2{
+  font-family:'Cormorant Garamond',serif;
+  font-size:clamp(24px,3vw,38px);font-weight:600;color:white;
+  line-height:1.2;position:relative;z-index:1;
+}
+.cta-band p{font-size:14px;color:rgba(255,255,255,0.6);margin-top:8px;position:relative;z-index:1;}
+.cta-btns{display:flex;gap:12px;flex-wrap:wrap;position:relative;z-index:1;}
+.btn-white{
+  padding:13px 28px;border-radius:6px;background:white;color:var(--navy);
+  font-family:'DM Sans',sans-serif;font-size:14px;font-weight:700;
+  border:none;cursor:pointer;transition:all 0.2s;
+}
+.btn-white:hover{transform:translateY(-2px);box-shadow:0 8px 20px rgba(0,0,0,0.2);}
+.btn-outline-w{
+  padding:13px 28px;border-radius:6px;background:transparent;color:white;
+  font-family:'DM Sans',sans-serif;font-size:14px;font-weight:500;
+  border:1px solid rgba(255,255,255,0.35);cursor:pointer;transition:all 0.2s;
+}
+.btn-outline-w:hover{background:rgba(255,255,255,0.08);}
+
+/* FOOTER */
+footer{background:var(--navy2);border-top:1px solid var(--border);padding:60px 56px 32px;}
+@media(max-width:900px){footer{padding:48px 24px 24px;}}
+.footer-inner{max-width:1100px;margin:0 auto;}
+.footer-top{display:grid;grid-template-columns:2fr 1fr 1fr 1fr;gap:40px;margin-bottom:48px;}
+@media(max-width:800px){.footer-top{grid-template-columns:1fr 1fr;}}
+@media(max-width:480px){.footer-top{grid-template-columns:1fr;}}
+.footer-brand p{font-size:13px;color:var(--muted);line-height:1.75;margin-top:14px;max-width:260px;font-weight:300;}
+.footer-col h5{font-family:'Cormorant Garamond',serif;font-size:14px;font-weight:600;color:white;margin-bottom:16px;letter-spacing:0.5px;}
+.footer-col a{display:block;font-size:13px;color:var(--muted);cursor:pointer;margin-bottom:10px;transition:color 0.2s;text-decoration:none;font-weight:300;}
+.footer-col a:hover{color:var(--gold);}
+.footer-bottom{display:flex;align-items:center;justify-content:space-between;border-top:1px solid var(--border);padding-top:24px;flex-wrap:wrap;gap:10px;}
+.footer-bottom p{font-size:12px;color:var(--muted);}
+.footer-gold{font-size:12px;color:var(--gold);font-weight:500;}
+
+/* PRODUCTS PAGE */
+.prod-hero{
+  padding:140px 56px 60px;
+  background:radial-gradient(ellipse at top,rgba(212,148,58,0.08) 0%,transparent 60%);
+}
+@media(max-width:900px){.prod-hero{padding:120px 24px 50px;}}
+.prod-hero-inner{max-width:1100px;margin:0 auto;}
+.prod-full-grid{display:grid;grid-template-columns:1fr 1fr;gap:24px;max-width:1100px;margin:0 auto 60px;padding:0 56px;}
+@media(max-width:900px){.prod-full-grid{padding:0 24px;}}
+@media(max-width:700px){.prod-full-grid{grid-template-columns:1fr;}}
+.pfc{
+  background:var(--navy2);border:1px solid var(--border);
+  border-radius:16px;padding:32px 28px;
+  transition:all 0.25s;position:relative;overflow:hidden;
+}
+.pfc::before{content:'';position:absolute;top:0;left:0;right:0;height:2px;background:linear-gradient(90deg,var(--gold),transparent);opacity:0;transition:opacity 0.25s;}
+.pfc:hover{transform:translateY(-4px);box-shadow:0 20px 44px rgba(0,0,0,0.35);border-color:var(--gold-b);}
+.pfc:hover::before{opacity:1;}
+.pfc-hd{display:flex;align-items:center;gap:16px;margin-bottom:14px;}
+.pfc-icon{width:52px;height:52px;border-radius:12px;background:var(--gold-g);border:1px solid var(--gold-b);display:flex;align-items:center;justify-content:center;font-size:24px;flex-shrink:0;}
+.pfc-title{font-family:'Cormorant Garamond',serif;font-size:22px;font-weight:600;color:white;}
+.pfc-tag{font-size:10px;color:var(--gold);font-weight:700;letter-spacing:1.5px;text-transform:uppercase;margin-top:2px;}
+.pfc-desc{font-size:14px;color:var(--muted);line-height:1.75;margin-bottom:18px;font-weight:300;}
+.pfc-items{display:flex;flex-wrap:wrap;gap:7px;margin-bottom:18px;}
+.pfc-item{font-size:12px;color:var(--muted);background:var(--navy3);border:1px solid var(--border);padding:4px 11px;border-radius:4px;transition:all 0.15s;}
+.pfc:hover .pfc-item{border-color:var(--gold-b);color:var(--text);}
+.pfc-btn{display:inline-flex;align-items:center;gap:6px;font-size:13px;font-weight:600;color:var(--gold);background:none;border:none;cursor:pointer;font-family:'DM Sans',sans-serif;transition:gap 0.2s;padding:0;}
+.pfc-btn:hover{gap:12px;}
+
+/* ABOUT PAGE */
+.about-hero{
+  padding:140px 56px 60px;
+  background:radial-gradient(ellipse at top right,rgba(212,148,58,0.07) 0%,transparent 55%);
+}
+@media(max-width:900px){.about-hero{padding:120px 24px 50px;}}
+.about-grid{display:grid;grid-template-columns:1fr 1fr;gap:64px;max-width:1100px;margin:0 auto;align-items:center;}
+@media(max-width:700px){.about-grid{grid-template-columns:1fr;gap:40px;}}
+.about-visual{background:var(--navy2);border:1px solid var(--border);border-radius:16px;padding:32px;}
+.astat-grid{display:grid;grid-template-columns:1fr 1fr;gap:14px;margin-bottom:16px;}
+.astat{background:var(--navy3);border:1px solid var(--border);border-radius:10px;padding:18px;}
+.astat .an{font-family:'Cormorant Garamond',serif;font-size:34px;font-weight:700;background:linear-gradient(90deg,var(--gold),var(--gold2));-webkit-background-clip:text;-webkit-text-fill-color:transparent;background-clip:text;margin-bottom:4px;line-height:1;}
+.astat .al{font-size:11px;color:var(--muted);}
+.mission-box{background:var(--gold-g);border:1px solid var(--gold-b);border-radius:10px;padding:20px;}
+.mission-box p{font-size:13px;color:#c8a870;line-height:1.75;font-style:italic;font-weight:300;}
+.team-grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(220px,1fr));gap:20px;max-width:1100px;margin:0 auto;}
+.team-card{background:var(--card);border:1px solid var(--border);border-radius:14px;padding:26px 20px;text-align:center;transition:all 0.2s;}
+.team-card:hover{border-color:var(--gold-b);transform:translateY(-4px);}
+.team-av{width:72px;height:72px;border-radius:50%;margin:0 auto 14px;display:flex;align-items:center;justify-content:center;font-family:'Cormorant Garamond',serif;font-size:24px;font-weight:700;color:white;}
+.team-name{font-family:'Cormorant Garamond',serif;font-size:17px;font-weight:600;margin-bottom:4px;}
+.team-role{font-size:12px;color:var(--gold);font-weight:600;margin-bottom:8px;letter-spacing:0.5px;}
+.team-bio{font-size:12px;color:var(--muted);line-height:1.6;font-weight:300;}
+.values-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:16px;max-width:1100px;margin:0 auto;}
+@media(max-width:700px){.values-grid{grid-template-columns:1fr 1fr;}}
+.val-card{background:var(--card);border:1px solid var(--border);border-radius:12px;padding:22px 18px;transition:all 0.2s;}
+.val-card:hover{border-color:var(--gold-b);background:var(--gold-g);}
+.val-icon{font-size:24px;margin-bottom:10px;}
+.val-card h4{font-family:'Cormorant Garamond',serif;font-size:16px;font-weight:600;color:white;margin-bottom:6px;}
+.val-card p{font-size:12px;color:var(--muted);line-height:1.65;font-weight:300;}
+
+/* CONTACT PAGE */
+.contact-wrap{max-width:1100px;margin:0 auto;padding:140px 56px 80px;display:grid;grid-template-columns:1fr 1.3fr;gap:60px;}
+@media(max-width:800px){.contact-wrap{grid-template-columns:1fr;padding:120px 24px 60px;}}
+.contact-left h1{font-family:'Cormorant Garamond',serif;font-size:clamp(30px,4vw,46px);font-weight:600;color:white;line-height:1.15;margin-bottom:14px;letter-spacing:-0.5px;}
+.contact-left p{font-size:15px;color:var(--muted);line-height:1.8;margin-bottom:32px;font-weight:300;}
+.cm-item{display:flex;align-items:center;gap:14px;background:var(--card);border:1px solid var(--border);border-radius:10px;padding:14px 18px;margin-bottom:10px;transition:border-color 0.2s;}
+.cm-item:hover{border-color:var(--gold-b);}
+.cm-icon{font-size:18px;flex-shrink:0;}
+.cm-lbl{font-size:11px;color:var(--muted);letter-spacing:0.5px;margin-bottom:2px;text-transform:uppercase;font-weight:600;}
+.cm-val{font-size:14px;font-weight:500;color:var(--text);}
+.form-card{background:var(--navy2);border:1px solid var(--border);border-radius:16px;padding:40px;}
+.form-card h3{font-family:'Cormorant Garamond',serif;font-size:24px;font-weight:600;color:white;margin-bottom:6px;}
+.form-card .sub{font-size:13px;color:var(--muted);margin-bottom:26px;font-weight:300;}
+.fg{margin-bottom:14px;}
+.fg label{display:block;font-size:11px;font-weight:600;margin-bottom:6px;color:#8090b0;letter-spacing:0.8px;text-transform:uppercase;}
+.fg input,.fg select,.fg textarea{width:100%;padding:12px 14px;background:var(--navy3);border:1px solid var(--border);border-radius:8px;color:var(--text);font-family:'DM Sans',sans-serif;font-size:14px;font-weight:300;transition:border-color 0.2s;resize:none;outline:none;}
+.fg input:focus,.fg select:focus,.fg textarea:focus{border-color:var(--gold-b);background:rgba(212,148,58,0.03);}
+.fg select option{background:var(--navy2);}
+.form-row{display:grid;grid-template-columns:1fr 1fr;gap:14px;}
+@media(max-width:500px){.form-row{grid-template-columns:1fr;}}
+.submit-btn{width:100%;padding:14px;border-radius:8px;background:var(--gold);color:var(--navy);font-family:'DM Sans',sans-serif;font-size:14px;font-weight:700;border:none;cursor:pointer;transition:all 0.2s;margin-top:6px;}
+.submit-btn:hover{background:var(--gold2);transform:translateY(-1px);}
+.submit-btn:disabled{opacity:0.55;cursor:not-allowed;transform:none;}
+.success-box{display:none;text-align:center;padding:44px 16px;}
+.success-box .sico{font-size:54px;margin-bottom:14px;}
+.success-box h4{font-family:'Cormorant Garamond',serif;font-size:24px;font-weight:600;color:white;margin-bottom:8px;}
+.success-box p{font-size:14px;color:var(--muted);font-weight:300;}
+
+/* BLOG PAGE */
+.blog-hero{padding:140px 56px 60px;background:radial-gradient(ellipse at top left,rgba(212,148,58,0.07) 0%,transparent 60%);}
+@media(max-width:900px){.blog-hero{padding:120px 24px 50px;}}
+.blog-hero-inner{max-width:1100px;margin:0 auto;}
+.blog-search{display:flex;align-items:center;gap:12px;background:var(--navy2);border:1px solid var(--border2);border-radius:10px;padding:10px 16px;max-width:480px;margin-top:24px;}
+.blog-search input{flex:1;background:none;border:none;color:var(--text);font-family:'DM Sans',sans-serif;font-size:14px;outline:none;}
+.blog-search input::placeholder{color:var(--muted);}
+.blog-tags{display:flex;gap:8px;flex-wrap:wrap;margin-top:20px;}
+.btag{padding:6px 16px;border-radius:20px;font-size:12px;font-weight:600;border:1px solid var(--border);color:var(--muted);cursor:pointer;background:transparent;transition:all 0.2s;font-family:'DM Sans',sans-serif;}
+.btag:hover,.btag.active{background:var(--gold);color:var(--navy);border-color:var(--gold);}
+.blog-grid-wrap{max-width:1100px;margin:0 auto;padding:0 56px 80px;}
+@media(max-width:900px){.blog-grid-wrap{padding:0 24px 60px;}}
+.blog-featured{display:grid;grid-template-columns:1.6fr 1fr;gap:24px;margin-bottom:24px;}
+@media(max-width:800px){.blog-featured{grid-template-columns:1fr;}}
+.blog-card{background:var(--navy2);border:1px solid var(--border);border-radius:16px;overflow:hidden;transition:all 0.25s;cursor:pointer;}
+.blog-card:hover{transform:translateY(-5px);box-shadow:0 24px 48px rgba(0,0,0,0.35);border-color:var(--gold-b);}
+.blog-thumb{height:200px;display:flex;align-items:center;justify-content:center;font-size:52px;}
+.blog-card.feat-card .blog-thumb{height:260px;}
+.blog-body{padding:22px;}
+.blog-meta{display:flex;align-items:center;gap:10px;margin-bottom:10px;flex-wrap:wrap;}
+.blog-cat{font-size:11px;font-weight:700;letter-spacing:1.5px;text-transform:uppercase;padding:3px 10px;border-radius:3px;}
+.cat-hr{background:var(--gold-g);color:var(--gold);}
+.cat-recruit{background:rgba(0,180,130,0.12);color:#00c897;}
+.cat-iso{background:rgba(61,100,255,0.12);color:#7a9fff;}
+.cat-talent{background:rgba(200,80,200,0.12);color:#e080e0;}
+.cat-product{background:rgba(80,180,255,0.12);color:#60c0ff;}
+.blog-date{font-size:12px;color:var(--muted);}
+.blog-card h3{font-family:'Cormorant Garamond',serif;font-weight:600;line-height:1.25;margin-bottom:10px;color:white;transition:color 0.2s;}
+.blog-card:hover h3{color:var(--gold);}
+.feat-card h3{font-size:22px;}
+.blog-card.small-card h3{font-size:16px;}
+.blog-card p.excerpt{font-size:13px;color:var(--muted);line-height:1.7;margin-bottom:14px;font-weight:300;}
+.blog-card.small-card p.excerpt{display:none;}
+.blog-author{display:flex;align-items:center;gap:8px;}
+.b-av{width:28px;height:28px;border-radius:50%;display:flex;align-items:center;justify-content:center;font-size:10px;font-weight:800;color:white;flex-shrink:0;}
+.b-name{font-size:12px;font-weight:600;}
+.b-role{font-size:11px;color:var(--muted);}
+.blog-main-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:20px;margin-bottom:24px;}
+@media(max-width:800px){.blog-main-grid{grid-template-columns:1fr 1fr;}}
+@media(max-width:500px){.blog-main-grid{grid-template-columns:1fr;}}
+.blog-card.reg-card .blog-thumb{height:150px;}
+.blog-card.reg-card h3{font-size:15px;}
+.blog-newsletter{background:var(--gold-g);border:1px solid var(--gold-b);border-radius:16px;padding:44px 40px;text-align:center;margin-bottom:60px;}
+.blog-newsletter h3{font-family:'Cormorant Garamond',serif;font-size:26px;font-weight:600;color:white;margin-bottom:8px;}
+.blog-newsletter p{font-size:14px;color:var(--muted);margin-bottom:22px;font-weight:300;}
+.nl-form{display:flex;gap:10px;max-width:400px;margin:0 auto;flex-wrap:wrap;}
+.nl-form input{flex:1;padding:12px 16px;border-radius:8px;min-width:180px;background:var(--navy2);border:1px solid var(--border);color:var(--text);font-family:'DM Sans',sans-serif;font-size:14px;outline:none;transition:border-color 0.2s;}
+.nl-form input:focus{border-color:var(--gold-b);}
+.nl-form button{padding:12px 22px;border-radius:8px;background:var(--gold);color:var(--navy);border:none;font-family:'DM Sans',sans-serif;font-size:14px;font-weight:700;cursor:pointer;white-space:nowrap;transition:background 0.2s;}
+.nl-form button:hover{background:var(--gold2);}
+.blog-post-view{display:none;}
+.blog-post-view.open{display:block;}
+.post-inner{max-width:720px;margin:0 auto;padding:120px 32px 80px;}
+.back-btn{display:inline-flex;align-items:center;gap:8px;font-size:13px;font-weight:600;color:var(--muted);cursor:pointer;margin-bottom:28px;background:none;border:none;transition:color 0.2s;font-family:'DM Sans',sans-serif;}
+.back-btn:hover{color:var(--gold);}
+.post-title{font-family:'Cormorant Garamond',serif;font-size:clamp(28px,4vw,44px);font-weight:700;letter-spacing:-1px;line-height:1.15;margin-bottom:18px;color:white;}
+.post-meta{display:flex;align-items:center;gap:14px;padding:14px 0;border-top:1px solid var(--border);border-bottom:1px solid var(--border);margin-bottom:32px;flex-wrap:wrap;}
+.post-content h2{font-family:'Cormorant Garamond',serif;font-size:22px;font-weight:700;margin:32px 0 12px;color:white;}
+.post-content p{font-size:15px;color:#9aaac0;line-height:1.85;margin-bottom:16px;font-weight:300;}
+.post-content ul{padding-left:20px;margin-bottom:16px;}
+.post-content ul li{font-size:15px;color:#9aaac0;line-height:1.8;margin-bottom:6px;font-weight:300;}
+.post-content blockquote{border-left:3px solid var(--gold);padding-left:20px;margin:24px 0;font-style:italic;color:#8090a8;font-size:15px;line-height:1.75;}
+.post-content .hl{background:var(--gold-g);border:1px solid var(--gold-b);border-radius:10px;padding:18px 22px;margin:22px 0;}
+.post-content .hl p{color:var(--text);margin:0;}
+
+/* REVEAL */
+.reveal{opacity:0;transform:translateY(18px);transition:opacity 0.55s ease,transform 0.55s ease;}
+.reveal.visible{opacity:1;transform:translateY(0);}
+
+/* RESPONSIVE */
+@media(max-width:900px){
+  nav{padding:0 24px;}
+  .hero{padding:100px 24px 60px;}
+  .hero-inner{grid-template-columns:1fr;gap:40px;}
+  .hero-right{display:none;}
+  .sec{padding:64px 0;}
+}
+@media(max-width:600px){
+  .nav-links{display:none;}
+  .nav-mob{display:block;}
+  .svc-grid{grid-template-columns:1fr;}
+  .reviews-grid{grid-template-columns:1fr;}
+}
+</style>
+</head>
+<body>
+
+<!-- NAV -->
+<nav>
+  <div class="logo" onclick="showPage('home')">
+    <div class="logo-icon">U</div>
+    <div class="logo-text">
+      <span class="logo-name">Unison Talent Management</span>
+      <span class="logo-sub">HR Solutions Africa</span>
+    </div>
+  </div>
+  <div class="nav-links">
+    <button class="nav-link active" id="nl-home"    onclick="showPage('home')">Home</button>
+    <button class="nav-link"        id="nl-products" onclick="showPage('products')">Our Services</button>
+    <button class="nav-link"        id="nl-about"   onclick="showPage('about')">About Us</button>
+    <button class="nav-link"        id="nl-blog"    onclick="showPage('blog')">Blog</button>
+    <button class="nav-link"        id="nl-contact" onclick="showPage('contact')">Contact</button>
+  </div>
+  <button class="nav-cta" onclick="showPage('contact')">Book a Consultation →</button>
+  <button class="nav-mob" onclick="toggleMob()">☰</button>
+</nav>
+
+<!-- ══════════ HOME ══════════ -->
+<div class="page active" id="page-home">
+  <section class="hero">
+    <div class="hero-grid"></div>
+    <div class="hero-glow"></div>
+    <div class="hero-glow2"></div>
+    <div class="hero-inner">
+      <div>
+        <div class="hero-badge"><span class="badge-dot"></span>HR Solutions Africa · Kampala, Uganda</div>
+        <h1>Empower Your<br>Workforce for<br>the <em>Future.</em></h1>
+        <p class="hero-sub">People. Systems. Skills. Standards. Delivered Right. Unison Talent Management delivers end-to-end HR solutions — from recruitment to HRIS digitization, talent development, and ISO certification.</p>
+        <div class="hero-actions">
+          <button class="btn-gold" onclick="showPage('contact')">Book a Consultation →</button>
+          <button class="btn-outline" onclick="showPage('products')">Our Services</button>
+        </div>
+        <div class="hero-trust">
+          <div class="trust-item">📍 Kampala, Uganda</div>
+          <div class="trust-sep"></div>
+          <div class="trust-item">🌍 Serving Africa</div>
+          <div class="trust-sep"></div>
+          <div class="trust-item">🏅 PECB Certified Partner</div>
+        </div>
+      </div>
+      <div class="hero-right" style="position:relative;">
+        <div class="services-card">
+          <div class="sc-header">
+            <span class="sc-title">Our Core Services</span>
+            <span class="sc-badge">4 Solutions</span>
+          </div>
+          <div class="sc-item" onclick="showPage('products')"><span class="sc-icon">🎯</span><div><div class="sc-label">Recruitment</div><div class="sc-desc">End-to-end talent acquisition</div></div></div>
+          <div class="sc-item" onclick="showPage('products')"><span class="sc-icon">💻</span><div><div class="sc-label">HR Digitization</div><div class="sc-desc">HRIS implementation & support</div></div></div>
+          <div class="sc-item" onclick="showPage('products')"><span class="sc-icon">📚</span><div><div class="sc-label">Talent Development</div><div class="sc-desc">Training & skills programmes</div></div></div>
+          <div class="sc-item" onclick="showPage('products')"><span class="sc-icon">🏅</span><div><div class="sc-label">ISO Certification</div><div class="sc-desc">PECB certified training</div></div></div>
+        </div>
+        <div class="hero-float">
+          <div style="font-size:22px;">🤝</div>
+          <div><div class="hf-val">PECB Partner</div><div class="hf-lbl">Certified ISO training provider</div></div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- Stats -->
+  <div class="container">
+    <div class="stats-band reveal">
+      <div class="stat-cell"><div class="stat-n">500+</div><div class="stat-l">Professionals placed</div></div>
+      <div class="stat-cell"><div class="stat-n">4</div><div class="stat-l">Core HR service areas</div></div>
+      <div class="stat-cell"><div class="stat-n">🌍</div><div class="stat-l">Pan-African reach</div></div>
+      <div class="stat-cell"><div class="stat-n">ISO</div><div class="stat-l">PECB certified partner</div></div>
+    </div>
+  </div>
+
+  <hr class="divider"/>
+
+  <!-- Services Overview -->
+  <div class="container sec">
+    <div class="reveal">
+      <div class="eyebrow">What We Do</div>
+      <div class="s-title">Comprehensive HR solutions<br>for growing organisations.</div>
+      <p class="s-body">From attracting the right talent to digitising your HR operations and certifying your teams — Unison Talent Management is your end-to-end HR partner across Africa.</p>
+    </div>
+    <div class="svc-grid reveal">
+      <div class="svc-card" onclick="showPage('products')">
+        <div class="svc-icon">🎯</div>
+        <h3>Recruitment</h3>
+        <p>Attracting top talent with industry insights and a vast network. We identify candidates tailored to your organisation's culture and strategic needs.</p>
+        <button class="svc-link">Learn more →</button>
+      </div>
+      <div class="svc-card" onclick="showPage('products')">
+        <div class="svc-icon">💻</div>
+        <h3>HR Digitization</h3>
+        <p>Streamline HR operations through advanced HRIS implementation. We configure, test, train, and support your teams for full system adoption from day one.</p>
+        <button class="svc-link">Learn more →</button>
+      </div>
+      <div class="svc-card" onclick="showPage('products')">
+        <div class="svc-icon">📚</div>
+        <h3>Talent Development</h3>
+        <p>Training and development programmes that equip individuals with essential skills for today's job market and the rapidly evolving future of work.</p>
+        <button class="svc-link">Learn more →</button>
+      </div>
+      <div class="svc-card" onclick="showPage('products')">
+        <div class="svc-icon">🏅</div>
+        <h3>ISO Certification</h3>
+        <p>In partnership with PECB, we bridge industry standards and professional development — empowering professionals and fostering excellence within organisations.</p>
+        <button class="svc-link">Learn more →</button>
+      </div>
+      <div class="svc-card" onclick="showPage('products')">
+        <div class="svc-icon">📊</div>
+        <h3>HR Consulting</h3>
+        <p>Strategic HR advisory services for organisations looking to restructure, scale, or build HR systems from the ground up.</p>
+        <button class="svc-link">Learn more →</button>
+      </div>
+      <div class="svc-card" onclick="showPage('contact')">
+        <div class="svc-icon">🌍</div>
+        <h3>Find a Job</h3>
+        <p>Looking for your next opportunity? We connect talented professionals with leading organisations across Uganda and Africa.</p>
+        <button class="svc-link">Browse jobs →</button>
+      </div>
+    </div>
+  </div>
+
+  <hr class="divider"/>
+
+  <!-- Why Us -->
+  <div class="sec-full">
+    <div class="sec-inner">
+      <div class="reveal" style="text-align:center;margin-bottom:44px;">
+        <div class="eyebrow" style="text-align:center;">Why Unison</div>
+        <div class="s-title" style="text-align:center;">People-focused. Results-driven.</div>
+      </div>
+      <div class="svc-grid reveal">
+        <div class="svc-card"><div class="svc-icon">🤝</div><h3>We Don't Just Install & Walk Away</h3><p>We configure, test, train, and support your teams so every system is fully adopted and delivers real value from day one.</p></div>
+        <div class="svc-card"><div class="svc-icon">🎯</div><h3>Industry Specialists</h3><p>Deep expertise across sectors — from government to NGOs, healthcare to finance. We know your industry's talent landscape.</p></div>
+        <div class="svc-card"><div class="svc-icon">📈</div><h3>Measurable Results</h3><p>Less manual work, fewer errors, better visibility. We turn everyday HR tasks into clear insights that support better decisions.</p></div>
+      </div>
+    </div>
+  </div>
+
+  <hr class="divider"/>
+
+  <!-- Reviews -->
+  <div class="container sec">
+    <div class="reveal">
+      <div class="eyebrow">Client Testimonials</div>
+      <div class="s-title">Trusted by organisations<br>across Africa.</div>
+    </div>
+    <div class="reviews-grid reveal">
+      <div class="rev-card">
+        <div class="rev-stars">★★★★★</div>
+        <p>"Unison transformed our entire recruitment process. Their understanding of our culture meant every candidate was a genuine fit — not just on paper."</p>
+        <div class="rev-author"><div class="r-av" style="background:linear-gradient(135deg,#d4943a,#a06820);">JO</div><div><div class="r-name">James Okello</div><div class="r-role">HR Director · Financial Institution</div></div></div>
+      </div>
+      <div class="rev-card">
+        <div class="rev-stars">★★★★★</div>
+        <p>"The HRIS implementation was seamless. Their team trained everyone thoroughly and we've never looked back — our admin time dropped by over 50%."</p>
+        <div class="rev-author"><div class="r-av" style="background:#2a5ea0;">RA</div><div><div class="r-name">Ruth Akello</div><div class="r-role">COO · Manufacturing Company</div></div></div>
+      </div>
+      <div class="rev-card">
+        <div class="rev-stars">★★★★★</div>
+        <p>"The ISO certification training through Unison and PECB was world-class. Our team is now certified and our clients immediately noticed the difference."</p>
+        <div class="rev-author"><div class="r-av" style="background:#2a6e34;">SK</div><div><div class="r-name">Samuel Kaggwa</div><div class="r-role">CEO · Consulting Firm</div></div></div>
+      </div>
+      <div class="rev-card">
+        <div class="rev-stars">★★★★★</div>
+        <p>"Their talent development programme gave our managers the skills to lead hybrid teams effectively. Real, practical training — not just theory."</p>
+        <div class="rev-author"><div class="r-av" style="background:#6a2a8e;">PM</div><div><div class="r-name">Patricia Mukasa</div><div class="r-role">L&D Manager · NGO</div></div></div>
+      </div>
+      <div class="rev-card">
+        <div class="rev-stars">★★★★★</div>
+        <p>"From first call to final placement, Unison's recruitment team was professional, responsive, and found us the perfect candidate in under three weeks."</p>
+        <div class="rev-author"><div class="r-av" style="background:#8e2a2a);">DN</div><div><div class="r-name">David Nkurunziza</div><div class="r-role">Director · Healthcare Organisation</div></div></div>
+      </div>
+      <div class="rev-card">
+        <div class="rev-stars">★★★★★</div>
+        <p>"Unison helped us become a paperless HR organisation. What once took our team days now takes minutes. The ROI was visible within the first month."</p>
+        <div class="rev-author"><div class="r-av" style="background:#2a5e8e;">GW</div><div><div class="r-name">Grace Wasswa</div><div class="r-role">Head of HR · Government Agency</div></div></div>
+      </div>
+    </div>
+  </div>
+
+  <!-- CTA -->
+  <div class="container">
+    <div class="cta-band reveal">
+      <div>
+        <h2>Ready to transform your<br>HR operations?</h2>
+        <p>Talk to our team today and discover how Unison can help your organisation grow.</p>
+      </div>
+      <div class="cta-btns">
+        <button class="btn-white" onclick="showPage('contact')">Book a Consultation →</button>
+        <button class="btn-outline-w" onclick="showPage('products')">View Services</button>
+      </div>
+    </div>
+  </div>
+
+  <footer>
+    <div class="footer-inner">
+      <div class="footer-top">
+        <div class="footer-brand">
+          <div class="logo"><div class="logo-icon">U</div><div class="logo-text"><span class="logo-name">Unison Talent Management</span><span class="logo-sub">HR Solutions Africa</span></div></div>
+          <p>End-to-end HR solutions for Africa's growing organisations. Recruitment, HRIS digitization, talent development, and ISO certification.</p>
+        </div>
+        <div class="footer-col"><h5>Services</h5><a onclick="showPage('products')">Recruitment</a><a onclick="showPage('products')">HR Digitization</a><a onclick="showPage('products')">Talent Development</a><a onclick="showPage('products')">ISO Certification</a></div>
+        <div class="footer-col"><h5>Company</h5><a onclick="showPage('about')">About Us</a><a onclick="showPage('blog')">Blog</a><a onclick="showPage('contact')">Contact</a></div>
+        <div class="footer-col"><h5>Contact</h5><a>📍 Kampala, Uganda</a><a>✉️ alex@unisontalentmanagement.com</a><a onclick="showPage('contact')">Book a Consultation</a></div>
+      </div>
+      <div class="footer-bottom"><p>© 2025 Unison Talent Management. All rights reserved.</p><span class="footer-gold">HR Solutions Africa</span></div>
+    </div>
+  </footer>
+</div>
+
+<!-- ══════════ PRODUCTS / SERVICES ══════════ -->
+<div class="page" id="page-products">
+  <div class="prod-hero">
+    <div class="prod-hero-inner">
+      <div class="eyebrow">Our Services</div>
+      <div class="s-title">Every HR need.<br>One trusted partner.</div>
+      <p style="font-size:15px;color:var(--muted);max-width:540px;line-height:1.8;margin-top:12px;font-weight:300;">Unison Talent Management delivers a complete suite of HR solutions designed to help African organisations attract, develop, and retain world-class talent.</p>
+    </div>
+  </div>
+  <div class="prod-full-grid reveal">
+    <div class="pfc">
+      <div class="pfc-hd"><div class="pfc-icon">🎯</div><div><div class="pfc-title">Recruitment</div><div class="pfc-tag">Talent Acquisition</div></div></div>
+      <p class="pfc-desc">Our robust recruitment process supports organisations at every stage — from crafting job descriptions to conducting interviews and onboarding. We focus on understanding your culture to find the best fit every time.</p>
+      <div class="pfc-items"><span class="pfc-item">Job profiling</span><span class="pfc-item">Candidate sourcing</span><span class="pfc-item">Screening & interviews</span><span class="pfc-item">Psychometric assessment</span><span class="pfc-item">Reference checks</span><span class="pfc-item">Onboarding support</span><span class="pfc-item">Executive search</span><span class="pfc-item">Graduate programmes</span></div>
+      <button class="pfc-btn" onclick="showPage('contact')">Get started →</button>
+    </div>
+    <div class="pfc">
+      <div class="pfc-hd"><div class="pfc-icon">💻</div><div><div class="pfc-title">HR Digitization</div><div class="pfc-tag">HRIS Implementation</div></div></div>
+      <p class="pfc-desc">Become a paper-less organisation. We don't just install software — we configure, test, train, and support your teams so the system delivers value from day one. From payroll to performance reporting.</p>
+      <div class="pfc-items"><span class="pfc-item">HRIS selection</span><span class="pfc-item">System configuration</span><span class="pfc-item">Data migration</span><span class="pfc-item">Staff training</span><span class="pfc-item">Payroll integration</span><span class="pfc-item">Leave management</span><span class="pfc-item">Performance module</span><span class="pfc-item">Ongoing support</span></div>
+      <button class="pfc-btn" onclick="showPage('contact')">Book a demo →</button>
+    </div>
+    <div class="pfc">
+      <div class="pfc-hd"><div class="pfc-icon">📚</div><div><div class="pfc-title">Talent Development</div><div class="pfc-tag">Training & Skills</div></div></div>
+      <p class="pfc-desc">We provide training programmes that equip individuals with essential skills for today's job market and the future. Practical, results-focused learning designed for the African workplace context.</p>
+      <div class="pfc-items"><span class="pfc-item">Leadership development</span><span class="pfc-item">Management training</span><span class="pfc-item">HR capacity building</span><span class="pfc-item">Soft skills workshops</span><span class="pfc-item">Onboarding programmes</span><span class="pfc-item">Performance coaching</span><span class="pfc-item">Team building</span><span class="pfc-item">Custom curricula</span></div>
+      <button class="pfc-btn" onclick="showPage('contact')">Enquire →</button>
+    </div>
+    <div class="pfc">
+      <div class="pfc-hd"><div class="pfc-icon">🏅</div><div><div class="pfc-title">ISO Certification</div><div class="pfc-tag">PECB Partnership</div></div></div>
+      <p class="pfc-desc">Our partnership with PECB bridges industry standards and professional development. We offer internationally recognised certification training — elevating standards and empowering professionals across Africa.</p>
+      <div class="pfc-items"><span class="pfc-item">ISO 9001 QMS</span><span class="pfc-item">ISO 27001 InfoSec</span><span class="pfc-item">ISO 45001 OHS</span><span class="pfc-item">ISO 14001 EMS</span><span class="pfc-item">PECB certified trainers</span><span class="pfc-item">Exam preparation</span><span class="pfc-item">Certification support</span><span class="pfc-item">Corporate packages</span></div>
+      <button class="pfc-btn" onclick="showPage('contact')">Get certified →</button>
+    </div>
+  </div>
+
+  <div class="cta-band reveal" style="max-width:1100px;margin:0 auto 80px;margin-left:56px;margin-right:56px;">
+    <div><h2>Not sure which service<br>is right for you?</h2><p>Our team will recommend the best solution for your organisation's stage and goals.</p></div>
+    <div class="cta-btns"><button class="btn-white" onclick="showPage('contact')">Talk to Us →</button></div>
+  </div>
+
+  <footer>
+    <div class="footer-inner">
+      <div class="footer-top">
+        <div class="footer-brand"><div class="logo"><div class="logo-icon">U</div><div class="logo-text"><span class="logo-name">Unison Talent Management</span><span class="logo-sub">HR Solutions Africa</span></div></div><p>End-to-end HR solutions for Africa's growing organisations.</p></div>
+        <div class="footer-col"><h5>Services</h5><a onclick="showPage('products')">Recruitment</a><a onclick="showPage('products')">HR Digitization</a><a onclick="showPage('products')">Talent Development</a><a onclick="showPage('products')">ISO Certification</a></div>
+        <div class="footer-col"><h5>Company</h5><a onclick="showPage('about')">About</a><a onclick="showPage('blog')">Blog</a><a onclick="showPage('contact')">Contact</a></div>
+        <div class="footer-col"><h5>Contact</h5><a>📍 Kampala, Uganda</a><a>✉️ alex@unisontalentmanagement.com</a></div>
+      </div>
+      <div class="footer-bottom"><p>© 2025 Unison Talent Management. All rights reserved.</p><span class="footer-gold">HR Solutions Africa</span></div>
+    </div>
+  </footer>
+</div>
+
+<!-- ══════════ ABOUT ══════════ -->
+<div class="page" id="page-about">
+  <div class="about-hero">
+    <div class="about-grid">
+      <div>
+        <div class="eyebrow">Our Story</div>
+        <div class="s-title" style="margin-bottom:16px;">People. Systems.<br>Skills. Standards.</div>
+        <p style="font-size:15px;color:var(--muted);line-height:1.85;margin-bottom:16px;font-weight:300;">Unison Talent Management was founded with a clear vision: to become Africa's most trusted HR solutions partner. We believe that organisations thrive when their people thrive — and that starts with getting HR right.</p>
+        <p style="font-size:15px;color:var(--muted);line-height:1.85;font-weight:300;">From our base in Kampala, Uganda, we serve organisations across the continent — delivering recruitment, HRIS implementation, talent development, and ISO certification programmes that create lasting impact.</p>
+        <div style="display:flex;gap:12px;margin-top:28px;flex-wrap:wrap;">
+          <button class="btn-gold" onclick="showPage('contact')">Work With Us →</button>
+          <button class="btn-outline" onclick="showPage('products')">Our Services</button>
+        </div>
+      </div>
+      <div class="about-visual">
+        <div class="astat-grid">
+          <div class="astat"><div class="an">500+</div><div class="al">Professionals placed</div></div>
+          <div class="astat"><div class="an">4</div><div class="al">Service areas</div></div>
+          <div class="astat"><div class="an">🌍</div><div class="al">Pan-African reach</div></div>
+          <div class="astat"><div class="an">PECB</div><div class="al">Certified partner</div></div>
+        </div>
+        <div class="mission-box">
+          <p>"We don't just place people or install software. We partner with organisations for the long term — ensuring every engagement creates real, measurable impact for their people and their business."</p>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <div style="max-width:1100px;margin:0 auto;padding:0 56px 20px;">
+    <div class="eyebrow" style="margin-top:8px;">Our Values</div>
+    <div class="s-title" style="margin-bottom:28px;">What drives us.</div>
+    <div class="values-grid reveal">
+      <div class="val-card"><div class="val-icon">🤝</div><h4>Partnership</h4><p>We build long-term relationships, not transactional ones. Your success is our success.</p></div>
+      <div class="val-card"><div class="val-icon">🎯</div><h4>Precision</h4><p>Every recruitment, every training, every HRIS implementation is done with care and attention to detail.</p></div>
+      <div class="val-card"><div class="val-icon">🌍</div><h4>African Focus</h4><p>Built for Africa. We understand local contexts, regulations, and workplace cultures deeply.</p></div>
+      <div class="val-card"><div class="val-icon">📈</div><h4>Impact First</h4><p>We measure our success by the measurable difference we create in your organisation's performance.</p></div>
+      <div class="val-card"><div class="val-icon">💡</div><h4>Innovation</h4><p>We bring modern HR technology and global best practices to African organisations.</p></div>
+      <div class="val-card"><div class="val-icon">🏅</div><h4>Excellence</h4><p>PECB certified. Professionally rigorous. We hold ourselves to the highest international standards.</p></div>
+    </div>
+  </div>
+
+  <div style="max-width:1100px;margin:0 auto;padding:20px 56px 80px;">
+    <div class="eyebrow">What Clients Say</div>
+    <div class="s-title" style="margin-bottom:28px;">Trusted across Africa.</div>
+    <div class="reviews-grid reveal">
+      <div class="rev-card"><div class="rev-stars">★★★★★</div><p>"Unison transformed our recruitment. Every placement has been a genuine culture fit — not just a CV match."</p><div class="rev-author"><div class="r-av" style="background:linear-gradient(135deg,#d4943a,#a06820);">JO</div><div><div class="r-name">James Okello</div><div class="r-role">HR Director</div></div></div></div>
+      <div class="rev-card"><div class="rev-stars">★★★★★</div><p>"The HRIS implementation was seamless. Our admin time dropped by over 50% within the first month."</p><div class="rev-author"><div class="r-av" style="background:#2a5ea0;">RA</div><div><div class="r-name">Ruth Akello</div><div class="r-role">COO</div></div></div></div>
+      <div class="rev-card"><div class="rev-stars">★★★★★</div><p>"The ISO training was world-class. Our clients noticed the difference in our quality immediately."</p><div class="rev-author"><div class="r-av" style="background:#2a6e34;">SK</div><div><div class="r-name">Samuel Kaggwa</div><div class="r-role">CEO</div></div></div></div>
+    </div>
+  </div>
+
+  <div class="container" style="padding-bottom:80px;">
+    <div class="cta-band reveal" style="margin-bottom:0;">
+      <div><h2>Ready to partner<br>with Unison?</h2><p>Let's build something great together.</p></div>
+      <div class="cta-btns"><button class="btn-white" onclick="showPage('contact')">Get In Touch →</button></div>
+    </div>
+  </div>
+
+  <footer>
+    <div class="footer-inner">
+      <div class="footer-top">
+        <div class="footer-brand"><div class="logo"><div class="logo-icon">U</div><div class="logo-text"><span class="logo-name">Unison Talent Management</span><span class="logo-sub">HR Solutions Africa</span></div></div><p>End-to-end HR solutions for Africa's growing organisations.</p></div>
+        <div class="footer-col"><h5>Services</h5><a onclick="showPage('products')">Recruitment</a><a onclick="showPage('products')">HR Digitization</a><a onclick="showPage('products')">Talent Development</a><a onclick="showPage('products')">ISO Certification</a></div>
+        <div class="footer-col"><h5>Company</h5><a onclick="showPage('about')">About</a><a onclick="showPage('blog')">Blog</a><a onclick="showPage('contact')">Contact</a></div>
+        <div class="footer-col"><h5>Contact</h5><a>📍 Kampala, Uganda</a><a>✉️ alex@unisontalentmanagement.com</a></div>
+      </div>
+      <div class="footer-bottom"><p>© 2025 Unison Talent Management. All rights reserved.</p><span class="footer-gold">HR Solutions Africa</span></div>
+    </div>
+  </footer>
+</div>
+
+<!-- ══════════ BLOG ══════════ -->
+<div class="page" id="page-blog">
+  <div class="blog-hero">
+    <div class="blog-hero-inner">
+      <div class="eyebrow">Unison Insights</div>
+      <div class="s-title">HR insights for<br>African organisations.</div>
+      <p style="color:var(--muted);font-size:15px;max-width:500px;line-height:1.8;margin-top:12px;font-weight:300;">Practical guides, industry trends, and HR best practices — written for leaders building world-class organisations across Africa.</p>
+      <div class="blog-search"><span style="color:var(--muted);">🔍</span><input type="text" id="blog-search" placeholder="Search articles…" oninput="filterBlog()"/></div>
+      <div class="blog-tags">
+        <button class="btag active" onclick="setTag(this,'all')">All</button>
+        <button class="btag" onclick="setTag(this,'hr')">HR Strategy</button>
+        <button class="btag" onclick="setTag(this,'recruit')">Recruitment</button>
+        <button class="btag" onclick="setTag(this,'iso')">ISO & Compliance</button>
+        <button class="btag" onclick="setTag(this,'talent')">Talent Development</button>
+        <button class="btag" onclick="setTag(this,'product')">HRIS & Tech</button>
+      </div>
+    </div>
+  </div>
+
+  <div class="blog-grid-wrap">
+    <div class="blog-featured reveal">
+      <div class="blog-card feat-card" onclick="openPost('p1')">
+        <div class="blog-thumb" style="background:linear-gradient(135deg,#1a1200,#2e2000);">🌍</div>
+        <div class="blog-body">
+          <div class="blog-meta"><span class="blog-cat cat-hr">HR Strategy</span><span class="blog-date">Jan 15, 2025</span><span style="font-size:12px;color:var(--muted);">· 6 min</span></div>
+          <h3>Why African Organisations Need to Rethink HR in 2025</h3>
+          <p class="excerpt">The African workplace is evolving fast. Remote work, Gen Z employees, and digital transformation are reshaping HR expectations. Here's what forward-thinking organisations are doing differently.</p>
+          <div class="blog-author"><div class="b-av" style="background:linear-gradient(135deg,#d4943a,#a06820);">UT</div><div><div class="b-name">Unison Team</div><div class="b-role">HR Insights</div></div></div>
+        </div>
+      </div>
+      <div style="display:flex;flex-direction:column;gap:20px;">
+        <div class="blog-card small-card" onclick="openPost('p2')">
+          <div class="blog-thumb" style="background:linear-gradient(135deg,#001a10,#002e18);height:130px;">🏅</div>
+          <div class="blog-body">
+            <div class="blog-meta"><span class="blog-cat cat-iso">ISO & Compliance</span><span class="blog-date">Jan 8, 2025</span></div>
+            <h3>What ISO Certification Really Means for Your Organisation</h3>
+            <div class="blog-author" style="margin-top:10px;"><div class="b-av" style="background:#2a5ea0;">AT</div><div><div class="b-name">Alex T.</div><div class="b-role">ISO Specialist</div></div></div>
+          </div>
+        </div>
+        <div class="blog-card small-card" onclick="openPost('p3')">
+          <div class="blog-thumb" style="background:linear-gradient(135deg,#0a0a1a,#141430);height:130px;">💻</div>
+          <div class="blog-body">
+            <div class="blog-meta"><span class="blog-cat cat-product">HRIS & Tech</span><span class="blog-date">Dec 20, 2024</span></div>
+            <h3>5 Signs Your Organisation Is Ready for HRIS</h3>
+            <div class="blog-author" style="margin-top:10px;"><div class="b-av" style="background:#2a6e34;">UT</div><div><div class="b-name">Unison Team</div><div class="b-role">HR Tech</div></div></div>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <div class="blog-main-grid reveal" id="blog-main-grid">
+      <div class="blog-card reg-card" data-tag="recruit" onclick="openPost('p4')">
+        <div class="blog-thumb" style="background:linear-gradient(135deg,#1a0a00,#2e1400);">🎯</div>
+        <div class="blog-body">
+          <div class="blog-meta"><span class="blog-cat cat-recruit">Recruitment</span><span class="blog-date">Dec 12, 2024</span></div>
+          <h3>How to Write Job Descriptions That Attract the Right Talent</h3>
+          <div class="blog-author" style="margin-top:10px;"><div class="b-av" style="background:#d4943a;color:#0b1f3a;">UT</div><div><div class="b-name">Unison Team</div></div></div>
+        </div>
+      </div>
+      <div class="blog-card reg-card" data-tag="talent" onclick="openPost('p1')">
+        <div class="blog-thumb" style="background:linear-gradient(135deg,#1a001a,#2e002e);">📚</div>
+        <div class="blog-body">
+          <div class="blog-meta"><span class="blog-cat cat-talent">Talent Dev</span><span class="blog-date">Dec 5, 2024</span></div>
+          <h3>Building a Learning Culture in African SMEs</h3>
+          <div class="blog-author" style="margin-top:10px;"><div class="b-av" style="background:#6a2a8e;">AT</div><div><div class="b-name">Alex T.</div></div></div>
+        </div>
+      </div>
+      <div class="blog-card reg-card" data-tag="hr" onclick="openPost('p3')">
+        <div class="blog-thumb" style="background:linear-gradient(135deg,#001a1a,#002e2e);">📊</div>
+        <div class="blog-body">
+          <div class="blog-meta"><span class="blog-cat cat-hr">HR Strategy</span><span class="blog-date">Nov 28, 2024</span></div>
+          <h3>The Real Cost of Bad Hiring — And How to Avoid It</h3>
+          <div class="blog-author" style="margin-top:10px;"><div class="b-av" style="background:#2a5ea0;">UT</div><div><div class="b-name">Unison Team</div></div></div>
+        </div>
+      </div>
+    </div>
+
+    <div class="blog-newsletter reveal">
+      <h3>Get HR insights in your inbox</h3>
+      <p>Join HR professionals across Africa getting practical tips and Unison updates every fortnight.</p>
+      <div class="nl-form">
+        <input type="email" id="nl-email" placeholder="your@email.com"/>
+        <button onclick="subscribeNl()">Subscribe →</button>
+      </div>
+    </div>
+  </div>
+
+  <!-- POST READER -->
+  <div class="blog-post-view" id="post-reader">
+    <div class="post-inner">
+      <button class="back-btn" onclick="closePost()">← Back to Blog</button>
+      <div id="post-content"></div>
+    </div>
+  </div>
+
+  <footer>
+    <div class="footer-inner">
+      <div class="footer-top">
+        <div class="footer-brand"><div class="logo"><div class="logo-icon">U</div><div class="logo-text"><span class="logo-name">Unison Talent Management</span><span class="logo-sub">HR Solutions Africa</span></div></div><p>End-to-end HR solutions for Africa's growing organisations.</p></div>
+        <div class="footer-col"><h5>Services</h5><a onclick="showPage('products')">Recruitment</a><a onclick="showPage('products')">HR Digitization</a><a onclick="showPage('products')">Talent Development</a><a onclick="showPage('products')">ISO Certification</a></div>
+        <div class="footer-col"><h5>Company</h5><a onclick="showPage('about')">About</a><a onclick="showPage('blog')">Blog</a><a onclick="showPage('contact')">Contact</a></div>
+        <div class="footer-col"><h5>Contact</h5><a>📍 Kampala, Uganda</a><a>✉️ alex@unisontalentmanagement.com</a></div>
+      </div>
+      <div class="footer-bottom"><p>© 2025 Unison Talent Management. All rights reserved.</p><span class="footer-gold">HR Solutions Africa</span></div>
+    </div>
+  </footer>
+</div>
+
+<!-- ══════════ CONTACT ══════════ -->
+<div class="page" id="page-contact">
+  <div class="contact-wrap">
+    <div class="contact-left">
+      <div class="eyebrow">Get In Touch</div>
+      <h1>Let's talk about<br>your HR goals.</h1>
+      <p>Whether you need to recruit top talent, digitise your HR operations, develop your team, or get ISO certified — our team is ready to help.</p>
+      <div class="cm-item"><div class="cm-icon">📍</div><div><div class="cm-lbl">Location</div><div class="cm-val">Kampala, Uganda</div></div></div>
+      <div class="cm-item"><div class="cm-icon">✉️</div><div><div class="cm-lbl">Email</div><div class="cm-val">alex@unisontalentmanagement.com</div></div></div>
+      <div class="cm-item"><div class="cm-icon">🌍</div><div><div class="cm-lbl">Reach</div><div class="cm-val">Serving organisations across Africa</div></div></div>
+      <div class="cm-item"><div class="cm-icon">🏅</div><div><div class="cm-lbl">Certification</div><div class="cm-val">PECB Certified ISO Training Partner</div></div></div>
+      <div class="cm-item"><div class="cm-icon">💼</div><div><div class="cm-lbl">Find a Job</div><div class="cm-val">careers.giighire.com/unisontalentmanagement</div></div></div>
+      <div class="cm-item"><div class="cm-icon">⚡</div><div><div class="cm-lbl">Response Time</div><div class="cm-val">Within 24 hours on business days</div></div></div>
+    </div>
+
+    <div class="form-card">
+      <div id="contact-form-view">
+        <h3>Book a Consultation</h3>
+        <p class="sub">Tell us about your organisation and we'll be in touch to schedule a call.</p>
+        <div class="form-row">
+          <div class="fg"><label>First Name</label><input type="text" id="c-fname" placeholder="Jane"/></div>
+          <div class="fg"><label>Last Name</label><input type="text" id="c-lname" placeholder="Doe"/></div>
+        </div>
+        <div class="fg"><label>Organisation</label><input type="text" id="c-org" placeholder="Company / Institution name"/></div>
+        <div class="fg"><label>Email</label><input type="email" id="c-email" placeholder="jane@organisation.com"/></div>
+        <div class="fg"><label>Phone</label><input type="tel" id="c-phone" placeholder="+256 700 000 000"/></div>
+        <div class="form-row">
+          <div class="fg"><label>Service Interested In</label>
+            <select id="c-service">
+              <option value="">Select service</option>
+              <option>Recruitment</option>
+              <option>HR Digitization / HRIS</option>
+              <option>Talent Development</option>
+              <option>ISO Certification</option>
+              <option>HR Consulting</option>
+              <option>Multiple Services</option>
+            </select>
+          </div>
+          <div class="fg"><label>Organisation Size</label>
+            <select id="c-size">
+              <option value="">Select size</option>
+              <option>1–20 employees</option>
+              <option>21–100 employees</option>
+              <option>101–500 employees</option>
+              <option>500+ employees</option>
+            </select>
+          </div>
+        </div>
+        <div class="fg"><label>Message</label><textarea id="c-msg" rows="3" placeholder="Tell us about your HR challenges or what you're looking to achieve…"></textarea></div>
+        <button class="submit-btn" id="c-submit" onclick="submitContact()">Send Message →</button>
+      </div>
+      <div class="success-box" id="contact-success">
+        <div class="sico">✅</div>
+        <h4>Message received!</h4>
+        <p>Thank you for reaching out to Unison Talent Management. Our team will be in touch within 24 hours.</p>
+      </div>
+    </div>
+  </div>
+
+  <footer>
+    <div class="footer-inner">
+      <div class="footer-top">
+        <div class="footer-brand"><div class="logo"><div class="logo-icon">U</div><div class="logo-text"><span class="logo-name">Unison Talent Management</span><span class="logo-sub">HR Solutions Africa</span></div></div><p>End-to-end HR solutions for Africa's growing organisations.</p></div>
+        <div class="footer-col"><h5>Services</h5><a onclick="showPage('products')">Recruitment</a><a onclick="showPage('products')">HR Digitization</a><a onclick="showPage('products')">Talent Development</a><a onclick="showPage('products')">ISO Certification</a></div>
+        <div class="footer-col"><h5>Company</h5><a onclick="showPage('about')">About</a><a onclick="showPage('blog')">Blog</a><a onclick="showPage('contact')">Contact</a></div>
+        <div class="footer-col"><h5>Contact</h5><a>📍 Kampala, Uganda</a><a>✉️ alex@unisontalentmanagement.com</a></div>
+      </div>
+      <div class="footer-bottom"><p>© 2025 Unison Talent Management. All rights reserved.</p><span class="footer-gold">HR Solutions Africa</span></div>
+    </div>
+  </footer>
+</div>
+
+<!-- SCRIPTS -->
+<script src="https://cdn.jsdelivr.net/npm/@emailjs/browser@4/dist/email.min.js"></script>
+<script>
+const SVC='service_bgmpuzr',TPL='template_beg6j6h',KEY='gzyJL7sP0rNjOC8fN';
+emailjs.init(KEY);
+
+// PAGE ROUTING
+function showPage(id){
+  document.querySelectorAll('.page').forEach(p=>p.classList.remove('active'));
+  document.querySelectorAll('.nav-link').forEach(l=>l.classList.remove('active'));
+  document.getElementById('page-'+id).classList.add('active');
+  const nl=document.getElementById('nl-'+id);
+  if(nl)nl.classList.add('active');
+  window.scrollTo({top:0,behavior:'smooth'});
+  // reset blog post view when leaving blog
+  document.getElementById('post-reader').classList.remove('open');
+  document.querySelector('.blog-grid-wrap') && (document.querySelector('.blog-grid-wrap').style.display='');
+  document.querySelector('.blog-hero') && (document.querySelector('.blog-hero').style.display='');
+  setTimeout(initReveal,80);
+}
+
+// MOBILE
+function toggleMob(){
+  const nl=document.querySelector('.nav-links');
+  if(nl.style.display==='flex'){nl.style.display='';}
+  else{Object.assign(nl.style,{display:'flex',flexDirection:'column',position:'absolute',top:'72px',left:'0',right:'0',background:'rgba(11,31,58,0.98)',padding:'16px 24px 24px',borderBottom:'1px solid rgba(255,255,255,0.07)',gap:'4px',zIndex:'300'});}
+}
+
+// CONTACT FORM
+function submitContact(){
+  const fname=document.getElementById('c-fname').value.trim();
+  const lname=document.getElementById('c-lname').value.trim();
+  const org=document.getElementById('c-org').value.trim();
+  const email=document.getElementById('c-email').value.trim();
+  const phone=document.getElementById('c-phone').value.trim();
+  const service=document.getElementById('c-service').value;
+  const size=document.getElementById('c-size').value;
+  const msg=document.getElementById('c-msg').value.trim();
+  const btn=document.getElementById('c-submit');
+  if(!fname||!email){alert('Please fill in your name and email.');return;}
+  btn.disabled=true;btn.textContent='Sending…';
+  emailjs.send(SVC,TPL,{
+    to_email:'alex@unisontalentmanagement.com',
+    from_name:fname+' '+lname+(org?' ('+org+')':''),
+    from_email:email,
+    company_size:size||phone||'Not specified',
+    plan:service||'Not specified',
+    request_type:'Consultation Request'+(msg?' — '+msg:''),
+  }).then(()=>{
+    document.getElementById('contact-form-view').style.display='none';
+    document.getElementById('contact-success').style.display='block';
+  }).catch(()=>{
+    btn.disabled=false;btn.textContent='Send Message →';
+    alert('Something went wrong. Please email alex@unisontalentmanagement.com directly.');
+  });
+}
+
+// BLOG
+const posts={
+  p1:{
+    title:"Why African Organisations Need to Rethink HR in 2025",
+    cat:"HR Strategy",catClass:"cat-hr",date:"January 15, 2025",read:"6 min read",
+    author:"Unison Team",role:"HR Insights",avBg:"linear-gradient(135deg,#d4943a,#a06820)",av:"UT",
+    content:`<p>The African workplace is evolving at a pace many HR departments have not kept up with. Remote and hybrid work, the rise of Gen Z employees, digital transformation pressures, and increasing competition for skilled talent are reshaping what employees expect from their organisations — and what organisations need from their HR function.</p>
+    <h2>The Old Model Is Breaking Down</h2>
+    <p>For years, HR in many African organisations has been primarily administrative — managing leave, processing payroll, and maintaining records. This model worked when the workforce was stable, attrition was low, and the speed of change was manageable. None of those conditions hold true today.</p>
+    <blockquote>"Organisations that still treat HR as purely administrative are not just inefficient — they are actively losing the war for talent."</blockquote>
+    <h2>What Forward-Thinking Organisations Are Doing Differently</h2>
+    <ul>
+      <li><strong>Investing in HRIS</strong> — automating routine tasks so HR teams can focus on strategy and people.</li>
+      <li><strong>Building structured development programmes</strong> — employees increasingly choose employers based on growth opportunities.</li>
+      <li><strong>Formalising recruitment</strong> — moving from informal networks to structured, competency-based hiring processes.</li>
+      <li><strong>Pursuing certification</strong> — ISO standards and professional certifications signal seriousness about quality to clients and partners.</li>
+    </ul>
+    <div class="hl"><p>💡 <strong>The bottom line:</strong> HR is no longer a support function. It is a strategic lever. The organisations winning in 2025 are those treating people operations as a competitive advantage.</p></div>`
+  },
+  p2:{
+    title:"What ISO Certification Really Means for Your Organisation",
+    cat:"ISO & Compliance",catClass:"cat-iso",date:"January 8, 2025",read:"5 min read",
+    author:"Alex T.",role:"ISO Specialist",avBg:"#2a5ea0",av:"AT",
+    content:`<p>Many organisations pursue ISO certification because clients require it, or because competitors have it. That's a reasonable starting point. But the organisations that get the most value from ISO are the ones who understand what it actually means — and build their culture around it.</p>
+    <h2>ISO Is Not a Badge — It's a Discipline</h2>
+    <p>An ISO certification, whether ISO 9001 for quality management, ISO 27001 for information security, or ISO 45001 for occupational health and safety, is fundamentally about building systems that deliver consistent, reliable results. The certificate is the evidence. The system is the value.</p>
+    <h2>What Changes When You Get Certified</h2>
+    <ul>
+      <li>Processes become documented, repeatable, and improvable</li>
+      <li>Accountability is clear — everyone knows their role in quality delivery</li>
+      <li>Clients gain confidence — audited, certified organisations win more tenders</li>
+      <li>Employees understand expectations — reducing errors and confusion</li>
+    </ul>
+    <blockquote>"ISO certification tells the world you don't just claim to be good — you can prove it."</blockquote>
+    <div class="hl"><p>🏅 <strong>Unison Talent Management is a PECB certified training partner</strong>, offering ISO certification programmes across Uganda and the wider African region. Contact us to find out which certification is right for your organisation.</p></div>`
+  },
+  p3:{
+    title:"5 Signs Your Organisation Is Ready for HRIS",
+    cat:"HRIS & Tech",catClass:"cat-product",date:"December 20, 2024",read:"4 min read",
+    author:"Unison Team",role:"HR Tech",avBg:"#2a6e34",av:"UT",
+    content:`<p>Many HR leaders know their organisation needs a better system — but aren't sure when the timing is right to invest. Here are five clear signals that your organisation is ready for a Human Resource Information System.</p>
+    <h2>1. You Spend More Than 30% of HR Time on Admin</h2>
+    <p>If your HR team is spending the majority of its time on leave approvals, payroll inputs, and chasing paper forms, a significant portion of that work can be automated. HRIS gives time back to focus on people, not processes.</p>
+    <h2>2. You Have More Than 20 Employees</h2>
+    <p>Below 20 staff, spreadsheets can work. Above that threshold, the complexity grows exponentially. HRIS scales with you — and the ROI improves as headcount grows.</p>
+    <h2>3. You've Made a Payroll Error in the Last 6 Months</h2>
+    <p>Manual payroll processing is error-prone. A single payroll mistake damages trust with employees immediately. Integrated HRIS significantly reduces these risks.</p>
+    <h2>4. Your Leave Records Are Inconsistent</h2>
+    <p>If different managers track leave differently, and your records don't match at year-end, you have a compliance risk and a fairness problem. HRIS solves both.</p>
+    <h2>5. You Can't Answer "How Many Staff Do We Have?" Instantly</h2>
+    <p>If answering basic workforce questions requires pulling data from multiple sources, you need centralised HR data infrastructure.</p>
+    <div class="hl"><p>💻 <strong>Unison Talent Management implements HRIS for organisations across Africa.</strong> We configure, train, and support — ensuring full adoption from day one. Book a demo to see what's possible.</p></div>`
+  }
+};
+let activeTag='all';
+function setTag(btn,tag){document.querySelectorAll('.btag').forEach(b=>b.classList.remove('active'));btn.classList.add('active');activeTag=tag;filterBlog();}
+function filterBlog(){
+  const q=document.getElementById('blog-search').value.toLowerCase();
+  document.querySelectorAll('#blog-main-grid .blog-card').forEach(card=>{
+    const tagOk=activeTag==='all'||card.dataset.tag===activeTag;
+    const txtOk=q===''||card.querySelector('h3').textContent.toLowerCase().includes(q);
+    card.style.display=(tagOk&&txtOk)?'':'none';
+  });
+}
+function openPost(id){
+  const p=posts[id];if(!p)return;
+  document.getElementById('post-content').innerHTML=`
+    <div style="margin-bottom:14px;"><span class="blog-cat ${p.catClass}">${p.cat}</span></div>
+    <h1 class="post-title">${p.title}</h1>
+    <div class="post-meta">
+      <div class="blog-author"><div class="b-av" style="background:${p.avBg};color:${p.avBg==='#f5c518'?'#111':'white'};width:36px;height:36px;font-size:12px;">${p.av}</div><div><div class="b-name">${p.author}</div><div class="b-role">${p.role}</div></div></div>
+      <span style="font-size:13px;color:var(--muted);">${p.date}</span>
+      <span style="font-size:13px;color:var(--muted);">${p.read}</span>
+    </div>
+    <div class="post-content">${p.content}</div>`;
+  document.getElementById('post-reader').classList.add('open');
+  document.querySelector('.blog-grid-wrap').style.display='none';
+  document.querySelector('.blog-hero').style.display='none';
+  window.scrollTo({top:0,behavior:'smooth'});
+}
+function closePost(){
+  document.getElementById('post-reader').classList.remove('open');
+  document.querySelector('.blog-grid-wrap').style.display='';
+  document.querySelector('.blog-hero').style.display='';
+  window.scrollTo({top:0,behavior:'smooth'});
+}
+function subscribeNl(){
+  const email=document.getElementById('nl-email').value.trim();
+  if(!email){alert('Please enter your email address.');return;}
+  emailjs.send(SVC,TPL,{to_email:'alex@unisontalentmanagement.com',from_name:'Newsletter Subscriber',from_email:email,company_size:'N/A',plan:'N/A',request_type:'Newsletter Subscription'})
+  .then(()=>{alert('Subscribed! Welcome to the Unison community 🎉');document.getElementById('nl-email').value='';})
+  .catch(()=>{alert('Something went wrong. Try again.');});
+}
+
+// REVEAL
+function initReveal(){
+  const obs=new IntersectionObserver(entries=>{entries.forEach(e=>{if(e.isIntersecting)e.target.classList.add('visible');});},{threshold:0.07});
+  document.querySelectorAll('.reveal:not(.visible)').forEach(el=>obs.observe(el));
+}
+initReveal();
+</script>
+</body>
+</html>
